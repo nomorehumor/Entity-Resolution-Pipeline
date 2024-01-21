@@ -1,62 +1,12 @@
 import pandas as pd
-from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import time
 import csv
 
-# LOADING DATA 
-def read_file(filename):
-    column_names = ['PaperID', 'Title', 'Authors', 'Venue', 'Year']
-    df = pd.read_csv(filename, sep='|', names=column_names, skiprows=1, encoding='utf-8-sig', dtype={'PaperID': str, 'Title': str, 'Authors': str, 'Venue': str, 'Year': int})
-    return df
+from blocking import create_ngram_blocks, get_candidate_pairs_between_blocks
+from data_loading import get_vector_datasets, load_two_publication_sets
 
-def load_two_publication_sets():
-    df1 = read_file("DBLP_1995_2004.csv")
-    df2 = read_file("ACM_1995_2004.csv")
-
-    # Combine relevant attributes into a single string
-    combine_attributes = lambda row: f"{row['Title']} {row['Authors']} {row['Year']}"
-    df1["Combined"] = df1.apply(combine_attributes, axis=1)
-    df2["Combined"] = df2.apply(combine_attributes, axis=1)
-    return df1, df2
-
-def get_vector_datasets(df1, df2):
-    vectorizer = TfidfVectorizer()
-    vectorizer.fit(df1["Combined"].values.tolist() + df2["Combined"].values.tolist())
-    vector_space1 = vectorizer.transform(df1["Combined"]).toarray()
-    vector_space2 = vectorizer.transform(df2["Combined"]).toarray()
-    return vector_space1, vector_space2
-
-# FIRST BLOCKING SCHEME
-def extract_ngrams(text, n):
-    words = text.split()
-
-    # list containing tuples with n subsequent words
-    ngrams_list = [tuple(words[i:i + n]) for i in range(len(words) - n + 1)]
-
-    # list containing strings (which are basically n subsequent words)
-    return [' '.join(gram) for gram in ngrams_list]  
-
-# Function to create n-gram blocks for a dataframe
-def create_ngram_blocks(df, column, n):
-    blocks = {}
-    for idx, row in df.iterrows():
-        ngrams_list = extract_ngrams(row[column], n)
-        for ngram in ngrams_list:
-            if ngram not in blocks:
-                blocks[ngram] = []
-            blocks[ngram].append(idx) # only append idx of row in dataframe to save more space
-    return blocks
-
-# HELPER FUNCTION TO CREATE CANDIDATE PAIRS BETWEEN BLOCKS
-def get_candidate_pairs_between_blocks(blocks1, blocks2):
-    candidate_pairs = set()
-    for ngram in blocks1:
-        if ngram in blocks2:
-            pairs = [(id1, id2) for id1 in blocks1[ngram] for id2 in blocks2[ngram]]
-            candidate_pairs.update(pairs) # add all candidate pairs to set
-    return candidate_pairs
-
+BASELINE_OUTPUT = "baseline_cosine.csv"
 
 # HELPER TO SEE WHETHER MATCHED INDICES ARE CORRECT
 def show_tuples_behind_indices_pair(filename, newfilename):
@@ -104,8 +54,6 @@ def er_ngram_cosine_pipe(n=2):
     df_matches.to_csv("Matched_Entities_Ngram_Cosine_Indices.csv", index=False)
     # show_tuples_behind_indices_pair("Matched_Entities_Ngram_Cosine_Indices.csv", "truetuples.csv")
 
-
-
 # BASELINE
 def create_baseline(threshold):
     df1, df2 = load_two_publication_sets()
@@ -125,7 +73,7 @@ def create_baseline(threshold):
                 matching_pairs.append((i, j))
     columns = ["idx1","idx2"]
     df_matches = pd.DataFrame(matching_pairs, columns=columns)
-    df_matches.to_csv("baseline_cosine.csv", index=False)
+    df_matches.to_csv(BASELINE_OUTPUT, index=False)
     #show_tuples_behind_indices_pair("indices.csv", "truetuples.csv")
 
 def evaluate(baseline_file, matches_file):
@@ -163,7 +111,7 @@ def main():
     print(f"Elapsed time for matching: {time.time() - start_time}") 
 
     # EVALUATION: get precision, recall and f-measure 
-    evaluate("baseline_cosine.csv", "Matched_Entities_Ngram_Cosine_Indices.csv")
+    evaluate(BASELINE_OUTPUT, "Matched_Entities_Ngram_Cosine_Indices.csv")
 
 if __name__ == "__main__":
     main()

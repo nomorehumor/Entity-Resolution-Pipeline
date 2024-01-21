@@ -2,6 +2,8 @@ import tarfile
 import io
 import csv
 
+from paths import ACM_DATASET_FILE, DBLP_DATASET_FILE
+
 def read_first_n_lines(tgz_filename, n=10):
     with tarfile.open(tgz_filename, "r:gz") as tar:
         for member in tar.getmembers():
@@ -45,6 +47,6 @@ def extract_publications(tgz_filename, output_csv_filename):
                             current_entry = {}
 
 
-extract_publications("citation-acm-v8.txt.tgz", "ACM_1995_2004.csv")
-extract_publications("dblp.v8.tgz", "DBLP_1995_2004.csv")
+extract_publications("citation-acm-v8.txt.tgz", ACM_DATASET_FILE)
+extract_publications("dblp.v8.tgz", DBLP_DATASET_FILE)
 #read_first_n_lines("citation-acm-v8.txt.tgz", n=1000)
