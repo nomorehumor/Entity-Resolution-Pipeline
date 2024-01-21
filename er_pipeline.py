@@ -20,6 +20,12 @@ def load_two_publication_sets():
     df2["Combined"] = df2.apply(combine_attributes, axis=1)
     return df1, df2
 
+def get_vector_datasets(df1, df2):
+    vectorizer = TfidfVectorizer()
+    vectorizer.fit(df1["Combined"].values.tolist() + df2["Combined"].values.tolist())
+    vector_space1 = vectorizer.transform(df1["Combined"]).toarray()
+    vector_space2 = vectorizer.transform(df2["Combined"]).toarray()
+    return vector_space1, vector_space2
 
 # FIRST BLOCKING SCHEME
 def extract_ngrams(text, n):
@@ -78,10 +84,7 @@ def er_ngram_cosine_pipe(n=2):
     df1, df2 = load_two_publication_sets()
 
     # Vectorization using TF-IDF
-    vectorizer = TfidfVectorizer()
-    vectorizer.fit(df1["Combined"].values.tolist() + df2["Combined"].values.tolist())
-    vector_space1 = vectorizer.transform(df1["Combined"]).toarray()
-    vector_space2 = vectorizer.transform(df2["Combined"]).toarray()
+    vector_space1, vector_space2 = get_vector_datasets(df1, df2)
 
     blocks1 = create_ngram_blocks(df1, "Combined", n)
     blocks2 = create_ngram_blocks(df2, "Combined", n)
@@ -108,10 +111,7 @@ def create_baseline(threshold):
     df1, df2 = load_two_publication_sets()
 
     # Vectorization using TF-IDF
-    vectorizer = TfidfVectorizer()
-    vectorizer.fit(df1["Combined"].values.tolist() + df2["Combined"].values.tolist())
-    vector_space1 = vectorizer.transform(df1["Combined"]).toarray()
-    vector_space2 = vectorizer.transform(df2["Combined"]).toarray()
+    vector_space1, vector_space2 = get_vector_datasets(df1, df2)
     
     # calculate similarities for all pairs
     cosine_sim = cosine_similarity(vector_space1, vector_space2)
