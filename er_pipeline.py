@@ -7,6 +7,7 @@ from blocking import create_ngram_blocks, get_candidate_pairs_between_blocks
 from data_loading import get_vector_datasets, load_two_publication_sets
 
 BASELINE_OUTPUT = "baseline_cosine.csv"
+ER_PIPELINE_NGRAM_COSINE_OUTPUT = "Matched_Entities_Ngram_Cosine_Indices.csv"
 
 # HELPER TO SEE WHETHER MATCHED INDICES ARE CORRECT
 def show_tuples_behind_indices_pair(filename, newfilename):
@@ -93,11 +94,8 @@ def evaluate(baseline_file, matches_file):
     precision = true_positives / (true_positives + false_positives) if (true_positives + false_positives) > 0 else 0
     recall = true_positives / (true_positives + false_negatives) if (true_positives + false_negatives) > 0 else 0
     f1_score = 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0
-
-    # Print the results
-    print("Precision:", precision)
-    print("Recall:", recall)
-    print("F1 Score:", f1_score)
+    
+    return precision, recall, f1_score
 
 def main():
     # BASELINE FILE CREATION
@@ -111,7 +109,11 @@ def main():
     print(f"Elapsed time for matching: {time.time() - start_time}") 
 
     # EVALUATION: get precision, recall and f-measure 
-    evaluate(BASELINE_OUTPUT, "Matched_Entities_Ngram_Cosine_Indices.csv")
+    precision, recall, f1_score = evaluate(BASELINE_OUTPUT, ER_PIPELINE_NGRAM_COSINE_OUTPUT)
+    # Print the results
+    print("Precision:", precision)
+    print("Recall:", recall)
+    print("F1 Score:", f1_score)
 
 if __name__ == "__main__":
     main()
