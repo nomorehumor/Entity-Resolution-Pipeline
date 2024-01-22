@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 import time
@@ -5,9 +6,10 @@ import csv
 
 from blocking import create_ngram_blocks, get_candidate_pairs_between_blocks
 from data_loading import get_vector_datasets, load_two_publication_sets
+from paths import OUTPUT_DIR
 
-BASELINE_OUTPUT = "baseline_cosine.csv"
-ER_PIPELINE_NGRAM_COSINE_OUTPUT = "Matched_Entities_Ngram_Cosine_Indices.csv"
+BASELINE_OUTPUT = f"{OUTPUT_DIR}/baseline_cosine.csv"
+ER_PIPELINE_NGRAM_COSINE_OUTPUT = f"{OUTPUT_DIR}/Matched_Entities_Ngram_Cosine_Indices.csv"
 
 # HELPER TO SEE WHETHER MATCHED INDICES ARE CORRECT
 def show_tuples_behind_indices_pair(filename, newfilename):
@@ -52,7 +54,7 @@ def er_ngram_cosine_pipe(n=2):
             matching_pairs.append((idx1,idx2))
     columns = ["idx1","idx2"]
     df_matches = pd.DataFrame(matching_pairs, columns=columns)
-    df_matches.to_csv("Matched_Entities_Ngram_Cosine_Indices.csv", index=False)
+    df_matches.to_csv(ER_PIPELINE_NGRAM_COSINE_OUTPUT, index=False)
     # show_tuples_behind_indices_pair("Matched_Entities_Ngram_Cosine_Indices.csv", "truetuples.csv")
 
 # BASELINE
@@ -116,4 +118,5 @@ def main():
     print("F1 Score:", f1_score)
 
 if __name__ == "__main__":
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
     main()

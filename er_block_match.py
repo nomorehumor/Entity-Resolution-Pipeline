@@ -1,4 +1,5 @@
 import itertools
+import os
 import re
 import string
 import time
@@ -10,10 +11,11 @@ import numpy as np
 import pandas as pd
 from nltk.tokenize import word_tokenize
 
+from paths import ACM_DATASET_FILE, DBLP_DATASET_FILE, OUTPUT_DIR
 
 def data_preparation():
-    df1 = pd.read_csv('ACM_1995_2004.csv', sep='|')
-    df2 = pd.read_csv('DBLP_1995_2004.csv', sep='|')
+    df1 = pd.read_csv(ACM_DATASET_FILE, sep='|')
+    df2 = pd.read_csv(DBLP_DATASET_FILE, sep='|')
     df1.dropna(ignore_index=True, inplace=True)
     df2.dropna(ignore_index=True, inplace=True)
     preprocessing(df1)
@@ -70,6 +72,7 @@ def matching(df, sim='jaccard', threshold = 0.8):
     
     matching_pairs = df[df['similarity'] > threshold]
     return matching_pairs
+
 def token_blocking(df1, df2, stop_words: set):
     blocks1 = defaultdict(list)
     blocks2 = defaultdict(list)
@@ -221,21 +224,22 @@ def entity_resolution_experiments(save_csv=False):
     weights = [[0.7, 0.3, 0], [0.7, 0.3, 0], [0.8, 0.2, 0], [0.5, 0.2, 0.3], [0.5, 0.2, 0.3], [0.5, 0.3, 0.2]]
     with open("output.txt", "a") as f:
         for i in range(len(matches)):
-            print(f'{blocks[i]}, {matches[i]}, {weights[i]}', file=f)
+            print(f'{blocks[i]}, {matches[i]}, {weights[i]}')
             start= time.time()
             df = blocking_and_matching(df1, df2, block=blocks[i], match=matches[i], weights=weights[i])
-            print(f'Time needed for blocking and matchign: {time.time() - start}', file=f)
+            print(f'Time needed for blocking and matching: {time.time() - start}')
 
             start = time.time()
             bs_df = baseline_matching(df1, df2, match=matches[i], weights=weights[i])
-            print(f'Time needed for baseline creation: {time.time() - start}', file=f)
+            print(f'Time needed for baseline creation: {time.time() - start}')
 
             evaluate(df, bs_df, f, match=matches[i])
 
             if save_csv:
                 w = f'{weights[i][0]*10}{weights[i][1]*10}{weights[2][0]*10}'
-                df.to_csv(f'{matches[i]}_{blocks[i]}_{w}.csv')
+                df.to_csv(f'{OUTPUT_DIR}/{matches[i]}_{blocks[i]}_{w}.csv')
 
 
 if __name__ == "__main__":
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
     entity_resolution_experiments()
