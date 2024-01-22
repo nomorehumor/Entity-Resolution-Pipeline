@@ -5,17 +5,38 @@ from paths import ACM_DATASET_FILE, DBLP_DATASET_FILE
 
 
 # LOADING DATA 
-def read_file(filename):
-    column_names = ['PaperID', 'Title', 'Authors', 'Venue', 'Year']
-    df = pd.read_csv(filename, sep='|', names=column_names, skiprows=1, encoding='utf-8-sig', dtype={'PaperID': str, 'Title': str, 'Authors': str, 'Venue': str, 'Year': int})
+def read_file(filename, dataset_origin):
+    column_names = ['paperId', 'title', 'authors', 'venue', 'year']
+    df = pd.read_csv(filename, sep='|', skiprows=1, names=column_names, encoding='utf-8-sig', dtype={'PaperID': str, 'Title': str, 'Authors': str, 'Venue': str, 'Year': int})
+    preprocessing(df)
+    
+    # column_names = [f"{column_name}_{dataset_origin}" for column_name in column_names]
+    # df.columns = column_names
+    df.dropna(ignore_index=True, inplace=True)
     return df
 
+def preprocessing(df):
+    df['title'] = (df['title'].str.lower()
+                   .replace("[^a-z0-9]", " ", regex=True)
+                   .replace(" +", " ", regex=True)
+                   .str.strip())
+    df['authors'] = (df['authors']
+                     .str.lower()
+                     .replace("[^a-z0-9]", " ", regex=True)
+                     .replace(" +", " ", regex=True)
+                     .str.strip())
+
+    df['venue'] = (df['venue']
+                   .str.lower()
+                   .replace(" +", " ", regex=True)
+                   .str.strip())
+
 def load_two_publication_sets():
-    df1 = read_file(DBLP_DATASET_FILE)
-    df2 = read_file(ACM_DATASET_FILE)
+    df1 = read_file(DBLP_DATASET_FILE, "dblp")
+    df2 = read_file(ACM_DATASET_FILE, "acm")
 
     # Combine relevant attributes into a single string
-    combine_attributes = lambda row: f"{row['Title']} {row['Authors']} {row['Year']}"
+    combine_attributes = lambda row: f"{row['title']} {row['authors']} {row['year']}"
     df1["Combined"] = df1.apply(combine_attributes, axis=1)
     df2["Combined"] = df2.apply(combine_attributes, axis=1)
     return df1, df2

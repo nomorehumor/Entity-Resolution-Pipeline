@@ -9,7 +9,9 @@ from nltk.corpus import stopwords
 from collections import defaultdict
 import numpy as np
 import pandas as pd
-from nltk.tokenize import word_tokenize
+from blocking import blocking_by_year, token_blocking
+from data_loading import preprocessing
+from matching import matching
 
 from paths import ACM_DATASET_FILE, DBLP_DATASET_FILE, OUTPUT_DIR
 
@@ -27,140 +29,6 @@ def data_preparation():
 
     return df1, df2
 
-
-def preprocessing(df):
-    df['Title'] = (df['Title'].str.lower()
-                   .replace("[^a-z0-9]", " ", regex=True)
-                   .replace(" +", " ", regex=True)
-                   .str.strip())
-    df['Authors'] = (df['Authors']
-                     .str.lower()
-                     .replace("[^a-z0-9]", " ", regex=True)
-                     .replace(" +", " ", regex=True)
-                     .str.strip())
-
-    df['Venue'] = (df['Venue']
-                   .str.lower()
-                   .replace(" +", " ", regex=True)
-                   .str.strip())
-
-
-def blocking(df1, df2, cols=['year_acm', 'year_dblp']):
-    b1 = defaultdict(list)
-    b2 = defaultdict(list)
-
-    for idx, key in df1[cols[0]].items():
-        if key:
-            b1[key].append(idx)
-
-    for idx, key in df2[cols[1]].items():
-        if key:
-            b2[key].append(idx)
-
-    pairs = [list(pair) for key in b1.keys() for pair in list(itertools.product(b1[key], b2[key]))]
-
-    return np.array(pairs)
-
-
-def matching(df, sim='jaccard', threshold = 0.8):
-    if sim == 'jaccard':
-        df['similarity'] = df.apply(lambda x: jaccard_sim(x.title_one, x.title_two), axis=1)
-    elif sim == 'trigram':
-        df['similarity'] = df.apply(lambda x: trigram_sim(x.title_one, x.title_two), axis=1)
-    elif sim == 'levenshtein':
-        df['similarity'] = df.apply(lambda x: levenshtein_sim(x.title_one, x.title_two), axis=1)
-    
-    matching_pairs = df[df['similarity'] > threshold]
-    return matching_pairs
-
-def token_blocking(df1, df2, stop_words: set):
-    blocks1 = defaultdict(list)
-    blocks2 = defaultdict(list)
-
-    for idx, row in enumerate(df1.itertuples()):
-
-        string = " ".join([str(value) for value in row if not pd.isna(value)])
-        tokens = set(
-            [word for word in word_tokenize(string) if word not in stop_words]
-        )
-
-        for token in tokens:
-            blocks1[token].append(idx)
-
-    for idx, row in enumerate(df2.itertuples()):
-
-        string = " ".join([str(value) for value in row if not pd.isna(value)])
-        tokens = set(
-            [word for word in word_tokenize(string) if word not in stop_words]
-        )
-
-        for token in tokens:
-            blocks2[token].append(idx)
-
-    blocks1 = {
-        key: indices
-        for key, indices in blocks1.items()
-        if len(indices) < 1000 and len(indices) > 1
-    }
-    blocks2 = {
-        key: indices
-        for key, indices in blocks2.items()
-        if len(indices) < 1000 and len(indices) > 1
-    }
-
-    pairs = [list(pair) for key in (blocks1.keys() & blocks2.keys()) for pair in
-             list(itertools.product(blocks1[key], blocks2[key]))]
-
-    return np.array(pairs)
-
-
-def matching(df, sim='jaccard', weights=[0.33, 0.33, 0.33]):
-    if sim == 'jaccard':
-        df['jaccard_sim'] = df.apply(lambda x: weights[0] * jaccard_sim(x.title_acm, x.title_dblp)
-                                               + weights[1] * jaccard_sim(x.authors_acm, x.authors_dblp)
-                                               + weights[2] * int(x.year_acm == x.year_dblp)
-                                     , axis=1)
-    elif sim == 'trigram':
-        df['trigram_sim'] = df.apply(
-            lambda x: weights[0] * trigram_sim(get_ngrams(x.title_acm), get_ngrams(x.title_dblp))
-                      + weights[1] * trigram_sim(get_ngrams(x.authors_acm), get_ngrams(x.authors_dblp))
-                      + weights[2] * int(x.year_acm == x.year_dblp)
-            , axis=1)
-
-def jaccard_sim(s1, s2):
-    s_intersection = set(set(s1.split()).intersection(set(s2.split())))
-    s_union = set(s1.split()).union(set(s2.split()))
-    return len(s_intersection) / len(s_union)
-
-
-def trigram_sim(ngram_1, ngram_2):
-    return 2 * len(ngram_1.intersection(ngram_2)) / (len(ngram_1) + len(ngram_2))
-
-def levenshtein_dist(s1, s2):
-    if len(s1) == 0 or len(s2) == 0:
-        return max(len(s1), len(s2)) # returns the length of the non-empty string
-    if s1[0] == s2[0]:
-        return levenshtein_dist(s1[1:], s2[1:])
-    else:
-        return 1 + min(
-            levenshtein_dist(s1[1:], s2), # deletion
-            levenshtein_dist(s1, s2[1:]), # insertion
-            levenshtein_dist(s1[1:], s2[1:]) # substitution
-        )
-
-def levenshtein_sim(s1,s2):
-    return 1 - levenshtein_dist(s1,s2) / max(len(s1), len(s2))
-
-def get_ngrams(text, number=3):
-    if not text:
-        return set()
-    text = ' ' * (number - 1) + text + ' ' * (number - 1)
-    ngrams = set()
-    for x in range(0, len(text) - number + 1):
-        ngrams.add(text[x:x + number])
-    return ngrams
-
-
 def blocking_and_matching(df1, df2, block='st', match='jacc',  weights=[0.3, 0.3, 0.3]):
 
     if block == 'token':
@@ -168,7 +36,7 @@ def blocking_and_matching(df1, df2, block='st', match='jacc',  weights=[0.3, 0.3
         blocks = token_blocking(df1[['title_acm', 'authors_acm']], df2[['title_dblp', 'authors_dblp']], stop_words)
         blocks = np.unique(blocks, axis=0)
     else:
-        blocks = blocking(df1, df2)
+        blocks = blocking_by_year(df1, df2)
 
     df_blocking = pd.concat([df1.loc[blocks[:, 0]].reset_index(),
                              df2.loc[blocks[:, 1]].reset_index()], axis=1)
@@ -203,7 +71,7 @@ def evaluate(df, bs_df, f, match='jaccard'):
             match_df_jaccard = df[df.jaccard_sim > threshold].sort_values(by=['jaccard_sim'],
                                                                           ascending=False)
             f1, prec, rec = f1_evaluation(match_df_jaccard, bs_df_jaccard)
-            print(f'Jaccard: threshold: {threshold}, f1: {f1}, precision: {prec}, recall: {rec}', file=f)
+#             print(f'Jaccard: threshold: {threshold}, f1: {f1}, precision: {prec}, recall: {rec}', file=f)
 
 
 def f1_evaluation(df, bs_df):

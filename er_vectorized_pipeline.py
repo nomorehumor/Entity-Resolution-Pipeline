@@ -2,34 +2,13 @@ import os
 import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 import time
-import csv
 
-from blocking import create_ngram_blocks, get_candidate_pairs_between_blocks
+from blocking import create_ngram_word_blocks, get_candidate_pairs_between_blocks
 from data_loading import get_vector_datasets, load_two_publication_sets
 from paths import OUTPUT_DIR
 
 BASELINE_OUTPUT = f"{OUTPUT_DIR}/baseline_cosine.csv"
 ER_PIPELINE_NGRAM_COSINE_OUTPUT = f"{OUTPUT_DIR}/Matched_Entities_Ngram_Cosine_Indices.csv"
-
-# HELPER TO SEE WHETHER MATCHED INDICES ARE CORRECT
-def show_tuples_behind_indices_pair(filename, newfilename):
-    df1, df2 = load_two_publication_sets()
-
-    with open(filename, 'r') as indices_pairs:
-        csv_reader = csv.reader(indices_pairs)
-
-        # Skip the header if it exists
-        next(csv_reader, None)
-
-        real_pairs = []
-        for row in csv_reader:
-            idx1 = int(row[0])
-            idx2 = int(row[1])
-
-            real_pairs.append((df1.iloc[idx1]["Combined"],df2.iloc[idx2]["Combined"]))
-        columns = ["Combined_1", "Combined_2"]
-        df_matches = pd.DataFrame(real_pairs, columns=columns)
-        df_matches.to_csv(newfilename, encoding='utf-8-sig', index=False)
 
 
 # FIRST PIPE FOR ENTITY RESOLUTION
@@ -39,8 +18,8 @@ def er_ngram_cosine_pipe(n=2):
     # Vectorization using TF-IDF
     vector_space1, vector_space2 = get_vector_datasets(df1, df2)
 
-    blocks1 = create_ngram_blocks(df1, "Combined", n)
-    blocks2 = create_ngram_blocks(df2, "Combined", n)
+    blocks1 = create_ngram_word_blocks(df1, "Combined", n)
+    blocks2 = create_ngram_word_blocks(df2, "Combined", n)
     candidate_pairs_set = get_candidate_pairs_between_blocks(blocks1, blocks2)
 
     # Set a similarity threshold
