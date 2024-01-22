@@ -34,12 +34,16 @@ def blocking(values, return_pairs=False):
     return buckets
 
 
-def matching(df, sim='jaccard'):
+def matching(df, sim='jaccard', threshold = 0.8):
     if sim == 'jaccard':
-        df['jaccard_sim'] = df.apply(lambda x: jaccard_sim(x.title_one, x.title_two), axis=1)
+        df['similarity'] = df.apply(lambda x: jaccard_sim(x.title_one, x.title_two), axis=1)
     elif sim == 'trigram':
-        df['trigram_sim'] = df.apply(lambda x: trigram_sim(x.title_one, x.title_two), axis=1)
-
+        df['similarity'] = df.apply(lambda x: trigram_sim(x.title_one, x.title_two), axis=1)
+    elif sim == 'levenshtein':
+        df['similarity'] = df.apply(lambda x: levenshtein_sim(x.title_one, x.title_two), axis=1)
+    
+    matching_pairs = df[df['similarity'] > threshold]
+    return matching_pairs
 
 def column_normalization(col_values):
     return (col_values
@@ -60,6 +64,20 @@ def trigram_sim(s1, s2):
     ngram_2 = get_trigrams(s2)
     return 2 * len(ngram_1.intersection(ngram_2)) / (len(ngram_1) + len(ngram_2))
 
+def levenshtein_dist(s1, s2):
+    if len(s1) == 0 or len(s2) == 0:
+        return max(len(s1), len(s2)) # returns the length of the non-empty string
+    if s1[0] == s2[0]:
+        return levenshtein_dist(s1[1:], s2[1:])
+    else:
+        return 1 + min(
+            levenshtein_dist(s1[1:], s2), # deletion
+            levenshtein_dist(s1, s2[1:]), # insertion
+            levenshtein_dist(s1[1:], s2[1:]) # substitution
+        )
+
+def levenshtein_sim(s1,s2):
+    return 1 - levenshtein_dist(s1,s2) / max(len(s1), len(s2))
 
 def get_trigrams(text, number=3):
     if not text:
@@ -80,5 +98,6 @@ def entity_resolution():
     pairs = np.array([x for (k, v) in blocks_on_year.items() for x in v])
     pairs_df = pd.concat([df['Title'].loc[pairs[:, 0]].rename('title_one').reset_index(),
                           df['Title'].loc[pairs[:, 1]].rename('title_two').reset_index()], axis=1)
-    matching(pairs_df, sim='jaccard')
-
+    df_matches = matching(pairs_df, sim='jaccard')
+    return df_matches
+    
