@@ -39,3 +39,14 @@ def show_tuples_behind_indices_pair(filename, newfilename):
         columns = ["Combined_1", "Combined_2"]
         df_matches = pd.DataFrame(real_pairs, columns=columns)
         df_matches.to_csv(newfilename, encoding='utf-8-sig', index=False)
+
+def get_candidate_pairs_between_blocks(blocks1, blocks2):
+    """
+    Helper function to create candidate pairs between blocks
+    """
+    candidate_pairs = set()
+    for ngram in blocks1:
+        if ngram in blocks2:
+            pairs = [(id1, id2) for id1 in blocks1[ngram] for id2 in blocks2[ngram]]
+            candidate_pairs.update(pairs) # add all candidate pairs to set
+    return candidate_pairs

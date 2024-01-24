@@ -3,9 +3,10 @@ import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 import time
 
-from blocking import create_ngram_word_blocks, get_candidate_pairs_between_blocks
+from blocking import create_ngram_word_blocks
 from data_loading import get_vector_datasets, load_two_publication_sets
 from paths import OUTPUT_DIR
+from utils import get_candidate_pairs_between_blocks
 
 BASELINE_OUTPUT = f"{OUTPUT_DIR}/baseline_cosine.csv"
 ER_PIPELINE_NGRAM_COSINE_OUTPUT = f"{OUTPUT_DIR}/Matched_Entities_Ngram_Cosine_Indices.csv"
@@ -18,8 +19,8 @@ def er_ngram_cosine_pipe(n=2):
     # Vectorization using TF-IDF
     vector_space1, vector_space2 = get_vector_datasets(df1, df2)
 
-    blocks1 = create_ngram_word_blocks(df1, "Combined", n)
-    blocks2 = create_ngram_word_blocks(df2, "Combined", n)
+    blocks1 = create_ngram_word_blocks(df1, "Combined_dblp", n)
+    blocks2 = create_ngram_word_blocks(df2, "Combined_acm", n)
     candidate_pairs_set = get_candidate_pairs_between_blocks(blocks1, blocks2)
 
     # Set a similarity threshold

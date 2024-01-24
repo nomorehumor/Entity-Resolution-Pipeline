@@ -11,7 +11,7 @@ import numpy as np
 import pandas as pd
 from blocking import blocking_by_year, token_blocking
 from data_loading import preprocessing
-from matching import matching
+from matching import string_matching
 
 from paths import ACM_DATASET_FILE, DBLP_DATASET_FILE, OUTPUT_DIR
 
@@ -28,31 +28,6 @@ def data_preparation():
     df2.index.names = ['index_dblp']
 
     return df1, df2
-
-def blocking_and_matching(df1, df2, block='st', match='jacc',  weights=[0.3, 0.3, 0.3]):
-
-    if block == 'token':
-        stop_words = set(stopwords.words('english') + list(string.punctuation))
-        blocks = token_blocking(df1[['title_acm', 'authors_acm']], df2[['title_dblp', 'authors_dblp']], stop_words)
-        blocks = np.unique(blocks, axis=0)
-    else:
-        blocks = blocking_by_year(df1, df2)
-
-    df_blocking = pd.concat([df1.loc[blocks[:, 0]].reset_index(),
-                             df2.loc[blocks[:, 1]].reset_index()], axis=1)
-
-    matching(df_blocking, sim=match, weights=weights)
-
-    return df_blocking
-
-
-def baseline_matching(df1, df2, match, weights):
-    all_pairs = np.array([list(pair) for pair in itertools.product(df1.index, df2.index)])
-    bs_df = pd.concat([df1.loc[all_pairs[:, 0]].reset_index(),
-                              df2.loc[all_pairs[:, 1]].reset_index()], axis=1)
-    matching(bs_df, sim=match, weights=weights)
-    return bs_df
-
 
 def evaluate(df, bs_df, f, match='jaccard'):
     thresholds = [0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95]
