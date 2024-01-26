@@ -1,3 +1,4 @@
+import csv
 import time
 from blocking import blocking
 from data_loading import load_two_publication_sets
@@ -78,8 +79,6 @@ def entity_resolution_experiments():
             print(f"#{i}: {config['blocking']}, {config['matching']}")
             start= time.time()
             pairs = blocking(df_acm, df_dblp, blocking_scheme=config['blocking'], params=config['blocking_params'])
-            # df_block_pairs = pd.concat([df_acm.loc[blocks[:, 0]].reset_index(),
-            #                  df_dblp.loc[blocks[:, 1]].reset_index()], axis=1)
             df_pairs = matching(df_acm, df_dblp, pairs, config['matching'], weights=config.get('matching_weights'))
 
             end = time.time()
@@ -93,7 +92,16 @@ def entity_resolution_experiments():
             for threshold in thresholds: 
                 f1, prec, rec = evaluate(df_pairs, bs_df_pairs, threshold)
                 print(f'threshold: {threshold}, f1: {f1}, precision: {prec}, recall: {rec}')
+                save_result(config, start_timestamp, threshold, f1, prec, rec)
 
+def save_result(config, timestamp, threshold, f1, prec, rec):
+    filename = f"{OUTPUT_DIR}/result_{timestamp}.csv"
+    file_exists = os.path.exists(filename)
+    with open(filename, "a") as f:
+        writer = csv.writer(f, delimiter="|")
+        if not file_exists:
+            writer.writerow(["config", "threshold", "f1", "precision", "recall"])
+        writer.writerow([config, threshold, f1, prec, rec])
 
 if __name__ == "__main__":
     entity_resolution_experiments()
