@@ -5,7 +5,7 @@ from er_block_match import *
 from matching import baseline_matching, matching
 
 
-def evaluate(df, bs_df, threshold, match='jaccard'):
+def evaluate(df, bs_df, threshold):
     bs_df_match = bs_df[bs_df.similarity > threshold].sort_values(by=['similarity'],
                                                                         ascending=False)
     df_match = df[df.similarity > threshold].sort_values(by=['similarity'],
@@ -67,22 +67,21 @@ def entity_resolution_experiments():
         for i, config in enumerate(experiment_configs):
             print(f"#{i}: {config['blocking']}, {config['matching']}")
             start= time.time()
-            blocks = blocking(df_acm, df_dblp, blocking_scheme=config['blocking'], params=config['blocking_params'])
-            df_block_pairs = pd.concat([df_acm.loc[blocks[:, 0]].reset_index(),
-                             df_dblp.loc[blocks[:, 1]].reset_index()], axis=1)
-            
-            df_pairs = matching(df_acm, df_dblp, df_block_pairs, config['matching'], weights=config.get('matching_weights'))
+            pairs = blocking(df_acm, df_dblp, blocking_scheme=config['blocking'], params=config['blocking_params'])
+            # df_block_pairs = pd.concat([df_acm.loc[blocks[:, 0]].reset_index(),
+            #                  df_dblp.loc[blocks[:, 1]].reset_index()], axis=1)
+            df_pairs = matching(df_acm, df_dblp, pairs, config['matching'], weights=config.get('matching_weights'))
 
             end = time.time()
             print(f'Time needed for blocking and matching: {end-start}')
 
             start = time.time()
-            bs_df_pairs = baseline_matching(df_acm, df_dblp, match=config['matching'], weights=config.get('matching_weights'))
+            bs_df_pairs = baseline_matching(df_acm, df_dblp, matching_function=config['matching'], weights=config.get('matching_weights'))
             end = time.time()
-            print(f'Time needed for baseline creation: {end-start}')
+            print(f'Time needed for baseline creation & matching : {end-start}')
 
             for threshold in thresholds: 
-                f1, prec, rec = evaluate(df_pairs, bs_df_pairs, threshold, match=config['matching'])
+                f1, prec, rec = evaluate(df_pairs, bs_df_pairs, threshold)
                 print(f'threshold: {threshold}, f1: {f1}, precision: {prec}, recall: {rec}')
 
 
