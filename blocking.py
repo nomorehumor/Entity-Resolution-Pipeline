@@ -8,19 +8,19 @@ from nltk.corpus import stopwords
 import string
 
 
-def blocking(df1, df2, blocking_scheme, params):
+def blocking(df_acm, df_dblp, blocking_scheme, params):
     if blocking_scheme == "ngram_word_blocks":
-        blocks1 = create_ngram_word_blocks(df1, "Combined_dblp", params["n"])
-        blocks2 = create_ngram_word_blocks(df2, "Combined_acm", params["n"])
+        blocks1 = create_ngram_word_blocks(df_acm, "Combined_acm",  params["n"])
+        blocks2 = create_ngram_word_blocks(df_dblp, "Combined_dblp", params["n"])
         candidate_pairs_set = get_candidate_pairs_between_blocks(blocks1, blocks2)
         return candidate_pairs_set
     elif blocking_scheme == 'token':
         stop_words = set(stopwords.words('english') + list(string.punctuation))
-        blocks = token_blocking(df1[['title_acm', 'authors_acm']], df2[['title_dblp', 'authors_dblp']], stop_words)
+        blocks = token_blocking(df_acm[['title_acm', 'authors_acm']], df_dblp[['title_dblp', 'authors_dblp']], stop_words)
         blocks = np.unique(blocks, axis=0)
         return blocks
     elif blocking_scheme == 'st':
-        blocks = blocking_by_year(df1, df2)
+        blocks = blocking_by_year(df_acm, df_dblp)
         return blocks
         
 
@@ -74,15 +74,15 @@ def token_blocking(df1, df2, stop_words: set):
 
     return np.array(pairs)
 
-def blocking_by_year(df1, df2, cols=['year_acm', 'year_dblp']):
+def blocking_by_year(df_acm, df_dblp, cols=['year_acm', 'year_dblp']):
     b1 = defaultdict(list)
     b2 = defaultdict(list)
 
-    for idx, key in df1[cols[0]].items():
+    for idx, key in df_acm[cols[0]].items():
         if key:
             b1[key].append(idx)
 
-    for idx, key in df2[cols[1]].items():
+    for idx, key in df_dblp[cols[1]].items():
         if key:
             b2[key].append(idx)
 

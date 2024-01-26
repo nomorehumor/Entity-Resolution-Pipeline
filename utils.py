@@ -1,5 +1,6 @@
 import csv
 from data_loading import load_two_publication_sets
+import numpy as np
 
 def get_symbol_ngrams(text, number=3):
     if not text:
@@ -49,4 +50,4 @@ def get_candidate_pairs_between_blocks(blocks1, blocks2):
         if ngram in blocks2:
             pairs = [(id1, id2) for id1 in blocks1[ngram] for id2 in blocks2[ngram]]
             candidate_pairs.update(pairs) # add all candidate pairs to set
-    return candidate_pairs
+    return np.array(list(candidate_pairs))
