@@ -13,6 +13,16 @@ def evaluate(df, bs_df, threshold):
     f1, prec, rec = f1_evaluation(df_match, bs_df_match)
     
     return f1, prec, rec
+
+def f1_evaluation(df, bs_df):
+    tp = len(pd.merge(df, bs_df, how='inner', on=['index_acm', 'index_dblp']))
+    fp = len(df) - tp
+    fn = len(bs_df) - tp
+    precision = (tp / (tp + fp)) if (tp + fp) > 0 else 0
+    recall = (tp / (tp + fn)) if (tp + fn) > 0 else 0
+    f1 = 2 * precision * recall / (precision + recall)
+
+    return f1, precision, recall
             
 def entity_resolution_experiments():
     df_acm, df_dblp = load_two_publication_sets()
