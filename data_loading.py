@@ -7,14 +7,16 @@ from paths import ACM_DATASET_FILE, DBLP_DATASET_FILE
 # LOADING DATA 
 def read_file(filename, dataset_origin):
     column_names = ['paperId', 'title', 'authors', 'venue', 'year']
-    df = pd.read_csv(filename, sep='|', skiprows=1, names=column_names, encoding='utf-8-sig',
-                     dtype={'PaperID': str, 'Title': str, 'Authors': str, 'Venue': str, 'Year': int})
+    df = pd.read_csv(filename, sep='|', skiprows=1, names=column_names, encoding='utf-8-sig', dtype={'PaperID': str, 'Title': str, 'Authors': str, 'Venue': str, 'Year': int})
     preprocessing(df)
+
+    df.fillna("", inplace=True)
 
     column_names = [f"{column_name}_{dataset_origin}" for column_name in df.columns]
     df.columns = column_names
-    df.dropna(ignore_index=True, inplace=True)
-    df.drop_duplicates(keep='first', ignore_index=True, inplace=True)
+    df.index.names = [f'index_{dataset_origin}']
+    # df.dropna(ignore_index=True, inplace=True)
+    # df.drop_duplicates(keep='first', ignore_index=True, inplace=True)
     return df
 
 
@@ -39,15 +41,15 @@ def preprocessing(df):
 
 
 def load_two_publication_sets():
-    df1 = read_file(DBLP_DATASET_FILE, "dblp")
-    df2 = read_file(ACM_DATASET_FILE, "acm")
+    df_acm = read_file(ACM_DATASET_FILE, "acm")
+    df_dblp = read_file(DBLP_DATASET_FILE, "dblp")
 
-    return df1, df2
+    return df_acm, df_dblp
 
 
-def get_vector_datasets(df1, df2):
+def get_vector_datasets(df_acm, df_dblp):
     vectorizer = TfidfVectorizer()
-    vectorizer.fit(df1["Combined_dblp"].values.tolist() + df2["Combined_acm"].values.tolist())
-    vector_space1 = vectorizer.transform(df1["Combined_dblp"]).toarray()
-    vector_space2 = vectorizer.transform(df2["Combined_acm"]).toarray()
+    vectorizer.fit(df_acm["Combined_acm"].values.tolist() + df_dblp["Combined_dblp"].values.tolist())
+    vector_space1 = vectorizer.transform(df_acm["Combined_acm"]).toarray()
+    vector_space2 = vectorizer.transform(df_dblp["Combined_dblp"]).toarray()
     return vector_space1, vector_space2

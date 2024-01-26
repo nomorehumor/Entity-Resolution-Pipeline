@@ -1,10 +1,13 @@
 import csv
+
+import pandas as pd
 from collections import defaultdict
 
 import pandas as pd
 from nltk import word_tokenize
 
 from data_loading import load_two_publication_sets
+import numpy as np
 
 
 def get_symbol_ngrams(text, number=3):
@@ -57,9 +60,21 @@ def get_candidate_pairs_between_blocks(blocks1, blocks2):
     for ngram in blocks1:
         if ngram in blocks2:
             pairs = [(id1, id2) for id1 in blocks1[ngram] for id2 in blocks2[ngram]]
-            candidate_pairs.update(pairs)  # add all candidate pairs to set
-    return candidate_pairs
+            candidate_pairs.update(pairs) # add all candidate pairs to set
+    return np.array(list(candidate_pairs))
 
+
+def create_cartesian_product_baseline(df_acm, df_dblp):
+    # all_pairs = np.array([list(pair) for pair in itertools.product(df_acm.index, df_dblp.index)])
+    # bs_df = pd.concat([df_acm.loc[all_pairs[:, 0]].reset_index(),
+    #                           df_dblp.loc[all_pairs[:, 1]].reset_index()], axis=1)
+
+    df_acm = df_acm.reset_index().rename(columns={'index': 'index_acm'})
+    df_dblp = df_dblp.reset_index().rename(columns={'index': 'index_dblp'})
+    df_acm['key'] = 1
+    df_dblp['key'] = 1
+    bs_df = pd.merge(df_acm, df_dblp, on='key').drop('key', axis=1)
+    return bs_df
 
 def get_token_blocks(df, stop_words):
     blocks = defaultdict(list)

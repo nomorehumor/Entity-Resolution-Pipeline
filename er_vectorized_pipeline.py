@@ -19,13 +19,13 @@ def er_ngram_cosine_pipe(n=2):
     # Vectorization using TF-IDF
     vector_space1, vector_space2 = get_vector_datasets(df1, df2)
 
-    blocks1 = create_ngram_word_blocks(df1, "Combined_dblp", n)
-    blocks2 = create_ngram_word_blocks(df2, "Combined_acm", n)
+    blocks1 = create_ngram_word_blocks(df1, "Combined_acm", n)
+    blocks2 = create_ngram_word_blocks(df2, "Combined_dblp", n)
     candidate_pairs_set = get_candidate_pairs_between_blocks(blocks1, blocks2)
 
     # Set a similarity threshold
     threshold = 0.8
-
+    
     matching_pairs = []
     for idx1, idx2 in candidate_pairs_set:
         sim = cosine_similarity(vector_space1[idx1].reshape(1, -1), vector_space2[idx2].reshape(1, -1))[0, 0]
@@ -47,7 +47,6 @@ def create_baseline(threshold):
 
     # calculate similarities for all pairs
     cosine_sim = cosine_similarity(vector_space1, vector_space2)
-
     # Find matching pairs
     matching_pairs = []
     for i in range(len(cosine_sim)):
