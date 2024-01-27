@@ -35,22 +35,38 @@ def string_matching(df_acm, df_dblp, pairs, sim='jaccard', weights=[0.33, 0.33, 
     # df['index_dblp'] = pairs[:, 1]
     # df = df.merge(df_acm, left_on='index_acm', right_index=True)
     # df = df.merge(df_dblp, left_on='index_dblp', right_index=True)
+
+
+    acm_title, dblp_title = 'title_acm', 'title_dblp'
+    acm_authors, dblp_authors = 'authors_acm', 'authors_dblp'
+
+    if sim == 'jaccard':
+        sim_func = jaccard_sim
+    elif sim == 'trigram':
+        df_acm['trigram_title_acm'] = np.vectorize(get_symbol_ngrams)(df_acm['title_acm'])
+        df_acm['trigram_authors_acm'] = np.vectorize(get_symbol_ngrams)(df_acm['authors_acm'])
+        df_dblp['trigram_title_dblp'] = np.vectorize(get_symbol_ngrams)(df_dblp['title_dblp'])
+        df_dblp['trigram_authors_dblp'] = np.vectorize(get_symbol_ngrams)(df_dblp['authors_dblp'])
+
+        acm_title, dblp_title = 'trigram_title_acm', 'trigram_title_dblp'
+        acm_authors, dblp_authors = 'trigram_authors_acm', 'trigram_authors_dblp'
+        sim_func = trigram_sim
+    elif sim == 'levenshtein':
+        sim_func = levenshtein_sim
+
+    # df = pd.DataFrame(np.column_stack([df_acm.values[pairs[:, 0]], df_dblp.values[pairs[:, 1]]]),
+    #                   columns=df_acm.columns.tolist() + df_dblp.columns.tolist())
+
+
     df = pd.concat([df_acm.loc[pairs[:, 0]].reset_index(),
                     df_dblp.loc[pairs[:, 1]].reset_index()], axis=1)
 
-    if sim == 'jaccard':
-        df['similarity'] = df.apply(lambda x: weights[0] * jaccard_sim(x.title_acm, x.title_dblp)
-                        + weights[1] * jaccard_sim(x.authors_acm, x.authors_dblp)
-                        + weights[2] * int(x.year_acm == x.year_dblp)
-                                    , axis=1)
-    elif sim == 'trigram':
-        df['similarity'] = df.apply(lambda x: weights[0] * trigram_sim(get_symbol_ngrams(x.title_acm), get_symbol_ngrams(x.title_dblp))
-                      + weights[1] * trigram_sim(get_symbol_ngrams(x.authors_acm), get_symbol_ngrams(x.authors_dblp))
-                      + weights[2] * int(x.year_acm == x.year_dblp)
-                                    , axis=1)
-    elif sim == 'levenshtein':
-        df['similarity'] = df.apply(lambda x: weights[0] * levenshtein_sim(x.title_one, x.title_two)
-                                    + weights[1] * levenshtein_sim(x.authors_acm, x.authors_dblp), axis=1)
+    title_sim = np.vectorize(sim_func)(df[acm_title], df[dblp_title])
+    authors_sim = np.vectorize(sim_func)(df[acm_authors], df[dblp_authors])
+    year_sim = (df['year_acm'] == df['year_dblp']).astype(int)
+
+    df['similarity'] = weights[0] * title_sim + weights[1] * authors_sim + weights[2] * year_sim
+
     return df
 
 
@@ -62,7 +78,7 @@ def vector_matching(df_acm, df_dblp, pairs):
     df = pd.DataFrame(columns=["index_acm", "index_dblp", "similarity"])
     df['index_acm'] = pairs[:, 0]
     df['index_dblp'] = pairs[:, 1]
-    df['similarity']= cosine_sim[pairs[:, 0], pairs[:, 1]]
+    df['similarity'] = cosine_sim[pairs[:, 0], pairs[:, 1]]
     return df
 
 
@@ -89,5 +105,5 @@ def levenshtein_dist(s1, s2):
         )
 
 
-def levenshtein_sim(s1,s2):
-    return 1 - levenshtein_dist(s1,s2) / max(len(s1), len(s2)) if max(len(s1), len(s2)) > 0 else 0
+def levenshtein_sim(s1, s2):
+    return 1 - levenshtein_dist(s1, s2) / max(len(s1), len(s2)) if max(len(s1), len(s2)) > 0 else 0
