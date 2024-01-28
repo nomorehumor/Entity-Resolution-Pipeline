@@ -74,25 +74,25 @@ def entity_resolution_experiments():
     
     thresholds = [0.5, 0.6, 0.7, 0.8, 0.9, 0.95]
     start_timestamp = time.strftime("%Y%m%d-%H%M%S")
-    with open("output.txt", "a") as f:
-        for i, config in enumerate(experiment_configs):
-            print(f"#{i}: {config['blocking']}, {config['matching']}")
-            pipeline_start= time.time()
-            pairs = blocking(df_acm, df_dblp, blocking_scheme=config['blocking'], params=config['blocking_params'])
-            df_pairs = matching(df_acm, df_dblp, pairs, config['matching'], weights=config.get('matching_weights'))
 
-            pipeline_end = time.time()
-            print(f'Time needed for blocking and matching: {pipeline_end-pipeline_start}')
+    for i, config in enumerate(experiment_configs):
+        print(f"#{i}: {config['blocking']}, {config['matching']}")
+        pipeline_start= time.time()
+        pairs = blocking(df_acm, df_dblp, blocking_scheme=config['blocking'], params=config['blocking_params'])
+        df_pairs = matching(df_acm, df_dblp, pairs, config['matching'], weights=config.get('matching_weights'))
 
-            bs_start = time.time()
-            bs_df_pairs = baseline_matching(df_acm, df_dblp, matching_function=config['matching'], weights=config.get('matching_weights'))
-            bs_matching_end = time.time()
-            print(f'Time needed for baseline creation & matching : {bs_matching_end-bs_start}')
+        pipeline_end = time.time()
+        print(f'Time needed for blocking and matching: {pipeline_end-pipeline_start}')
 
-            for threshold in thresholds: 
-                f1, prec, rec = evaluate(df_pairs, bs_df_pairs, threshold)
-                print(f'threshold: {threshold}, f1: {f1}, precision: {prec}, recall: {rec}')
-                save_result(config, start_timestamp, threshold, f1, prec, rec, pipeline_end-pipeline_start)
+        bs_start = time.time()
+        bs_df_pairs = baseline_matching(df_acm, df_dblp, matching_function=config['matching'], weights=config.get('matching_weights'))
+        bs_matching_end = time.time()
+        print(f'Time needed for baseline creation & matching : {bs_matching_end-bs_start}')
+
+        for threshold in thresholds: 
+            f1, prec, rec = evaluate(df_pairs, bs_df_pairs, threshold)
+            print(f'threshold: {threshold}, f1: {f1}, precision: {prec}, recall: {rec}')
+            save_result(config, start_timestamp, threshold, f1, prec, rec, pipeline_end-pipeline_start)
 
 def save_result(config, timestamp, threshold, f1, prec, rec, pipeline_execution_time):
     filename = f"{OUTPUT_DIR}/result_{timestamp}.csv"
