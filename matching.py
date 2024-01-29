@@ -1,4 +1,5 @@
 import time
+import Levenshtein
 import pandas as pd
 from data_loading import get_vector_datasets
 from utils import create_cartesian_product_baseline, get_symbol_ngrams
@@ -92,18 +93,5 @@ def trigram_sim(ngram_1, ngram_2):
     return 2 * len(ngram_1.intersection(ngram_2)) / (len(ngram_1) + len(ngram_2)) if len(ngram_1) + len(ngram_2) > 0 else 0
 
 
-def levenshtein_dist(s1, s2):
-    if len(s1) == 0 or len(s2) == 0:
-        return max(len(s1), len(s2))  # returns the length of the non-empty string
-    if s1[0] == s2[0]:
-        return levenshtein_dist(s1[1:], s2[1:])
-    else:
-        return 1 + min(
-            levenshtein_dist(s1[1:], s2),  # deletion
-            levenshtein_dist(s1, s2[1:]),  # insertion
-            levenshtein_dist(s1[1:], s2[1:])  # substitution
-        )
-
-
 def levenshtein_sim(s1, s2):
-    return 1 - levenshtein_dist(s1, s2) / max(len(s1), len(s2)) if max(len(s1), len(s2)) > 0 else 0
+    return 1 - Levenshtein.distance(s1, s2) / max(len(s1), len(s2)) if max(len(s1), len(s2)) > 0 else 0

@@ -50,7 +50,7 @@ def entity_resolution_experiments():
         },
         {
             'blocking': 'st',
-            'matching': 'jaccard',
+            'matching': 'levenshtein',
             "blocking_params": {},
             'matching_weights': [0.8, 0.2, 0]
         },
