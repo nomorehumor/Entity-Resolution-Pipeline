@@ -1,6 +1,6 @@
 def create_undirected_bipartite_graph(matched_pairs):
     graph = {}
-    for idx1, idx2 in zip(matched_pairs['idx1'], matched_pairs['idx2']):
+    for idx1, idx2 in zip(matched_pairs['index_acm'], matched_pairs['index_dblp']):
         node1 = f"1_{idx1}"
         node2 = f"2_{idx2}"
         if node1 not in graph:
