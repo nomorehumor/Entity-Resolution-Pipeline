@@ -4,6 +4,7 @@ import csv
 
 from paths import ACM_DATASET_FILE, DBLP_DATASET_FILE
 
+
 def read_first_n_lines(tgz_filename, n=10):
     with tarfile.open(tgz_filename, "r:gz") as tar:
         for member in tar.getmembers():
@@ -17,8 +18,10 @@ def read_first_n_lines(tgz_filename, n=10):
                         if line_count == n:
                             break
 
+
 def extract_publications(tgz_filename, output_csv_filename):
-    with tarfile.open(tgz_filename, "r:gz") as tar, open(output_csv_filename, mode='w', newline='', encoding='utf-8-sig') as csvfile:
+    with tarfile.open(tgz_filename, "r:gz") as tar, open(output_csv_filename, mode='w', newline='',
+                                                         encoding='utf-8-sig') as csvfile:
         csv_writer = csv.writer(csvfile, delimiter='|')
         csv_writer.writerow(['PaperID', 'Title', 'Authors', 'Venue', 'Year'])
 
@@ -41,12 +44,15 @@ def extract_publications(tgz_filename, output_csv_filename):
                         elif line == "":
                             # Check if the entry meets the criteria before writing it to CSV
                             if 'Year' in current_entry and 1995 <= int(current_entry['Year']) <= 2004:
-                                if 'Venue' in current_entry and any(keyword.lower() in current_entry['Venue'].lower() for keyword in ["sigmod", "vldb"]):
-                                    csv_writer.writerow([current_entry.get(key, '') for key in ['PaperID', 'Title', 'Authors', 'Venue', 'Year']])
+                                if 'Venue' in current_entry and any(
+                                        keyword.lower() in current_entry['Venue'].lower() for keyword in
+                                        ["sigmod", "vldb"]):
+                                    csv_writer.writerow([current_entry.get(key, '') for key in
+                                                         ['PaperID', 'Title', 'Authors', 'Venue', 'Year']])
                             # Reset current entry
                             current_entry = {}
 
 
 extract_publications("citation-acm-v8.txt.tgz", ACM_DATASET_FILE)
 extract_publications("dblp.v8.tgz", DBLP_DATASET_FILE)
-#read_first_n_lines("citation-acm-v8.txt.tgz", n=1000)
+# read_first_n_lines("citation-acm-v8.txt.tgz", n=1000)

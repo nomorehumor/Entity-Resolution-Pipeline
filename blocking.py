@@ -1,7 +1,5 @@
-from utils import get_candidate_pairs_between_blocks, get_words_ngrams
+from utils import get_candidate_pairs_between_blocks, get_words_ngrams, get_token_blocks
 from collections import defaultdict
-from nltk.tokenize import word_tokenize
-import pandas as pd
 import itertools
 import numpy as np
 from nltk.corpus import stopwords
@@ -34,55 +32,26 @@ def create_ngram_word_blocks(df, column, n):
             blocks[ngram].append(idx) # only append idx of row in dataframe to save more space
     return blocks
 
+
 def token_blocking(df1, df2, stop_words: set):
-    blocks1 = defaultdict(list)
-    blocks2 = defaultdict(list)
-
-    for idx, row in enumerate(df1.itertuples()):
-
-        string = " ".join([str(value) for value in row if not pd.isna(value)])
-        tokens = set(
-            [word for word in word_tokenize(string) if word not in stop_words]
-        )
-
-        for token in tokens:
-            blocks1[token].append(idx)
-
-    for idx, row in enumerate(df2.itertuples()):
-
-        string = " ".join([str(value) for value in row if not pd.isna(value)])
-        tokens = set(
-            [word for word in word_tokenize(string) if word not in stop_words]
-        )
-
-        for token in tokens:
-            blocks2[token].append(idx)
-
-    blocks1 = {
-        key: indices
-        for key, indices in blocks1.items()
-        if len(indices) < 1000 and len(indices) > 1
-    }
-    blocks2 = {
-        key: indices
-        for key, indices in blocks2.items()
-        if len(indices) < 1000 and len(indices) > 1
-    }
+    blocks1 = get_token_blocks(df1, stop_words)
+    blocks2 = get_token_blocks(df2, stop_words)
 
     pairs = [list(pair) for key in (blocks1.keys() & blocks2.keys()) for pair in
              list(itertools.product(blocks1[key], blocks2[key]))]
 
     return np.array(pairs)
 
-def blocking_by_year(df_acm, df_dblp, cols=['year_acm', 'year_dblp']):
+
+def blocking_by_year(df_acm, df_dblp):
     b1 = defaultdict(list)
     b2 = defaultdict(list)
 
-    for idx, key in df_acm[cols[0]].items():
+    for idx, key in df_acm['year_acm'].items():
         if key:
             b1[key].append(idx)
 
-    for idx, key in df_dblp[cols[1]].items():
+    for idx, key in df_dblp['year_dblp'].items():
         if key:
             b2[key].append(idx)
 

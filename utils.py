@@ -1,7 +1,13 @@
 import csv
 import pandas as pd
+from collections import defaultdict
+
+import pandas as pd
+from nltk import word_tokenize
+
 from data_loading import load_two_publication_sets
 import numpy as np
+
 
 def get_symbol_ngrams(text, number=3):
     if not text:
@@ -12,6 +18,7 @@ def get_symbol_ngrams(text, number=3):
         ngrams.add(text[x:x + number])
     return ngrams
 
+
 # Function to create n-gram blocks for a dataframe
 def get_words_ngrams(text, n):
     words = text.split()
@@ -20,7 +27,8 @@ def get_words_ngrams(text, n):
     ngrams_list = [tuple(words[i:i + n]) for i in range(len(words) - n + 1)]
 
     # list containing strings (which are basically n subsequent words)
-    return [' '.join(gram) for gram in ngrams_list]  
+    return [' '.join(gram) for gram in ngrams_list]
+
 
 # HELPER TO SEE WHETHER MATCHED INDICES ARE CORRECT
 def show_tuples_behind_indices_pair(filename, newfilename):
@@ -65,10 +73,29 @@ def create_cartesian_product_baseline(df_acm, df_dblp):
     # all_pairs = np.array([list(pair) for pair in itertools.product(df_acm.index, df_dblp.index)])
     # bs_df = pd.concat([df_acm.loc[all_pairs[:, 0]].reset_index(),
     #                           df_dblp.loc[all_pairs[:, 1]].reset_index()], axis=1)
-    
+
     df_acm = df_acm.reset_index().rename(columns={'index': 'index_acm'})
     df_dblp = df_dblp.reset_index().rename(columns={'index': 'index_dblp'})
     df_acm['key'] = 1
-    df_dblp['key'] = 1      
+    df_dblp['key'] = 1
     bs_df = pd.merge(df_acm, df_dblp, on='key').drop('key', axis=1)
     return bs_df
+
+def get_token_blocks(df, stop_words):
+    blocks = defaultdict(list)
+
+    for idx, row in enumerate(df.itertuples()):
+        string = " ".join([str(value) for value in row if not pd.isna(value)])
+        tokens = set(
+            [word for word in word_tokenize(string) if word not in stop_words]
+        )
+        for token in tokens:
+            blocks[token].append(idx)
+
+    blocks = {
+        key: indices
+        for key, indices in blocks.items()
+        if 1000 > len(indices) > 1
+    }
+
+    return blocks

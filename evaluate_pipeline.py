@@ -15,6 +15,7 @@ def evaluate(df, bs_df, threshold):
     
     return f1, prec, rec
 
+
 def f1_evaluation(df, bs_df):
     tp = len(pd.merge(df, bs_df, how='inner', on=['index_acm', 'index_dblp']))
     fp = len(df) - tp
@@ -24,7 +25,8 @@ def f1_evaluation(df, bs_df):
     f1 = 2 * precision * recall / (precision + recall)
 
     return f1, precision, recall
-            
+
+
 def entity_resolution_experiments():
     df_acm, df_dblp = load_two_publication_sets()
         
@@ -48,7 +50,7 @@ def entity_resolution_experiments():
         },
         {
             'blocking': 'st',
-            'matching': 'jaccard',
+            'matching': 'levenshtein',
             "blocking_params": {},
             'matching_weights': [0.8, 0.2, 0]
         },
@@ -93,6 +95,7 @@ def entity_resolution_experiments():
             f1, prec, rec = evaluate(df_pairs, bs_df_pairs, threshold)
             print(f'threshold: {threshold}, f1: {f1}, precision: {prec}, recall: {rec}')
             save_result(config, start_timestamp, threshold, f1, prec, rec, pipeline_end-pipeline_start)
+
 
 def save_result(config, timestamp, threshold, f1, prec, rec, pipeline_execution_time):
     filename = f"{OUTPUT_DIR}/result_{timestamp}.csv"
