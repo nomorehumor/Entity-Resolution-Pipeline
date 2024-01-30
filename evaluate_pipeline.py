@@ -1,5 +1,5 @@
 import csv
-import time
+from clustering import connected_components
 from blocking import blocking
 from data_loading import load_two_publication_sets
 from er_block_match import *
@@ -12,7 +12,7 @@ def evaluate(df, bs_df, threshold):
     df_match = df[df.similarity > threshold].sort_values(by=['similarity'],
                                                                     ascending=False)
     f1, prec, rec = f1_evaluation(df_match, bs_df_match)
-    
+
     return f1, prec, rec
 
 
@@ -27,9 +27,23 @@ def f1_evaluation(df, bs_df):
     return f1, precision, recall
 
 
+def deduplicate_datasets(df_acm, df_dblp, clusters, config_num):
+    idx_acm, idx_dblp = [], []
+
+    for key in clusters.keys():
+        if len(clusters[key]) > 2:
+            id_acm = [int(el[2:]) for el in clusters[key] if el.startswith('1')]
+            idx_acm.extend(id_acm[1:])
+            id_dblp = [int(el[2:]) for el in clusters[key] if el.startswith('2')]
+            idx_dblp.extend(id_dblp[1:])
+
+    df_acm.drop(idx_acm).to_csv(f'{OUTPUT_DIR}/ACM_deduplicated_{config_num}.csv')
+    df_dblp.drop(idx_dblp).to_csv(f'{OUTPUT_DIR}/DBLP_deduplicated_{config_num}.csv')
+
+
 def entity_resolution_experiments():
     df_acm, df_dblp = load_two_publication_sets()
-        
+
     experiment_configs = [
         {
             "blocking": 'ngram_word_blocks',
@@ -168,10 +182,10 @@ def entity_resolution_experiments():
             'matching_weights': [0, 0.7, 0.3]
         }
     ]
-    
-    thresholds = [0.5, 0.6, 0.7, 0.8, 0.9, 0.95]
-    start_timestamp = time.strftime("%Y%m%d-%H%M%S")
 
+    thresholds = [0.5, 0.6, 0.7, 0.8, 0.9, 0.95]
+    chosen_threshold = 0.8
+    start_timestamp = time.strftime("%Y%m%d-%H%M%S")
     for i, config in enumerate(experiment_configs):
         print(f"#{i}: {config['blocking']}, {config['matching']}")
         pipeline_start= time.time()
@@ -186,10 +200,13 @@ def entity_resolution_experiments():
         bs_matching_end = time.time()
         print(f'Time needed for baseline creation & matching : {bs_matching_end-bs_start}')
 
-        for threshold in thresholds: 
+        for threshold in thresholds:
             f1, prec, rec = evaluate(df_pairs, bs_df_pairs, threshold)
             print(f'threshold: {threshold}, f1: {f1}, precision: {prec}, recall: {rec}')
             save_result(config, start_timestamp, threshold, f1, prec, rec, pipeline_end-pipeline_start)
+
+        clusters = connected_components(df_pairs[df_pairs.similarity > chosen_threshold])
+        deduplicate_datasets(df_acm, df_dblp, clusters, i)
 
 
 def save_result(config, timestamp, threshold, f1, prec, rec, pipeline_execution_time):
@@ -200,6 +217,7 @@ def save_result(config, timestamp, threshold, f1, prec, rec, pipeline_execution_
         if not file_exists:
             writer.writerow(["config", "threshold", "f1", "precision", "recall", "execution_time"])
         writer.writerow([config, threshold, f1, prec, rec, pipeline_execution_time])
+
 
 if __name__ == "__main__":
     entity_resolution_experiments()
