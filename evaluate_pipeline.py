@@ -22,7 +22,7 @@ def f1_evaluation(df, bs_df):
     fn = len(bs_df) - tp
     precision = (tp / (tp + fp)) if (tp + fp) > 0 else 0
     recall = (tp / (tp + fn)) if (tp + fn) > 0 else 0
-    f1 = 2 * precision * recall / (precision + recall)
+    f1 = 2 * precision * recall / (precision + recall) if precision + recall != 0 else 0
 
     return f1, precision, recall
 
@@ -32,9 +32,14 @@ def entity_resolution_experiments():
         
     experiment_configs = [
         {
-            "blocking": 'ngram_word_blocks',
+            "blocking": '',
             "matching": 'cosine',
             "blocking_params": {"n": 4},
+        },
+        {
+            "blocking": 'ngram_word_blocks',
+            "matching": 'cosine',
+            "blocking_params": {"n": 3},
         },
         {
             "blocking": 'st',
@@ -43,8 +48,80 @@ def entity_resolution_experiments():
             "matching_weights": [0.7, 0.3, 0]
         },
         {
+            'blocking': 'token',
+            'matching': 'jaccard',
+            "blocking_params": {},
+            'matching_weights': [0.7, 0.3, 0]
+        },
+        {
+            'blocking': 'st',
+            'matching': 'jaccard',
+            "blocking_params": {},
+            'matching_weights': [0.3, 0.3, 0.3]
+        },
+        {
+            'blocking': 'token',
+            'matching': 'jaccard',
+            "blocking_params": {},
+            'matching_weights': [0.3, 0.3, 0.3]
+        },
+        {
+            'blocking': 'st',
+            'matching': 'jaccard',
+            "blocking_params": {},
+            'matching_weights': [0, 0.7, 0.3]
+        },
+        {
+            'blocking': 'token',
+            'matching': 'jaccard',
+            "blocking_params": {},
+            'matching_weights': [0, 0.7, 0.3]
+        },
+        {
+            "blocking": 'st',
+            "matching": 'trigram',
+            "blocking_params": {},
+            "matching_weights": [0.7, 0.3, 0]
+        },
+        {
+            'blocking': 'token',
+            'matching': 'trigram',
+            "blocking_params": {},
+            'matching_weights': [0.7, 0.3, 0]
+        },
+        {
             'blocking': 'st',
             'matching': 'trigram',
+            "blocking_params": {},
+            'matching_weights': [0.3, 0.3, 0.3]
+        },
+        {
+            'blocking': 'token',
+            'matching': 'trigram',
+            "blocking_params": {},
+            'matching_weights': [0.3, 0.3, 0.3]
+        },
+        {
+            'blocking': 'st',
+            'matching': 'trigram',
+            "blocking_params": {},
+            'matching_weights': [0, 0.7, 0.3]
+        },
+        {
+            'blocking': 'token',
+            'matching': 'trigram',
+            "blocking_params": {},
+            'matching_weights': [0, 0.7, 0.3]
+        },
+        {
+            "blocking": 'st',
+            "matching": 'levenshtein',
+            "blocking_params": {},
+            "matching_weights": [0.7, 0.3, 0]
+        },
+        {
+            'blocking': 'token',
+            'matching': 'levenshtein',
             "blocking_params": {},
             'matching_weights': [0.7, 0.3, 0]
         },
@@ -52,25 +129,43 @@ def entity_resolution_experiments():
             'blocking': 'st',
             'matching': 'levenshtein',
             "blocking_params": {},
-            'matching_weights': [0.8, 0.2, 0]
+            'matching_weights': [0.3, 0.3, 0.3]
         },
         {
             'blocking': 'token',
-            'matching': 'jaccard',
+            'matching': 'levenshtein',
             "blocking_params": {},
-            'matching_weights': [0.5, 0.2, 0.3]
+            'matching_weights': [0.3, 0.3, 0.3]
+        },
+        {
+            'blocking': 'st',
+            'matching': 'levenshtein',
+            "blocking_params": {},
+            'matching_weights': [0, 0.7, 0.3]
         },
         {
             'blocking': 'token',
-            'matching': 'trigram',
+            'matching': 'levenshtein',
             "blocking_params": {},
-            'matching_weights': [0.5, 0.2, 0.3]
-        }, 
+            'matching_weights': [0, 0.7, 0.3]
+        },
         {
-            'blocking': 'token',
-            'matching': 'jaccard',
-            "blocking_params": {},
-            'matching_weights': [0.5, 0.3, 0.2]
+            'blocking': 'ngram_word_blocks',
+            'matching': 'levenshtein',
+            "blocking_params": {"n": 3},
+            'matching_weights': [0.3, 0.3, 0.3]
+        },
+        {
+            'blocking': 'ngram_word_blocks',
+            'matching': 'levenshtein',
+            "blocking_params": {"n": 3},
+            'matching_weights': [0, 0.7, 0.3]
+        },
+        {
+            'blocking': 'ngram_word_blocks',
+            'matching': 'levenshtein',
+            "blocking_params": {"n": 3},
+            'matching_weights': [0, 0.7, 0.3]
         }
     ]
     
