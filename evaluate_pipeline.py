@@ -32,7 +32,7 @@ def entity_resolution_experiments():
         
     experiment_configs = [
         {
-            "blocking": '',
+            "blocking": 'ngram_word_blocks',
             "matching": 'cosine',
             "blocking_params": {"n": 4},
         },
