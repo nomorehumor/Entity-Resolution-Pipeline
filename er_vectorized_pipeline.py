@@ -3,8 +3,8 @@ import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 import time
 
-from blocking import create_ngram_word_blocks
-from data_loading import get_vector_datasets, load_two_publication_sets
+from pipeline.blocking import create_ngram_word_blocks
+from pipeline.data_loading import get_vector_datasets, load_two_publication_sets
 from paths import OUTPUT_DIR
 from utils import get_candidate_pairs_between_blocks, convert_matches_to_indices_df, show_tuples_behind_indices_pair
 
@@ -30,12 +30,12 @@ def er_ngram_cosine_pipe(n=2):
     threshold = 0.8
     
     matching_pairs = []
-    for idx1, idx2 in candidate_pairs_set:
-        sim = cosine_similarity(vector_space1[idx1].reshape(1, -1), vector_space2[idx2].reshape(1, -1))[0, 0]
-        #print(f"Cosine Similarity between df_acm[{idx1}] and df_dblp[{idx2}]: {similarity}")
+    for index_acm, index_dblp in candidate_pairs_set:
+        sim = cosine_similarity(vector_space1[index_acm].reshape(1, -1), vector_space2[index_dblp].reshape(1, -1))[0, 0]
+        #print(f"Cosine Similarity between df_acm[{index_acm}] and df_dblp[{index_dblp}]: {similarity}")
         if sim > threshold:
-            matching_pairs.append((idx1, idx2))
-    columns = ["idx1", "idx2"]
+            matching_pairs.append((index_acm, index_dblp))
+    columns = ["index_acm", "index_dblp"]
     df_matches = pd.DataFrame(matching_pairs, columns=columns)
     df_matches.to_csv(ER_PIPELINE_NGRAM_COSINE_OUTPUT, index=False)
     show_tuples_behind_indices_pair(ER_PIPELINE_NGRAM_COSINE_OUTPUT, "truetuples.csv")
@@ -45,7 +45,7 @@ def er_ngram_cosine_pipe(n=2):
     
     acm_clus, dblp_clus = assign_to_clusters(indices_df=indices_pairs_df)
 
-    # use this function to write a file containing the papers belonging to each cluster
+    # use this function to wr ite a file containing the papers belonging to each cluster
     cluster_check(acm_clus, dblp_clus, df_acm, df_dblp)
 
     representatives_dict = create_cluster_representatives_dict(dblp_clus, df_dblp)
@@ -70,7 +70,7 @@ def create_baseline(threshold):
             if cosine_sim[i, j] > threshold:
                 # print(f"Match: {(df1.iloc[i]['Combined'], df2.iloc[j]['Combined'])} ")
                 matching_pairs.append((i, j))
-    columns = ["idx1", "idx2"]
+    columns = ["index_acm", "index_dblp"]
     df_matches = pd.DataFrame(matching_pairs, columns=columns)
     df_matches.to_csv(BASELINE_OUTPUT, index=False)
     # show_tuples_behind_indices_pair("indices.csv", "truetuples.csv")
@@ -81,7 +81,7 @@ def evaluate(baseline_file, matches_file):
     matches_df = pd.read_csv(matches_file)
 
     # Count the number of true positives
-    true_positives = pd.merge(matches_df, baseline_df, on=['idx1', 'idx2']).shape[0]
+    true_positives = pd.merge(matches_df, baseline_df, on=['index_acm', 'index_dblp']).shape[0]
 
     # Count the number of false positives
     false_positives = matches_df.shape[0] - true_positives
@@ -102,32 +102,32 @@ def assign_to_clusters(indices_df):
     next_cluster_idx = 0
     
     for _, row in indices_df.iterrows():
-        idx1, idx2 = row['idx1'], row['idx2']
+        index_acm, index_dblp = row['index_acm'], row['index_dblp']
         
-        if idx1 in acm_clusters and idx2 in dblp_clusters:
+        if index_acm in acm_clusters and index_dblp in dblp_clusters:
             continue  
             
-        if idx1 not in acm_clusters and idx2 not in dblp_clusters:
-            acm_clusters[idx1] = next_cluster_idx
-            dblp_clusters[idx2] = next_cluster_idx
+        if index_acm not in acm_clusters and index_dblp not in dblp_clusters:
+            acm_clusters[index_acm] = next_cluster_idx
+            dblp_clusters[index_dblp] = next_cluster_idx
             
-            # get the other matches of the dblp dataset to the idx1 and add them to the cluster
-            for _, sub_row in indices_df[indices_df['idx1'] == idx1].iterrows():
-                if sub_row['idx2'] not in dblp_clusters:
-                    dblp_clusters[sub_row['idx2']] = next_cluster_idx
+            # get the other matches of the dblp dataset to the index_acm and add them to the cluster
+            for _, sub_row in indices_df[indices_df['index_acm'] == index_acm].iterrows():
+                if sub_row['index_dblp'] not in dblp_clusters:
+                    dblp_clusters[sub_row['index_dblp']] = next_cluster_idx
             
-            # get the other matches of the acm dataset to the idx2 and add them to the cluster
-            for _, sub_row in indices_df[indices_df['idx2'] == idx2].iterrows():
-                if sub_row['idx1'] not in acm_clusters:
-                    acm_clusters[sub_row['idx1']] = next_cluster_idx
+            # get the other matches of the acm dataset to the index_dblp and add them to the cluster
+            for _, sub_row in indices_df[indices_df['index_dblp'] == index_dblp].iterrows():
+                if sub_row['index_acm'] not in acm_clusters:
+                    acm_clusters[sub_row['index_acm']] = next_cluster_idx
             
             next_cluster_idx += 1
-        elif idx1 in acm_clusters and idx2 not in dblp_clusters:
-            current_cluster_idx = acm_clusters[idx1]
-            dblp_clusters[idx2] = current_cluster_idx
-        elif idx2 in dblp_clusters and idx1 not in acm_clusters:
-            current_cluster_idx = dblp_clusters[idx2]
-            acm_clusters[idx1] = current_cluster_idx
+        elif index_acm in acm_clusters and index_dblp not in dblp_clusters:
+            current_cluster_idx = acm_clusters[index_acm]
+            dblp_clusters[index_dblp] = current_cluster_idx
+        elif index_dblp in dblp_clusters and index_acm not in acm_clusters:
+            current_cluster_idx = dblp_clusters[index_dblp]
+            acm_clusters[index_acm] = current_cluster_idx
     
     return acm_clusters, dblp_clusters
 

@@ -1,9 +1,10 @@
 import csv
-from clustering import connected_components
-from blocking import blocking
-from data_loading import load_two_publication_sets
+from pipeline.clustering import connected_components
+from pipeline.blocking import blocking
+from pipeline.data_loading import load_two_publication_sets
 from er_block_match import *
-from matching import baseline_matching, matching
+from pipeline.deduplication import deduplicate_datasets
+from pipeline.matching import baseline_matching, matching
 
 
 def evaluate(df, bs_df, threshold):
@@ -25,21 +26,6 @@ def f1_evaluation(df, bs_df):
     f1 = 2 * precision * recall / (precision + recall) if precision + recall != 0 else 0
 
     return f1, precision, recall
-
-
-def deduplicate_datasets(df_acm, df_dblp, clusters, config_num):
-    idx_acm, idx_dblp = [], []
-
-    for key in clusters.keys():
-        if len(clusters[key]) > 2:
-            id_acm = [int(el[2:]) for el in clusters[key] if el.startswith('1')]
-            idx_acm.extend(id_acm[1:])
-            id_dblp = [int(el[2:]) for el in clusters[key] if el.startswith('2')]
-            idx_dblp.extend(id_dblp[1:])
-
-    df_acm.drop(idx_acm).to_csv(f'{OUTPUT_DIR}/ACM_deduplicated_{config_num}.csv')
-    df_dblp.drop(idx_dblp).to_csv(f'{OUTPUT_DIR}/DBLP_deduplicated_{config_num}.csv')
-
 
 def entity_resolution_experiments():
     df_acm, df_dblp = load_two_publication_sets()
@@ -188,7 +174,7 @@ def entity_resolution_experiments():
     start_timestamp = time.strftime("%Y%m%d-%H%M%S")
     for i, config in enumerate(experiment_configs):
         print(f"#{i}: {config['blocking']}, {config['matching']}")
-        pipeline_start= time.time()
+        pipeline_start = time.time()
         pairs = blocking(df_acm, df_dblp, blocking_scheme=config['blocking'], params=config['blocking_params'])
         df_pairs = matching(df_acm, df_dblp, pairs, config['matching'], weights=config.get('matching_weights'))
 

@@ -5,7 +5,7 @@ from collections import defaultdict
 import pandas as pd
 from nltk import word_tokenize
 
-from data_loading import load_two_publication_sets
+from pipeline.data_loading import load_two_publication_sets
 import numpy as np
 
 
@@ -64,8 +64,8 @@ def get_candidate_pairs_between_blocks(blocks1, blocks2):
 
 # instead of storing the rownumbers in the dataframes, get the actual PaperID in the dataframes
 def convert_matches_to_indices_df(df_acm, df_dblp, df_matches):
-    indices = [(df_acm.iloc[row["idx1"]]['paperId_acm'], df_dblp.iloc[row["idx2"]]['paperId_dblp']) for _, row in df_matches.iterrows()]
-    indices_df = pd.DataFrame(indices, columns=['idx1', 'idx2'])
+    indices = [(df_acm.iloc[int(row["index_acm"])]['paperId_acm'], df_dblp.iloc[int(row["index_dblp"])]['paperId_dblp']) for _, row in df_matches.iterrows()]
+    indices_df = pd.DataFrame(indices, columns=['index_acm', 'index_dblp'])
     return indices_df
 
 

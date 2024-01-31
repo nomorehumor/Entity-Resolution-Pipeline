@@ -10,6 +10,7 @@ def read_file(filename, dataset_origin):
     df = pd.read_csv(filename, sep='|', skiprows=1, names=column_names, encoding='utf-8-sig', dtype={'PaperID': str, 'Title': str, 'Authors': str, 'Venue': str, 'Year': int})
     preprocessing(df)
 
+    df.drop_duplicates(subset=["paperId"], keep='first', ignore_index=True, inplace=True)
     df.fillna("", inplace=True)
 
     column_names = [f"{column_name}_{dataset_origin}" for column_name in df.columns]
