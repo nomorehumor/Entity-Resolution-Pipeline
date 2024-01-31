@@ -1,5 +1,5 @@
 import time
-from er_vectorized_pipeline import assign_to_clusters, cluster_check, create_cluster_representatives_dict, create_deduplicated_dataset
+from scripts.er_vectorized_pipeline import assign_to_clusters, cluster_check, create_cluster_representatives_dict, create_deduplicated_dataset
 from paths import OUTPUT_DIR
 from pipeline.data_loading import load_two_publication_sets
 

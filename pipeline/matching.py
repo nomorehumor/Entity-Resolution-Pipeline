@@ -2,7 +2,7 @@ import time
 import Levenshtein
 import pandas as pd
 from pipeline.data_loading import get_vector_datasets
-from utils import create_cartesian_product_baseline, get_symbol_ngrams
+from pipeline.utils import create_cartesian_product_baseline, get_symbol_ngrams
 from sklearn.metrics.pairwise import cosine_similarity
 import itertools
 import numpy as np

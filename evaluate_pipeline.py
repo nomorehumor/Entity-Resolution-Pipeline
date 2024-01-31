@@ -2,7 +2,7 @@ import csv
 from pipeline.clustering import connected_components, deduplicate_datasets
 from pipeline.blocking import blocking
 from pipeline.data_loading import load_two_publication_sets
-from er_block_match import *
+from scripts.er_block_match import *
 from pipeline.matching import baseline_matching, matching
 
 
