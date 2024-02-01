@@ -1,12 +1,11 @@
 import csv
-
 import pandas as pd
 from collections import defaultdict
 
 import pandas as pd
 from nltk import word_tokenize
 
-from data_loading import load_two_publication_sets
+from pipeline.data_loading import load_two_publication_sets
 import numpy as np
 
 
@@ -46,8 +45,8 @@ def show_tuples_behind_indices_pair(filename, newfilename):
             idx1 = int(row[0])
             idx2 = int(row[1])
 
-            real_pairs.append((df1.iloc[idx1]["Combined"], df2.iloc[idx2]["Combined"]))
-        columns = ["Combined_1", "Combined_2"]
+            real_pairs.append((df1.iloc[idx1]["Combined_acm"],df2.iloc[idx2]["Combined_dblp"]))
+        columns = ["Combined_acm", "Combined_dblp"]
         df_matches = pd.DataFrame(real_pairs, columns=columns)
         df_matches.to_csv(newfilename, encoding='utf-8-sig', index=False)
 
@@ -62,6 +61,12 @@ def get_candidate_pairs_between_blocks(blocks1, blocks2):
             pairs = [(id1, id2) for id1 in blocks1[ngram] for id2 in blocks2[ngram]]
             candidate_pairs.update(pairs) # add all candidate pairs to set
     return np.array(list(candidate_pairs))
+
+# instead of storing the rownumbers in the dataframes, get the actual PaperID in the dataframes
+def convert_matches_to_indices_df(df_acm, df_dblp, df_matches):
+    indices = [(df_acm.iloc[int(row["index_acm"])]['paperId_acm'], df_dblp.iloc[int(row["index_dblp"])]['paperId_dblp']) for _, row in df_matches.iterrows()]
+    indices_df = pd.DataFrame(indices, columns=['index_acm', 'index_dblp'])
+    return indices_df
 
 
 def create_cartesian_product_baseline(df_acm, df_dblp):

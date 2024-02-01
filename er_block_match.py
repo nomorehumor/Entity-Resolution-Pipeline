@@ -9,9 +9,9 @@ from nltk.corpus import stopwords
 from collections import defaultdict
 import numpy as np
 import pandas as pd
-from blocking import blocking_by_year, token_blocking
-from data_loading import preprocessing
-from matching import string_matching
+from pipeline.blocking import blocking_by_year, token_blocking
+from pipeline.data_loading import preprocessing
+from pipeline.matching import string_matching
 
 from paths import ACM_DATASET_FILE, DBLP_DATASET_FILE, OUTPUT_DIR
 
