@@ -7,7 +7,7 @@ from paths import ACM_DATASET_FILE, DBLP_DATASET_FILE, OUTPUT_DIR
 
 from pyspark.sql import SparkSession
 from pyspark.ml.feature import Tokenizer, NGram
-from pyspark.sql.functions import regexp_replace, concat_ws, udf, col, explode, collect_list, size, lower, concat, \
+from pyspark.sql.functions import regexp_replace, concat_ws, udf, col, explode, collect_list, lower, concat, \
     lit, trim
 from pyspark.sql.types import StringType, IntegerType, StructType, StructField, FloatType
 from pyspark.sql.functions import monotonically_increasing_id
@@ -64,10 +64,10 @@ def preprocess_column(df, input_column, output_column):
     return df
 
 
-def load_two_publication_sets_spark():
+def load_two_publication_sets_spark(acm_file, dblp_file):
     # Load ACM and DBLP datasets
-    df_acm = read_file_spark(ACM_DATASET_FILE, "acm")
-    df_dblp = read_file_spark(DBLP_DATASET_FILE, "dblp")
+    df_acm = read_file_spark(acm_file, "acm")
+    df_dblp = read_file_spark(dblp_file, "dblp")
 
     return df_acm, df_dblp
 
@@ -153,11 +153,11 @@ def deduplicate_datasets_spark(df_acm, df_dblp, clusters):
     return df_acm, df_dblp
 
 
-def pipeline():
+def distributed_er_pipeline(acm_file=ACM_DATASET_FILE, dblp_file=DBLP_DATASET_FILE, save=True):
     sim_threshold = 0.8
 
     pipeline_start = time.time()
-    df_acm, df_dblp = load_two_publication_sets_spark()
+    df_acm, df_dblp = load_two_publication_sets_spark(acm_file, dblp_file )
     candidate_pairs = blocking_spark(df_acm, df_dblp)
     matched_entities = levenshtein_matching(df_acm, df_dblp, candidate_pairs, sim_threshold)
     clusters = connected_components(matched_entities)
@@ -166,13 +166,13 @@ def pipeline():
     pipeline_end = time.time()
     print(f'Pipeline execution time: {pipeline_end - pipeline_start}')
 
-    matched_entities.coalesce(1).write.option("header", "true") \
-        .mode("overwrite") \
-        .csv("output/distributed_matched_entities")
+    if save:
+        matched_entities.coalesce(1).write.option("header", "true") \
+            .mode("overwrite") \
+            .csv("output/distributed_matched_entities")
 
-    dedupe_acm.coalesce(1).write.csv(f"{OUTPUT_DIR}/CM_deduplicated_distributed.csv", header=True,
-                                     mode="overwrite")
-    dedupe_dblp.coalesce(1).write.csv(f"{OUTPUT_DIR}/DBLP_deduplicated_distributed.csv", header=True,
-                                      mode="overwrite")
+        dedupe_acm.coalesce(1).write.csv(f"{OUTPUT_DIR}/CM_deduplicated_distributed.csv", header=True,
+                                         mode="overwrite")
+        dedupe_dblp.coalesce(1).write.csv(f"{OUTPUT_DIR}/DBLP_deduplicated_distributed.csv", header=True,
+                                          mode="overwrite")
 
-    return clusters
