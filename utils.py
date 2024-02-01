@@ -76,6 +76,7 @@ def create_cartesian_product_baseline(df_acm, df_dblp):
     bs_df = pd.merge(df_acm, df_dblp, on='key').drop('key', axis=1)
     return bs_df
 
+
 def get_token_blocks(df, stop_words):
     blocks = defaultdict(list)
 

@@ -37,7 +37,6 @@ def string_matching(df_acm, df_dblp, pairs, sim='jaccard', weights=[0.33, 0.33, 
     # df = df.merge(df_acm, left_on='index_acm', right_index=True)
     # df = df.merge(df_dblp, left_on='index_dblp', right_index=True)
 
-
     acm_title, dblp_title = 'title_acm', 'title_dblp'
     acm_authors, dblp_authors = 'authors_acm', 'authors_dblp'
 
@@ -54,9 +53,6 @@ def string_matching(df_acm, df_dblp, pairs, sim='jaccard', weights=[0.33, 0.33, 
         sim_func = trigram_sim
     elif sim == 'levenshtein':
         sim_func = levenshtein_sim
-
-    # df = pd.DataFrame(np.column_stack([df_acm.values[pairs[:, 0]], df_dblp.values[pairs[:, 1]]]),
-    #                   columns=df_acm.columns.tolist() + df_dblp.columns.tolist())
 
 
     df = pd.concat([df_acm.loc[pairs[:, 0]].reset_index(),
@@ -90,7 +86,8 @@ def jaccard_sim(s1, s2):
 
 
 def trigram_sim(ngram_1, ngram_2):
-    return 2 * len(ngram_1.intersection(ngram_2)) / (len(ngram_1) + len(ngram_2)) if len(ngram_1) + len(ngram_2) > 0 else 0
+    return 2 * len(ngram_1.intersection(ngram_2)) / (len(ngram_1) + len(ngram_2)) if len(ngram_1) + len(
+        ngram_2) > 0 else 0
 
 
 def levenshtein_sim(s1, s2):

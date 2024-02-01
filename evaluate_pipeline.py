@@ -82,9 +82,9 @@ def entity_resolution_experiments():
         }, 
         {
             'blocking': 'token',
-            'matching': 'jaccard',
+            'matching': 'levenshtein',
             "blocking_params": {},
-            'matching_weights': [0.5, 0.3, 0.2]
+            'matching_weights': [0.33, 0.33, 0.33]
         }
     ]
 
@@ -93,23 +93,25 @@ def entity_resolution_experiments():
     start_timestamp = time.strftime("%Y%m%d-%H%M%S")
     for i, config in enumerate(experiment_configs):
         print(f"#{i}: {config['blocking']}, {config['matching']}")
-        pipeline_start= time.time()
+        pipeline_start = time.time()
         pairs = blocking(df_acm, df_dblp, blocking_scheme=config['blocking'], params=config['blocking_params'])
         df_pairs = matching(df_acm, df_dblp, pairs, config['matching'], weights=config.get('matching_weights'))
 
         pipeline_end = time.time()
-        print(f'Time needed for blocking and matching: {pipeline_end-pipeline_start}')
+        print(f'Time needed for blocking and matching: {pipeline_end - pipeline_start}')
 
         bs_start = time.time()
-        bs_df_pairs = baseline_matching(df_acm, df_dblp, matching_function=config['matching'], weights=config.get('matching_weights'))
+        bs_df_pairs = baseline_matching(df_acm, df_dblp, matching_function=config['matching'],
+                                        weights=config.get('matching_weights'))
         bs_matching_end = time.time()
-        print(f'Time needed for baseline creation & matching : {bs_matching_end-bs_start}')
+        print(f'Time needed for baseline creation & matching : {bs_matching_end - bs_start}')
 
         for threshold in thresholds:
             f1, prec, rec = evaluate(df_pairs, bs_df_pairs, threshold)
             print(f'threshold: {threshold}, f1: {f1}, precision: {prec}, recall: {rec}')
-            save_result(config, start_timestamp, threshold, f1, prec, rec, pipeline_end-pipeline_start)
+            save_result(config, start_timestamp, threshold, f1, prec, rec, pipeline_end - pipeline_start)
 
+        df_pairs[df_pairs.similarity > chosen_threshold].to_csv(f'matched_entities_{i}.csv')
         clusters = connected_components(df_pairs[df_pairs.similarity > chosen_threshold])
         deduplicate_datasets(df_acm, df_dblp, clusters, i)
 
