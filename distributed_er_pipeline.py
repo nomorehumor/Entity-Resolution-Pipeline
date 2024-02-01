@@ -2,11 +2,11 @@ import time
 
 import Levenshtein
 
-from clustering import connected_components
+from pipeline.clustering import connected_components
 from paths import ACM_DATASET_FILE, DBLP_DATASET_FILE
 
 from pyspark.sql import SparkSession
-from pyspark.ml.feature import Tokenizer
+from pyspark.ml.feature import Tokenizer, NGram
 from pyspark.sql.functions import regexp_replace, concat_ws, udf, col, explode, collect_list, size, lower, concat, \
     lit, trim
 from pyspark.sql.types import StringType, IntegerType, StructType, StructField, FloatType
@@ -32,6 +32,7 @@ def read_file_spark(filename, dataset_origin):
           .option("maxPartitionBytes", "134217728")
           .csv(filename, schema=schema))
 
+    df = df.dropDuplicates(subset=["paperId"]).orderBy(col("paperId"))
     df = df.na.fill("")
 
     df = preprocess_column(df, 'title', 'cleaned_title')
@@ -73,22 +74,33 @@ def load_two_publication_sets_spark():
 
 
 def blocking_spark(df_acm, df_dblp):
-    blocks1 = get_token_blocks_spark(df_acm, "Combined_acm", "index_acm")
-    blocks2 = get_token_blocks_spark(df_dblp, "Combined_dblp", "index_dblp")
+    blocks1 = create_ngram_word_blocks_spark(df_acm, "Combined_acm", "index_acm", 3)
+    blocks2 = create_ngram_word_blocks_spark(df_dblp, "Combined_dblp", "index_dblp", 3)
 
-    candidate_pairs_set = get_candidate_pairs_between_blocks_spark(blocks1, blocks2, 'token', 'ids')
+    candidate_pairs_set = get_candidate_pairs_between_blocks_spark(blocks1, blocks2, 'ngram', 'ids')
 
     return candidate_pairs_set
 
 
-def get_token_blocks_spark(df, column, id_col):
-    exploded_df = df.select(col(id_col).alias("idx"), explode(col(column)).alias("token"))
+def create_ngram_word_blocks_spark(df, column, id_col, n):
+    ngram = NGram(n=n, inputCol=column, outputCol="ngrams")
+    df = ngram.transform(df)
+
+    exploded_df = df.select(col(id_col), explode(col("ngrams")).alias("ngram"))
     repartitioned_df = exploded_df.repartition(10)
-    grouped_df = repartitioned_df.groupBy("token").agg(collect_list("idx").alias("ids"))
-    filtered_tokens_sdf = grouped_df.filter(size("ids") > 1).filter(size("ids") < 1000)
-    blocks = filtered_tokens_sdf.repartition(10)
+    blocks = repartitioned_df.groupBy("ngram").agg(collect_list(id_col).alias("ids"))
+    blocks = blocks.repartition(10)
 
     return blocks
+
+# def get_token_blocks_spark(df, column, id_col):
+#     exploded_df = df.select(col(id_col).alias("idx"), explode(col(column)).alias("token"))
+#     repartitioned_df = exploded_df.repartition(10)
+#     grouped_df = repartitioned_df.groupBy("token").agg(collect_list("idx").alias("ids"))
+#     filtered_tokens_sdf = grouped_df.filter(size("ids") > 1).filter(size("ids") < 1000)
+#     blocks = filtered_tokens_sdf.repartition(10)
+#
+#     return blocks
 
 
 def get_candidate_pairs_between_blocks_spark(blocks1, blocks2, column, id_col):

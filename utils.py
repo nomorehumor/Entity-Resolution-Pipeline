@@ -62,6 +62,7 @@ def get_candidate_pairs_between_blocks(blocks1, blocks2):
             candidate_pairs.update(pairs) # add all candidate pairs to set
     return np.array(list(candidate_pairs))
 
+
 # instead of storing the rownumbers in the dataframes, get the actual PaperID in the dataframes
 def convert_matches_to_indices_df(df_acm, df_dblp, df_matches):
     indices = [(df_acm.iloc[int(row["index_acm"])]['paperId_acm'], df_dblp.iloc[int(row["index_dblp"])]['paperId_dblp']) for _, row in df_matches.iterrows()]
