@@ -9,14 +9,14 @@ from pipeline.matching import matching
 
 
 def run_entity_resolution(df_acm, df_dblp, blocking_function, matching_function, sim_threshold, blocking_params=None, matching_params={}):
-    
+    print(f'Running entity resolution with blocking function {blocking_function} and matching function {matching_function}')
     pipeline_start= time.time()
     # Blocking
     pairs = blocking(df_acm, df_dblp, blocking_scheme=blocking_function, params=blocking_params)
     
     # Matching
     df_pairs = matching(df_acm, df_dblp, pairs, matching_function, weights=matching_params.get('matching_weights'))
-    df_pairs[["index_acm", "index_dblp"]].to_csv(f'{OUTPUT_DIR}/Matched_Entities.csv', index=False)
+    df_pairs[["paperId_acm", "paperId_dblp"]].to_csv(f'{OUTPUT_DIR}/Matched_Entities.csv', index=False)
     pipeline_end = time.time()
     print(f'Time needed for blocking and matching: {pipeline_end-pipeline_start}')
 

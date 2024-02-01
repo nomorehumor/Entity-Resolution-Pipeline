@@ -76,9 +76,11 @@ def vector_matching(df_acm, df_dblp, pairs):
     vector_space1, vector_space2 = get_vector_datasets(df_acm, df_dblp)
     cosine_sim = cosine_similarity(vector_space1, vector_space2)
 
-    df = pd.DataFrame(columns=["index_acm", "index_dblp", "similarity"])
+    df = pd.DataFrame(columns=["index_acm", "index_dblp", "paperId_acm", "paperId_dblp", "similarity"])
     df['index_acm'] = pairs[:, 0]
     df['index_dblp'] = pairs[:, 1]
+    df['paperId_acm'] = df_acm['paperId_acm'].values[pairs[:, 0]]
+    df['paperId_dblp'] = df_dblp['paperId_dblp'].values[pairs[:, 1]]
     df['similarity'] = cosine_sim[pairs[:, 0], pairs[:, 1]]
     return df
 

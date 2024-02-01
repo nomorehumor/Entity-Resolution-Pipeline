@@ -147,6 +147,7 @@ index_acm,paperId_acm,title_acm,authors_acm,venue_acm,year_acm
 148,5390975920f70186a0dfe096,best papers of vldb 2003,johann christoph freytag serge abiteboul mike carey,the vldb journal — the international journal on very large data bases,2004
 149,5390975920f70186a0dfe094,automatic integration of web search interfaces with wise integrator,hai he weiyi meng clement yu zonghuan wu,the vldb journal — the international journal on very large data bases,2004
 150,5390975920f70186a0dfe097,adaptive unsupervised stream mining,spiros papadimitriou anthony brockwell christos faloutsos,the vldb journal — the international journal on very large data bases,2004
+151,5390975920f70186a0dfe095,supporting top k join queries in relational databases,ihab f ilyas walid g aref ahmed k elmagarmid,the vldb journal — the international journal on very large data bases,2004
 152,5390975920f70186a0dfe099,preserving mapping consistency under schema changes,yannis velegrakis j miller lucian popa,the vldb journal — the international journal on very large data bases,2004
 153,5390975920f70186a0dfe098,exploring the tradeoff between performance and data freshness in database driven web servers,alexandros labrinidis nick roussopoulos,the vldb journal — the international journal on very large data bases,2004
 154,5390975920f70186a0dfe2ab,life science research and data management what can they give each other,amarnath gupta,acm sigmod record,2004
@@ -173,6 +174,7 @@ index_acm,paperId_acm,title_acm,authors_acm,venue_acm,year_acm
 175,5390975920f70186a0dfe2b8,logic based web information extraction,georg gottlob christoph koch,acm sigmod record,2004
 176,5390975920f70186a0dfe2bd,branding yourself,richard snodgrass merrie brucks,acm sigmod record,2004
 177,5390975920f70186a0dfe2b6,mobile databases a selection of open issues and research directions,guy bernard jalel ben othman luc bouganim g r me canals sophie chabridon bruno defude jean ferri st phane gan arski rachid guerraoui pascal molli philippe pucheral claudia roncancio patricia serrano alvarado patrick valduriez,acm sigmod record,2004
+178,5390979920f70186a0dff268,the bea streaming xquery processor,daniela florescu chris hillery donald kossmann paul lucas fabio riccardi till westmann j carey arvind sundararajan,the vldb journal — the international journal on very large data bases,2004
 179,558e0b600cf2e6675805097a,acm sigmod record,,acm sigmod record,2004
 180,5390979920f70186a0dffb84,civedi a customized virtual environment for database interaction,pietro mazzoleni elisa bertino elena ferrari stefano valtolina,acm sigmod record,2004
 181,5390979920f70186a0dffb82,a denotational semantics for continuous queries over streams and relations,arvind arasu jennifer widom,acm sigmod record,2004
@@ -276,6 +278,7 @@ index_acm,paperId_acm,title_acm,authors_acm,venue_acm,year_acm
 280,53909f6920f70186a0e3a96d,optimizing view queries in rolex to support navigable result trees,p bohannon s ganguly h f korth p p s narayan p shenoy,vldb '02 proceedings of the 28th international conference on very large data bases,2002
 281,53909f6920f70186a0e3a96a,structural function inlining technique for structurally recursive xml queries,chang won park jun ki min chin wan chung,vldb '02 proceedings of the 28th international conference on very large data bases,2002
 283,53909f6920f70186a0e3a977,updates for structure indexes,raghav kaushik philip bohannon jeffrey f naughton pradeep shenoy,vldb '02 proceedings of the 28th international conference on very large data bases,2002
+284,53909f6920f70186a0e3a974,streaming queries over streaming data,sirish chandrasekaran michael j franklin,vldb '02 proceedings of the 28th international conference on very large data bases,2002
 285,53909f6920f70186a0e3a97f,comparing data streams using hamming norms how to zero in,graham cormode mayur datar piotr indyk s muthukrishnan,vldb '02 proceedings of the 28th international conference on very large data bases,2002
 286,53909f6920f70186a0e3a982,optimizing result prefetching in web search engines with segmented indices,ronny lempel shlomo moran,vldb '02 proceedings of the 28th international conference on very large data bases,2002
 287,53909f6920f70186a0e3a986,adaptive index structures,yufei tao dimitris papadias,vldb '02 proceedings of the 28th international conference on very large data bases,2002
@@ -283,6 +286,7 @@ index_acm,paperId_acm,title_acm,authors_acm,venue_acm,year_acm
 289,53909f6920f70186a0e3a97c,progressive merge join a generic and non blocking sort based join algorithm,jens peter dittrich bernhard seeger david scot taylor peter widmayer,vldb '02 proceedings of the 28th international conference on very large data bases,2002
 290,53909f6920f70186a0e3a96f,hippocratic databases,rakesh agrawal jerry kiernan ramakrishnan srikant yirong xu,vldb '02 proceedings of the 28th international conference on very large data bases,2002
 291,53909f6920f70186a0e3a97b,continuous nearest neighbor search,yufei tao dimitris papadias qiongmao shen,vldb '02 proceedings of the 28th international conference on very large data bases,2002
+292,53909f6920f70186a0e3a987,a case for fractured mirrors,ravishankar ramamurthy david j dewitt qi su,vldb '02 proceedings of the 28th international conference on very large data bases,2002
 293,53909f6920f70186a0e3a984,distributed search over the hidden web hierarchical database sampling and selection,panagiotis g ipeirotis luis gravano,vldb '02 proceedings of the 28th international conference on very large data bases,2002
 294,53909f6920f70186a0e3a988,xpathlearner an on line self tuning markov histogram for xml path selectivity estimation,lipyeow lim min wang sriram padmanabhan jeffrey scott vitter ronald parr,vldb '02 proceedings of the 28th international conference on very large data bases,2002
 295,53909f6920f70186a0e3a98a,structure and value synopses for xml data graphs,neoklis polyzotis minos garofalakis,vldb '02 proceedings of the 28th international conference on very large data bases,2002
@@ -342,6 +346,7 @@ index_acm,paperId_acm,title_acm,authors_acm,venue_acm,year_acm
 349,53909f6920f70186a0e3a9cf,a topss a publish subscribe system supporting approximate matching,haifeng liu h arno jacobsen,vldb '02 proceedings of the 28th international conference on very large data bases,2002
 350,53909f6920f70186a0e3a9c9,banks browsing and keyword searching in relational databases,b aditya gaurav bhalotia soumen chakrabarti arvind hulgeri charuta nakhe parag parag s sudarshan,vldb '02 proceedings of the 28th international conference on very large data bases,2002
 351,53909f6920f70186a0e3a9ca,active xml peer to peer data and web services integration,serge abitrboul omar benjellourn ioana manolescu tova milo roger weber,vldb '02 proceedings of the 28th international conference on very large data bases,2002
+352,53909f6920f70186a0e3a9b7,xmark a benchmark for xml data management,albrecht schmidt florian waas martin kersten michael j carey ioana manolescu ralph busse,vldb '02 proceedings of the 28th international conference on very large data bases,2002
 353,53909f6920f70186a0e3a9cb,legodb customizing relational storage for xml documents,philip bohannon juliana freire jayant r haritsa prasan roy j r me sim on,vldb '02 proceedings of the 28th international conference on very large data bases,2002
 354,53909f6920f70186a0e3a9ce,alias an active learning led interactive deduplication system,sunita sarawagi anuradha bhamidipaty alok kirpal chandra mouli,vldb '02 proceedings of the 28th international conference on very large data bases,2002
 355,53909f6920f70186a0e3a9cc,entrans a system for flexible consistency maintenance in directory applications,anandi herlekar atul deopujari krithi ramamritham shyamsunder gopale shridhar shukla,vldb '02 proceedings of the 28th international conference on very large data bases,2002
@@ -363,6 +368,7 @@ index_acm,paperId_acm,title_acm,authors_acm,venue_acm,year_acm
 371,53909f6920f70186a0e3a990,a bandwidth model for internet search,axel uhl,vldb '02 proceedings of the 28th international conference on very large data bases,2002
 372,53909f6920f70186a0e3a97e,multi dimensional regression analysis of time series data streams,yixin chen guozhu dong jiawei han benjamin w wah jianyong wang,vldb '02 proceedings of the 28th international conference on very large data bases,2002
 374,53909f6920f70186a0e3a976,a transducer based xml query processor,bertram lud scher pratik mukhopadhyay yannis papakonstantinou,vldb '02 proceedings of the 28th international conference on very large data bases,2002
+375,53909f6920f70186a0e3a978,re tree an efficient index structure for regular expressions,chee yong chan minos garofalakis rajeev rastogi,vldb '02 proceedings of the 28th international conference on very large data bases,2002
 376,53909f6920f70186a0e3a965,self tuning database technology and information services from wishful thinking to viable engineering,gerhard weikum axel moenkeberg christof hasse peter zabback,vldb '02 proceedings of the 28th international conference on very large data bases,2002
 377,53909f6920f70186a0e3a96c,incorporating xsl processing into database engines,guido moerkotte,vldb '02 proceedings of the 28th international conference on very large data bases,2002
 378,53909f6920f70186a0e3a966,referee an open framework for practical testing of recommender systems using researchindex,dan cosley steve lawrence david m pennock,vldb '02 proceedings of the 28th international conference on very large data bases,2002
@@ -377,6 +383,7 @@ index_acm,paperId_acm,title_acm,authors_acm,venue_acm,year_acm
 387,53909f8c20f70186a0e3fe2d,distributed top n query processing with possibly uncooperative local systems,clement yu george philip weiyi meng,vldb '03 proceedings of the 29th international conference on very large data bases - volume 29,2003
 388,53909f8c20f70186a0e3fe30,on the minimization of xpath queries,s flesca f furfaro e masciari,vldb '03 proceedings of the 29th international conference on very large data bases - volume 29,2003
 389,53909f8c20f70186a0e3fe29,efficient mining of xml query patterns for caching,liang huai yang mong li lee wynne hsu,vldb '03 proceedings of the 29th international conference on very large data bases - volume 29,2003
+390,53909f8c20f70186a0e3fe32,phrase matching in xml,sihem amer yahia mary fern ndez divesh srivastava yu xu,vldb '03 proceedings of the 29th international conference on very large data bases - volume 29,2003
 391,53909f8c20f70186a0e3fe28,an efficient and resilient approach to filtering and disseminating streaming data,shetal shah shyamshankar dharmarajan krithi ramamritham,vldb '03 proceedings of the 29th international conference on very large data bases - volume 29,2003
 392,53909f8c20f70186a0e3fe33,rrxs redundancy reducing xml storage in relations,yi chen susan davidson carmem hara yifeng zheng,vldb '03 proceedings of the 29th international conference on very large data bases - volume 29,2003
 393,53909f8c20f70186a0e3fe2b,a regression based temporal pattern mining scheme for data streams,wei guang teng ming syan chen philip s yu,vldb '03 proceedings of the 29th international conference on very large data bases - volume 29,2003
@@ -439,9 +446,7 @@ index_acm,paperId_acm,title_acm,authors_acm,venue_acm,year_acm
 451,53909f8c20f70186a0e3fe80,illuminating the dark side of web services,michael l brodie,vldb '03 proceedings of the 29th international conference on very large data bases - volume 29,2003
 452,53909f8c20f70186a0e3fe6c,locating data sources in large distributed systems,leonidas galanis yuan wang shawn r jeffery david j dewitt,vldb '03 proceedings of the 29th international conference on very large data bases - volume 29,2003
 453,53909f8c20f70186a0e3fe82,orientstore a schema based native xml storage system,xiaofeng meng daofeng luo mong li lee jing an,vldb '03 proceedings of the 29th international conference on very large data bases - volume 29,2003
-454,53909f8c20f70186a0e3fe62,supporting top k join queries in relational databases,ihab f ilyas walid g aref ahmed k elmagarmid,vldb '03 proceedings of the 29th international conference on very large data bases - volume 29,2003
 455,53909f8c20f70186a0e3fe89,chameleon an extensible and customizable tool for web data translation,riccardo torlone paolo atzeni,vldb '03 proceedings of the 29th international conference on very large data bases - volume 29,2003
-456,53909f8c20f70186a0e3fe77,the bea xqrl streaming xquery processor,daniela florescu chris hillery donald kossmann paul lucas fabio riccardi till westmann michael j carey arvind sundararajan geetika agrawal,vldb '03 proceedings of the 29th international conference on very large data bases - volume 29,2003
 457,53909f8c20f70186a0e3fe81,xcerpt and visxcerpt from pattern based to visual querying of xml and semistructured data,sacha berger fran ois bry sebastian schaffert christoph wieser,vldb '03 proceedings of the 29th international conference on very large data bases - volume 29,2003
 458,53909f8c20f70186a0e3fe8a,nexusscout an advanced location based application on a distributed open mediation platform,daniela nicklas matthias grossmann thomas schwarz,vldb '03 proceedings of the 29th international conference on very large data bases - volume 29,2003
 459,53909f8c20f70186a0e3fe8b,schema driven customization of web services,s abiteboul b amann j baumgarten o benjelloun f dang ngoc t milo,vldb '03 proceedings of the 29th international conference on very large data bases - volume 29,2003
@@ -1233,7 +1238,6 @@ index_acm,paperId_acm,title_acm,authors_acm,venue_acm,year_acm
 1247,539087f320f70186a0d6f79f,querying aggregate data,st phane grumbach maurizio rafanelli leonardo tininini,pods '99 proceedings of the eighteenth acm sigmod-sigact-sigart symposium on principles of database systems,1999
 1248,539087f320f70186a0d6f7a3,type inference for queries on semistructured data,tova milo dan suciu,pods '99 proceedings of the eighteenth acm sigmod-sigact-sigart symposium on principles of database systems,1999
 1249,539087f320f70186a0d6f79c,inherent complexity of recursive queries,stavros cosmadakis,pods '99 proceedings of the eighteenth acm sigmod-sigact-sigart symposium on principles of database systems,1999
-1250,539087f320f70186a0d6f7a1,rewriting of regular expressions and regular path queries,diego calvanese giuseppe de giacomo maurizio lenzerini moshe y vardi,pods '99 proceedings of the eighteenth acm sigmod-sigact-sigart symposium on principles of database systems,1999
 1251,539087f320f70186a0d6f7a2,query automata,frank neven thomas schwentick,pods '99 proceedings of the eighteenth acm sigmod-sigact-sigart symposium on principles of database systems,1999
 1252,539087f320f70186a0d6f7a0,applications of linear algebra in information retrieval and hypertext analysis,jon kleinberg andrew tomkins,pods '99 proceedings of the eighteenth acm sigmod-sigact-sigart symposium on principles of database systems,1999
 1253,539087f320f70186a0d6f7a9,correctness in general configurations of transactional components,gustavo alonso armin fe ler guy pardon hans j rg schek,pods '99 proceedings of the eighteenth acm sigmod-sigact-sigart symposium on principles of database systems,1999
@@ -1473,6 +1477,7 @@ index_acm,paperId_acm,title_acm,authors_acm,venue_acm,year_acm
 1489,5390880220f70186a0d75f11,the onion technique indexing for linear optimization queries,yuan chi chang lawrence bergman vittorio castelli chung sheng li ming ling lo john r smith,sigmod '00 proceedings of the 2000 acm sigmod international conference on management of data,2000
 1490,5390880220f70186a0d75f3e,data access tutorial session,jos a blakeley anand deshpande,sigmod '00 proceedings of the 2000 acm sigmod international conference on management of data,2000
 1491,5390880220f70186a0d75f13,efficient and cost effective techniques for browsing and indexing large video databases,junghwan oh kien a hua,sigmod '00 proceedings of the 2000 acm sigmod international conference on management of data,2000
+1492,5390880220f70186a0d75f3b,designing an ultra highly available dbms tutorial session,svein erik bratsberg ystein torbj rnsen,sigmod '00 proceedings of the 2000 acm sigmod international conference on management of data,2000
 1493,5390880220f70186a0d75f4e,serfing the web web site management made easy,elke a rundensteiner kajal t claypool li chen hong su keiji oenoki,sigmod '00 proceedings of the 2000 acm sigmod international conference on management of data,2000
 1494,5390880220f70186a0d75f2f,handling very large databases with informix extended parallel server,andreas weininger,sigmod '00 proceedings of the 2000 acm sigmod international conference on management of data,2000
 1495,5390880220f70186a0d75f4a,self organizing data sharing communities with sagres,zachary ives alon levy jayant madhavan rachel pottinger stefan saroiu igor tatarinov shiori betzler qiong chen ewa jaslikowska jing su wai tak theodora yeung,sigmod '00 proceedings of the 2000 acm sigmod international conference on management of data,2000
@@ -1581,7 +1586,6 @@ index_acm,paperId_acm,title_acm,authors_acm,venue_acm,year_acm
 1600,5390881220f70186a0d7e29f,representing and querying xml with incomplete information,serge abiteboul luc segoufin victor vianu,pods '01 proceedings of the twentieth acm sigmod-sigact-sigart symposium on principles of database systems,2001
 1601,5390881220f70186a0d7e29d,extended path expressions of xml,makoto murata,pods '01 proceedings of the twentieth acm sigmod-sigact-sigart symposium on principles of database systems,2001
 1602,5390881220f70186a0d7e2a5,string operations in query languages,michael benedikt leonid libkin thomas schwentick luc segoufin,pods '01 proceedings of the twentieth acm sigmod-sigact-sigart symposium on principles of database systems,2001
-1603,5390881220f70186a0d7e28e,a web odyssey from codd to xml,victor vianu,pods '01 proceedings of the twentieth acm sigmod-sigact-sigart symposium on principles of database systems,2001
 1604,5390881220f70186a0d7e2aa,equivalences among aggregate queries with negation,sara cohen werner nutt yehoshua sagiv,pods '01 proceedings of the twentieth acm sigmod-sigact-sigart symposium on principles of database systems,2001
 1605,5390881220f70186a0d7e2af,efficient computation of temporal aggregates with range predicates,donhui zhang alexander markowetz vassilis tsotras dimitrios gunopulos bernhard seeger,pods '01 proceedings of the twentieth acm sigmod-sigact-sigart symposium on principles of database systems,2001
 1606,5390881220f70186a0d7e2ad,optimal and approximate computation of summary statistics for range aggregates,anna c gilbert yannis kotidis s muthukrishnan marin j strauss,pods '01 proceedings of the twentieth acm sigmod-sigact-sigart symposium on principles of database systems,2001
@@ -1712,6 +1716,7 @@ index_acm,paperId_acm,title_acm,authors_acm,venue_acm,year_acm
 1732,5390881820f70186a0d8110e,an active functionality service for e business applications,m cilia a p buchmann,acm sigmod record,2002
 1733,5390881820f70186a0d81111,semantic b2b integration issues in ontology based approaches,zhan cui dean jones paul o brien,acm sigmod record,2002
 1734,5390881820f70186a0d81113,a multi agent system infrastructure for software component market place an ontological perspective,riza cenk erdur o uz dikenelli,acm sigmod record,2002
+1735,558e0bce0cf2e667580509be,book review column,karl aberer,acm sigmod record,2002
 1736,5390881820f70186a0d81116,databases and transaction processing an application oriented approach,philip m lewis arthur bernstein michael kifer,acm sigmod record,2002
 1737,5390881820f70186a0d81115,the role of b2b engines in b2b integration architectures,christoph bussler,acm sigmod record,2002
 1738,5390881820f70186a0d81118,what will be,michael dertouzos,acm sigmod record,2002
@@ -1887,7 +1892,6 @@ index_acm,paperId_acm,title_acm,authors_acm,venue_acm,year_acm
 1912,5590e2310cf237666fc298bf,acm sigmod record,,acm sigmod record,2001
 1913,5590dc620cf25001c36ef755,acm sigmod record,,acm sigmod record,2001
 1914,539089ab20f70186a0d97054,special issue on data mining for intrusion detection and threat analysis,daniel barbar,acm sigmod record,2001
-1915,558f36690cf2c779a64787a8,book review column,karl aberer,acm sigmod record,2001
 1916,539089ab20f70186a0d9705b,transactional information systems theory algorithms and the practice of concurrency control and recovery,marc h scholl,acm sigmod record,2001
 1917,539089ab20f70186a0d9705c,information warfare and security,h v jagadish,acm sigmod record,2001
 1918,539089ab20f70186a0d97057,detection and classification of intrusions and faults using sequences of system calls,jo o b d cabrera lundy lewis raman k mehra,acm sigmod record,2001
@@ -1955,6 +1959,7 @@ index_acm,paperId_acm,title_acm,authors_acm,venue_acm,year_acm
 1981,53908a4020f70186a0d9d776,analysis of existing databases at the logical level the dba companion project,fabien de marchi st phane lopes jean marc petit farouk toumani,acm sigmod record,2003
 1982,53908a4020f70186a0d9d779,report on the first international conference on ontologies databases and applications of semantics odbase part of the federated conference on the move to meaningful internet systems 2002,karl aberer,acm sigmod record,2003
 1983,53908a4020f70186a0d9d773,a multi paradigm querying approach for a generic multimedia database management system,ji rong wen qing li wei ying ma hong jiang zhang,acm sigmod record,2003
+1984,53908a4020f70186a0d9d771,xpath processing in a nutshell,georg gottlob christoph koch reinhard pichler,acm sigmod record,2003
 1985,5590d8f90cf2ce4b6f3a06ce,the vldb journal the international journal on very large data bases,,the vldb journal — the international journal on very large data bases,2002
 1986,53908a4020f70186a0d9d84c,energy performance trade offs for spatial access methods on memory resident data,ning an sudhanva gurumurthi anand sivasubramaniam narayanan vijaykrishnan mahmut kandemir mary jane irwin,the vldb journal — the international journal on very large data bases,2002
 1987,53908a4020f70186a0d9d84d,data page layouts for relational databases on deep memory hierarchies,anastassia ailamaki david j dewitt mark d hill,the vldb journal — the international journal on very large data bases,2002
@@ -1994,6 +1999,7 @@ index_acm,paperId_acm,title_acm,authors_acm,venue_acm,year_acm
 2021,53908a7420f70186a0da4494,towards an odmg compliant visual object query language,manoj chavda peter t wood,vldb '97 proceedings of the 23rd international conference on very large data bases,1997
 2022,53908a7420f70186a0da4497,an asynchronous avoidance based cache consistency algorithm for client caching dbmss,m tamer zsu kaladhar voruganti ronald c unrau,vldb '98 proceedings of the 24rd international conference on very large data bases,1998
 2023,53908a7420f70186a0da449f,dms a parallel data mining server,felicity george,vldb '98 proceedings of the 24rd international conference on very large data bases,1998
+2024,53908a7420f70186a0da4499,design implementation and performance of the lham log structured history data access method,peter muth patrick e o neil achim pick gerhard weikum,vldb '98 proceedings of the 24rd international conference on very large data bases,1998
 2025,53908a7420f70186a0da448f,a generic approach to bulk loading multidimensional index structures,jochen van den bercken bernhard seeger peter widmayer,vldb '97 proceedings of the 23rd international conference on very large data bases,1997
 2026,53908a7420f70186a0da449b,heterogeneous database query optimization in db2 universal datajoiner,shivakumar venkataraman tian zhang,vldb '98 proceedings of the 24rd international conference on very large data bases,1998
 2027,53908a7420f70186a0da449c,fast high dimensional data search in incomplete databases,beng chin ooi cheng hian goh kian lee tan,vldb '98 proceedings of the 24rd international conference on very large data bases,1998
@@ -2069,6 +2075,7 @@ index_acm,paperId_acm,title_acm,authors_acm,venue_acm,year_acm
 2097,53908a7420f70186a0da45de,performance measurements of compressed bitmap indices,theodore johnson,vldb '99 proceedings of the 25th international conference on very large data bases,1999
 2098,53908a7420f70186a0da45d3,scalable sweeping based spatial join,lars arge octavian procopiuc sridhar ramaswamy torsten suel jeffrey scott vitter,vldb '98 proceedings of the 24rd international conference on very large data bases,1998
 2099,53908a7420f70186a0da45e2,aggregation algorithms for very large compressed data warehouses,jianzhong li doron rotem jaideep srivastava,vldb '99 proceedings of the 25th international conference on very large data bases,1999
+2100,53908a7420f70186a0da45d5,wavecluster a multi resolution clustering approach for very large spatial databases,gholamhosein sheikholeslami surojit chatterjee aidong zhang,vldb '98 proceedings of the 24rd international conference on very large data bases,1998
 2101,53908a7420f70186a0da45e3,quality driven integration of heterogenous information systems,felix naumann ulf leser johann christoph freytag,vldb '99 proceedings of the 25th international conference on very large data bases,1999
 2102,53908a7420f70186a0da45e8,voodb a generic discrete event random simulation model to evaluate the performances of oodbs,j r me darmont michel schneider,vldb '99 proceedings of the 25th international conference on very large data bases,1999
 2103,53908a7420f70186a0da45ca,mindreader querying databases through multiple examples,yoshiharu ishikawa ravishankar subramanya christos faloutsos,vldb '98 proceedings of the 24rd international conference on very large data bases,1998
@@ -2097,6 +2104,7 @@ index_acm,paperId_acm,title_acm,authors_acm,venue_acm,year_acm
 2127,53908a7420f70186a0da467b,networked data management design points,james r hamilton,vldb '99 proceedings of the 25th international conference on very large data bases,1999
 2128,53908a7420f70186a0da467c,a scalable and highly available networked database architecture,roger bamford rafiul ahad angelo pruscino,vldb '99 proceedings of the 25th international conference on very large data bases,1999
 2129,53908a7420f70186a0da467a,ghost fine granularity buffering of indexes,cheng hian goh beng chin ooi d sim kian lee tan,vldb '99 proceedings of the 25th international conference on very large data bases,1999
+2131,53908a7420f70186a0da4671,context based prefetch for implementing objects on relations,philip a bernstein shankar pal david shutt,vldb '99 proceedings of the 25th international conference on very large data bases,1999
 2132,53908a7420f70186a0da466c,optimization of run time management of data intensive web sites,daniela florescu alon y levy dan suciu khaled yagoub,vldb '99 proceedings of the 25th international conference on very large data bases,1999
 2133,53908a7420f70186a0da4680,spatio temporal retrieval with rasdaman,peter baumann andreas dehmel paula furtado roland ritsch norbert widmann,vldb '99 proceedings of the 25th international conference on very large data bases,1999
 2134,53908a7420f70186a0da4679,generalised hash teams for join and group by,alfons kemper donald kossmann christian wiesner,vldb '99 proceedings of the 25th international conference on very large data bases,1999
@@ -2141,6 +2149,7 @@ index_acm,paperId_acm,title_acm,authors_acm,venue_acm,year_acm
 2173,53908a9620f70186a0da471f,active views for electronic commerce,serge abiteboul bernd amann sophie cluet adi eyal laurent mignet tova milo,vldb '99 proceedings of the 25th international conference on very large data bases,1999
 2174,53908a9620f70186a0da4725,what do those weird xml types want anyway,steven j derose,vldb '99 proceedings of the 25th international conference on very large data bases,1999
 2175,53908a9620f70186a0da4726,loading a cache with query results,laura m haas donald kossmann ioana ursu,vldb '99 proceedings of the 25th international conference on very large data bases,1999
+2176,53908a9620f70186a0da472f,panel future directions of database research the vldb broadening strategy part 2,michael l brodie,vldb '00 proceedings of the 26th international conference on very large data bases,2000
 2177,53908a9620f70186a0da472d,toward learning based web query processing,yanlei diao hongjun lu songting chen zengping tian,vldb '00 proceedings of the 26th international conference on very large data bases,2000
 2178,53908a9620f70186a0da4732,a database platform for bioinformatics,sandeepan banerjee,vldb '00 proceedings of the 26th international conference on very large data bases,2000
 2179,53908a9620f70186a0da4722,semantic compression and pattern extraction with fascicles,h v jagadish j madar raymond t ng,vldb '99 proceedings of the 25th international conference on very large data bases,1999
@@ -2179,7 +2188,6 @@ index_acm,paperId_acm,title_acm,authors_acm,venue_acm,year_acm
 2212,53908a9620f70186a0da47cd,data mining in the bioinformatics domain,shalom tsur,vldb '00 proceedings of the 26th international conference on very large data bases,2000
 2213,53908a9620f70186a0da47d2,controlling data warehouses with knowledge networks,elvira schaefer jan dirk becker andreas boehmer matthias jarke,vldb '00 proceedings of the 26th international conference on very large data bases,2000
 2214,53908a9620f70186a0da47ca,temporal integrity constraints with indeterminacy,wes cowley dimitris plexousakis,vldb '00 proceedings of the 26th international conference on very large data bases,2000
-2215,53908a9620f70186a0da47da,an ultra highly available dbms,svein olaf hvasshovd svein erik bratsberg ystein torbj rnsen,vldb '00 proceedings of the 26th international conference on very large data bases,2000
 2216,53908a9620f70186a0da47dd,the zero latency enterprise,dave liles,vldb '00 proceedings of the 26th international conference on very large data bases,2000
 2217,53908a9620f70186a0da47d3,agora living with xml and relational,ioana manolescu daniela florescu donald kossmann florian xhumari dan olteanu,vldb '00 proceedings of the 26th international conference on very large data bases,2000
 2218,53908a9620f70186a0da473e,efficiently publishing relational data as xml documents,jayavel shanmugasundaram eugene j shekita rimon barr michael j carey bruce g lindsay hamid pirahesh berthold reinwald,vldb '00 proceedings of the 26th international conference on very large data bases,2000
@@ -2228,14 +2236,12 @@ index_acm,paperId_acm,title_acm,authors_acm,venue_acm,year_acm
 2262,53908a9620f70186a0da47f1,practical applications of triggers and constraints success and lingering issues 10 year award,stefano ceri roberta cochrane jennifer widom,vldb '00 proceedings of the 26th international conference on very large data bases,2000
 2263,53908a9620f70186a0da47db,focused crawling using context graphs,michelangelo diligenti frans coetzee steve lawrence c lee giles marco gori,vldb '00 proceedings of the 26th international conference on very large data bases,2000
 2264,53908a9620f70186a0da47ed,integrating the ub tree into a database system kernel,frank ramsak volker markl robert fenk martin zirkel klaus elhardt rudolf bayer,vldb '00 proceedings of the 26th international conference on very large data bases,2000
-2265,53908a9620f70186a0da47e2,panel future directions of database research the vldb broadening strategy part 1,hans j rg schek,vldb '00 proceedings of the 26th international conference on very large data bases,2000
 2266,53908a9620f70186a0da47d1,managing intervals efficiently in object relational databases,hans peter kriegel marco p tke thomas seidl,vldb '00 proceedings of the 26th international conference on very large data bases,2000
 2267,53908a9620f70186a0da47ec,work and information practices in the sciences of biodiversity,geoffrey c bowker,vldb '00 proceedings of the 26th international conference on very large data bases,2000
 2268,53908a9620f70186a0da47e7,linking business to deliver value a data management challenge,anand deshpande,vldb '00 proceedings of the 26th international conference on very large data bases,2000
 2269,53908a9620f70186a0da47df,evolution of groupware for business applications a database perspective on lotus domino notes,c mohan ron barber s watts a somani markos zaharioudakis,vldb '00 proceedings of the 26th international conference on very large data bases,2000
 2270,53908a9620f70186a0da47e6,building scalable internet applications with oracle8i server,julie basu jos alberto fern ndez olga peschansky,vldb '00 proceedings of the 26th international conference on very large data bases,2000
 2271,53908a9620f70186a0da487d,icicles self tuning samples for approximate query answering,venkatesh ganti mong li lee raghu ramakrishnan,vldb '00 proceedings of the 26th international conference on very large data bases,2000
-2272,53908a9620f70186a0da4880,caching strategies for data intensive web sites,khaled yagoub daniela florescu val rie issarny patrick valduriez,vldb '00 proceedings of the 26th international conference on very large data bases,2000
 2273,53908a9620f70186a0da4c5b,declustering databases on heterogeneous disk systems,ling tony chen doron rotem sidhar seshadri,vldb '95 proceedings of the 21th international conference on very large data bases,1995
 2274,53908a9620f70186a0da4c5a,near neighbor search in large metric spaces,sergey brin,vldb '95 proceedings of the 21th international conference on very large data bases,1995
 2275,53908a9620f70186a0da4cd9,document management as a database problem,rudolf bayer,vldb '95 proceedings of the 21th international conference on very large data bases,1995
@@ -2307,7 +2313,6 @@ index_acm,paperId_acm,title_acm,authors_acm,venue_acm,year_acm
 2341,53908a9620f70186a0da4e27,supporting procedural constructs in sql compilers,nelson mendon a mattos,vldb '96 proceedings of the 22th international conference on very large data bases,1996
 2342,53908a9620f70186a0da4e24,applying data mining techniques to a health insurance information system,marisa s viveros john p nearhos michael j rothman,vldb '96 proceedings of the 22th international conference on very large data bases,1996
 2343,53908a9620f70186a0da4e2d,using referential integrity to easily define consistent subset replicas,brad hammond,vldb '96 proceedings of the 22th international conference on very large data bases,1996
-2344,53908a9620f70186a0da4e2a,tpc d the challenges issues and results,ramesh bhashyam,vldb '96 proceedings of the 22th international conference on very large data bases,1996
 2345,53908a9620f70186a0da4e2b,the query optimizer in tandem s new serverware sql product,pedro celis,vldb '96 proceedings of the 22th international conference on very large data bases,1996
 2346,53908a9620f70186a0da4e28,supporting state wide immunisation tracking using multi paradigm workflow technology,amit p sheth krys kochut john a miller devashish worah souvik das chenye lin devanand palaniswami john lynch ivan shevchenko,vldb '96 proceedings of the 22th international conference on very large data bases,1996
 2347,53908a9620f70186a0da4e2f,supporting periodic authorizations and temporal reasoning in database access control,elisa bertino claudio bettini elena ferrari pierangela samarati,vldb '96 proceedings of the 22th international conference on very large data bases,1996
@@ -2357,9 +2362,7 @@ index_acm,paperId_acm,title_acm,authors_acm,venue_acm,year_acm
 2392,53908a9620f70186a0da4edb,innovation in database management computer science vs engineering,kenneth r jacobs,vldb '97 proceedings of the 23rd international conference on very large data bases,1997
 2393,53908a9620f70186a0da4ec7,answering queries with aggregation using views,divesh srivastava shaul dar h v jagadish alon y levy,vldb '96 proceedings of the 22th international conference on very large data bases,1996
 2394,53908a9620f70186a0da4ed0,clustering techniques for minimizing external path length,a a diwan sanjeeva rane s seshadri s sudarshan,vldb '96 proceedings of the 22th international conference on very large data bases,1996
-2395,53908a9620f70186a0da4ed9,garbage collection in object oriented databases using transactional cyclic reference counting,srinivas ashwin prasan roy s seshadri abraham silberschatz s sudarshan,vldb '97 proceedings of the 23rd international conference on very large data bases,1997
 2396,53908a9620f70186a0da4ed5,recovering information from summary data,christos faloutsos h v jagadish nikolaos sidiropoulos,vldb '97 proceedings of the 23rd international conference on very large data bases,1997
-2397,53908a9620f70186a0da4ed7,integrating reliable memory in databases,wee teck ng peter m chen,vldb '97 proceedings of the 23rd international conference on very large data bases,1997
 2398,53908a9620f70186a0da4edc,implementing abstract objects with inheritance in datalogneg,hasan m jamil,vldb '97 proceedings of the 23rd international conference on very large data bases,1997
 2399,53908a9620f70186a0da4ed8,multiple view self maintenance in data warehousing environments,nam huyn,vldb '97 proceedings of the 23rd international conference on very large data bases,1997
 2400,53908a9620f70186a0da4edd,optimizing queries with universal quantification in object oriented and object relational databases,jens clau en alfons kemper guido moerkotte klaus peithner,vldb '97 proceedings of the 23rd international conference on very large data bases,1997
@@ -2424,7 +2427,6 @@ index_acm,paperId_acm,title_acm,authors_acm,venue_acm,year_acm
 2459,53908a9720f70186a0da69fa,adaptive xml shredding architecture implementation and challenges,juliana freire j r me sim on,proceedings of the vldb 2002 workshop eextt and caise 2002 workshop dtweb on efficiency and effectiveness of xml tools and techniques and data integration over the web-revised papers,2003
 2460,53908a9720f70186a0da69ff,data integration using web services,mark hansen stuart e madnick michael siegel,proceedings of the vldb 2002 workshop eextt and caise 2002 workshop dtweb on efficiency and effectiveness of xml tools and techniques and data integration over the web-revised papers,2003
 2461,53908a9720f70186a0da69fe,xbench a family of benchmarks for xml dbmss,benjamin b yao m tamer zsu john keenleyside,proceedings of the vldb 2002 workshop eextt and caise 2002 workshop dtweb on efficiency and effectiveness of xml tools and techniques and data integration over the web-revised papers,2003
-2462,53908a9720f70186a0da69fc,assessing xml data management with xmark,albrecht schmidt florian waas martin l kersten michael j carey ioana manolescu ralph busse,proceedings of the vldb 2002 workshop eextt and caise 2002 workshop dtweb on efficiency and effectiveness of xml tools and techniques and data integration over the web-revised papers,2003
 2463,53908a9720f70186a0da69fd,a proposal for an xml data definition and manipulation language,dare obasanjo shamkant b navathe,proceedings of the vldb 2002 workshop eextt and caise 2002 workshop dtweb on efficiency and effectiveness of xml tools and techniques and data integration over the web-revised papers,2003
 2464,53908a9720f70186a0da6a79,an adaptable and adjustable mapping from xml data to tables in rdb,wang xiao ling luan jin feng dong yi sheng,proceedings of the vldb 2002 workshop eextt and caise 2002 workshop dtweb on efficiency and effectiveness of xml tools and techniques and data integration over the web-revised papers,2003
 2465,53908a9720f70186a0da6a7a,the xoo7 benchmark,st phane bressan mong li lee ying guang li zo lacroix ullas nambiar,proceedings of the vldb 2002 workshop eextt and caise 2002 workshop dtweb on efficiency and effectiveness of xml tools and techniques and data integration over the web-revised papers,2003
@@ -2443,11 +2445,13 @@ index_acm,paperId_acm,title_acm,authors_acm,venue_acm,year_acm
 2478,53908b2a20f70186a0db9748,koda the architecture and interface of a data model independent kernel,gopalan arun ashok joshi,vldb '98 proceedings of the 24rd international conference on very large data bases,1998
 2479,53908b2a20f70186a0db974e,efficient numerical error bounding for replicated network services,haifeng yu amin vahdat,vldb '00 proceedings of the 26th international conference on very large data bases,2000
 2480,558e10e50cf2e66758050bc2,author index,,vldb '00 proceedings of the 26th international conference on very large data bases,2000
+2481,53908b2a20f70186a0db9751,picodmbs scaling down database techniques for the smartcard,christophe bobineau luc bouganim philippe pucheral patrick valduriez,vldb '00 proceedings of the 26th international conference on very large data bases,2000
 2482,53908b2a20f70186a0db9745,watchman a data warehouse intelligent cache manager,peter scheuermann junho shim radek vingralek,vldb '96 proceedings of the 22th international conference on very large data bases,1996
 2483,53908b2a20f70186a0db974d,the persistent cache improving oid indexing in temporal object oriented database systems,kjetil n rv g,vldb '99 proceedings of the 25th international conference on very large data bases,1999
 2484,53908b2a20f70186a0db974b,mining deviants in a time series database,h v jagadish nick koudas s muthukrishnan,vldb '99 proceedings of the 25th international conference on very large data bases,1999
 2485,53908b2a20f70186a0db9744,performance of future database systems bottlenecks and bonananzas,chaitanya k baru,vldb '96 proceedings of the 22th international conference on very large data bases,1996
 2486,53908b2a20f70186a0db9743,the double life of the transaction abstraction fundamental principle and evolving system concept,henry f korth,vldb '95 proceedings of the 21th international conference on very large data bases,1995
+2487,53908b2a20f70186a0db9750,building and customizing data intensive web sites using weave,khaled yagoub daniela florescu val rie issarny patrick valduriez,vldb '00 proceedings of the 26th international conference on very large data bases,2000
 2488,53908b2a20f70186a0db9749,experiences in federated databases from iro db to miro web,peter fankhauser georges gardarin m lopez j mu oz anthony tomasic,vldb '98 proceedings of the 24rd international conference on very large data bases,1998
 2489,53908b2a20f70186a0db974c,hyper programming in java,evangelos zirintsis graham n c kirby ronald morrison,vldb '99 proceedings of the 25th international conference on very large data bases,1999
 2490,53908b2a20f70186a0db9746,resource scheduling in enhanced pay per view continuous media databases,minos n garofalakis banu zden abraham silberschatz,vldb '97 proceedings of the 23rd international conference on very large data bases,1997
@@ -2460,12 +2464,10 @@ index_acm,paperId_acm,title_acm,authors_acm,venue_acm,year_acm
 2497,53908b4920f70186a0dbab18,foreword by the vldb 98 pc chairmen,o shmueli j widom,the vldb journal — the international journal on very large data bases,2000
 2498,53908b4920f70186a0dbab1a,secure buffering in firm real time database systems,binto george jayant r haritsa,the vldb journal — the international journal on very large data bases,2000
 2499,53908b4920f70186a0dbab14,tree pattern query minimization,s amer yahia s cho l v s lakshmanan d srivastava,the vldb journal — the international journal on very large data bases,2002
-2500,53908b4920f70186a0dbab1b,the lham log structured history data access method,peter muth patrick o neil achim pick gerhard weikum,the vldb journal — the international journal on very large data bases,2000
 2501,53908b4920f70186a0dbab19,functional join processing,r braumandl j claussen a kemper d kossmann,the vldb journal — the international journal on very large data bases,2000
 2502,53908b4920f70186a0dbab22,optimizing multiple dimensional queries simultaneously in multidimensional databases,weifa liang maria e orlowska jeffrey x yu,the vldb journal — the international journal on very large data bases,2000
 2503,53908b4920f70186a0dbab13,anatomy of a native xml base management system,t fiebig s helmer c c kanne g moerkotte j neumann r schiele t westmann,the vldb journal — the international journal on very large data bases,2002
 2504,53908b4920f70186a0dbab1f,effective timestamping in databases,kristian torp christian s jensen richard thomas snodgrass,the vldb journal — the international journal on very large data bases,2000
-2505,53908b4920f70186a0dbab20,wavecluster a wavelet based clustering approach for spatial data in very large databases,gholamhosein sheikholeslami surojit chatterjee aidong zhang,the vldb journal — the international journal on very large data bases,2000
 2506,53908b4920f70186a0dbab17,an xml query engine for network bound data,zachary g ives a y halevy d s weld,the vldb journal — the international journal on very large data bases,2002
 2507,53908b4920f70186a0dbab12,timber a native xml database,h v jagadish s al khalifa a chapman l v s lakshmanan a nierman s paparizos j m patel d srivastava n wiwatwattana y wu c yu,the vldb journal — the international journal on very large data bases,2002
 2508,53908b4920f70186a0dbab1d,distance based outliers algorithms and applications,edwin m knorr raymond t ng vladimir tucakov,the vldb journal — the international journal on very large data bases,2000
@@ -2478,7 +2480,6 @@ index_acm,paperId_acm,title_acm,authors_acm,venue_acm,year_acm
 2517,558f3abe0cf222bc17bc2263,guest editorial,malcolm p atkinson,the vldb journal — the international journal on very large data bases,2000
 2518,53908b4920f70186a0dbabb8,checking the temporal integrity of interactive multimedia documents,i mirbel b pernici t sellis s tserkezoglou m vazirgiannis,the vldb journal — the international journal on very large data bases,2000
 2519,53908b4920f70186a0dbabb4,learning response time for websources using query feedback and application in query optimization,jean robert gruser louiqa raschid vladimir zadorozhny tao zhan,the vldb journal — the international journal on very large data bases,2000
-2520,53908b4920f70186a0dbabbb,context based prefetch an optimization for implementing objects on relations,philip a bernstein shankar pal david shutt,the vldb journal — the international journal on very large data bases,2000
 2521,53908b4920f70186a0dbabb6,analysis of navigation behaviour in web sites integrating multiple information systems,bettina berendt myra spiliopoulou,the vldb journal — the international journal on very large data bases,2000
 2522,53908b4920f70186a0dbabb5,declarative specification of web sites with s,mary fern 225 ndez daniela florescu alon levy dan suciu,the vldb journal — the international journal on very large data bases,2000
 2523,53908b4920f70186a0dbabba,dynamic vp tree indexing for n nearest neighbor search given pair wise distances,ada wai chee fu polly mei shuen chan yin ling cheung yiu sang moon,the vldb journal — the international journal on very large data bases,2000
@@ -2510,6 +2511,7 @@ index_acm,paperId_acm,title_acm,authors_acm,venue_acm,year_acm
 2549,53908b4920f70186a0dbabdd,integrating symbolic images into a multimedia database system using classification and abstraction approaches,aya soffer hanan samet,the vldb journal — the international journal on very large data bases,1998
 2550,53908b4920f70186a0dbabd1,data partitioning and load balancing in parallel disk systems,peter scheuermann gerhard weikum peter zabback,the vldb journal — the international journal on very large data bases,1998
 2551,53908b4920f70186a0dbabd8,scalable feature selection classification and signature generation for organizing large text databases into hierarchical topic taxonomies,soumen chakrabarti byron dom rakesh agrawal prabhakar raghavan,the vldb journal — the international journal on very large data bases,1998
+2552,53908b4920f70186a0dbabda,integrating reliable memory in databases,wee teck ng peter m chen,the vldb journal — the international journal on very large data bases,1998
 2553,53908b4920f70186a0dbabe0,the hb pi tree a multi attribute index supporting concurrency recovery and node consolidation,georgios evangelidis david lomet betty salzberg,the vldb journal — the international journal on very large data bases,1997
 2554,558f42a80cf2e0ca47150ad9,the vldb journal the international journal on very large data bases,,the vldb journal — the international journal on very large data bases,1997
 2555,53908b4920f70186a0dbabdf,delivering presentations from multimedia servers,nevzat hurkan balkir gultekin ozsoyoglu,the vldb journal — the international journal on very large data bases,1998
@@ -2520,6 +2522,7 @@ index_acm,paperId_acm,title_acm,authors_acm,venue_acm,year_acm
 2560,53908b4920f70186a0dbabe6,on applying hash filters to improving the execution of multi join queries,ming syan chen hui i hsiao philip s yu,the vldb journal — the international journal on very large data bases,1997
 2561,53908b4920f70186a0dbabe8,concurrency control in hierarchical multidatabase systems,sharad mehrotra henry f korth avi silberschatz,the vldb journal — the international journal on very large data bases,1997
 2562,53908b4920f70186a0dbabe9,the impact of object technology on commercial transaction processing,edward e cobb,the vldb journal — the international journal on very large data bases,1997
+2563,53908b4920f70186a0dbabd9,garbage collection in object oriented databases using transactional cyclic reference counting,p roy s seshadri a silberschatz s sudarshan s ashwin,the vldb journal — the international journal on very large data bases,1998
 2564,53908b4920f70186a0dbabd6,enhanced abstract data types in object relational databases,praveen seshadri,the vldb journal — the international journal on very large data bases,1998
 2565,53908b4920f70186a0dbabe5,graphical interaction with heterogeneous databases,t catarci g santucci j cardiff,the vldb journal — the international journal on very large data bases,1997
 2566,53908b4920f70186a0dbabec,concurrency and recovery for index trees,david lomet betty salzberg,the vldb journal — the international journal on very large data bases,1997
@@ -2587,7 +2590,6 @@ index_acm,paperId_acm,title_acm,authors_acm,venue_acm,year_acm
 2631,558d0d490cf2b0acc6503fda,the vldb journal the international journal on very large data bases,,the vldb journal — the international journal on very large data bases,2001
 2632,53908b4920f70186a0dbb0a5,xml enabled workflow management for e services across heterogeneous platforms,german shegalov michael gillmann gerhard weikum,the vldb journal — the international journal on very large data bases,2001
 2633,53908b4920f70186a0dbb09e,a template model for multidimensional inter transactional association rules,ling feng jeffrey xu yu hongjun lu jiawei han,the vldb journal — the international journal on very large data bases,2002
-2634,53908b4920f70186a0dbb0a7,picodbms scaling down database techniques for the smartcard,philippe pucheral luc bouganim patrick valduriez christophe bobineau,the vldb journal — the international journal on very large data bases,2001
 2635,53908b4920f70186a0dbb0a6,an architecture to support scalable online personalization on the web,anindya datta kaushik dutta debra vandermeer krithi ramamritham shamkant b navathe,the vldb journal — the international journal on very large data bases,2001
 2636,53908b4920f70186a0dbb0a4,an internet based negotiation server for e commerce,stanley y w su chunbo huang joachim hammer yihua huang haifei li liu wang youzhong liu charnyote pluempitiwiriyawej minsoo lee herman lam,the vldb journal — the international journal on very large data bases,2001
 2637,53908b4920f70186a0dbb0a3,objectglobe ubiquitous query processing on the internet,r braumandl m keidl a kemper d kossmann a kreutz s seltzsam k stocker,the vldb journal — the international journal on very large data bases,2001
@@ -2644,11 +2646,11 @@ index_acm,paperId_acm,title_acm,authors_acm,venue_acm,year_acm
 2688,5590e1990cf237666fc29852,acm sigmod record,,acm sigmod record,2003
 2689,53908b4920f70186a0dbc918,closing the key loophole in mls databases,nenad jukic svetlozar nestorov susan vrbsky,acm sigmod record,2003
 2690,53908b4920f70186a0dbc91b,modelling temporal thematic map contents,alberto d onofrio elaheh pourabbas,acm sigmod record,2003
-2691,53908b4920f70186a0dbc919,xpath processing in a nutshell,georg gottlob christoph koch reinhard pichler,acm sigmod record,2003
 2692,53908b4920f70186a0dbc91e,fundamentals of data warehouses 2nd revised and extended edition,vernon hoffner,acm sigmod record,2003
 2693,53908b4920f70186a0dbc920,information rules,dale a stirling,acm sigmod record,2003
 2694,53908b4920f70186a0dbc91d,towards a database body of knowledge a study from spain,coral calero mario piattini francisco ruiz,acm sigmod record,2003
 2695,53908b4920f70186a0dbc922,a mapping mechanism to support bitmap index and other auxiliary structures on tables stored as primary b trees,eugene inseok chong jagannathan srinivasan souripriya das chuck freiwald aravind yalamanchi mahesh jagannath anh tuan tran ramkumar krishnan richard jiang,acm sigmod record,2003
+2696,53908b4920f70186a0dbc921,a web odyssey from codd to xml,victor vianu,acm sigmod record,2003
 2697,53908b4920f70186a0dbc91c,research issues for data communication in mobile ad hoc network database systems,leslie d fife le gruenwald,acm sigmod record,2003
 2698,53908b4920f70186a0dbc924,time management for new faculty,anastassia ailamaki johannes gehrke,acm sigmod record,2003
 2699,53908b4920f70186a0dbc923,xml schema,charles e campbell andrew eisenberg jim melton,acm sigmod record,2003
@@ -2703,7 +2705,6 @@ index_acm,paperId_acm,title_acm,authors_acm,venue_acm,year_acm
 2749,53908d6520f70186a0dd1a35,qxtract a building block for efficient information extraction from text databases,eugene agichtein luis gravano,proceedings of the 2003 acm sigmod international conference on management of data,2003
 2750,53908d6520f70186a0dd1a31,peerdb peering into personal databases,beng chin ooi kian lee tan aoying zhou chin hong goh yingguang li chu yee liau bo ling wee siong ng yanfeng shu xiaoyu wang ming zhang,proceedings of the 2003 acm sigmod international conference on management of data,2003
 2751,53908d6520f70186a0dd1a33,transparent mid tier database caching in sql server,per ke larson jonathan goldstein jingren zhou,proceedings of the 2003 acm sigmod international conference on management of data,2003
-2752,53908d6520f70186a0dd1a36,pix exact and approximate phrase matching in xml,sihem amer yahia mary fern ndez divesh srivastava yu xu,proceedings of the 2003 acm sigmod international conference on management of data,2003
 2753,53908d6520f70186a0dd1a24,adaptive filters for continuous queries over distributed data streams,chris olston jing jiang jennifer widom,proceedings of the 2003 acm sigmod international conference on management of data,2003
 2754,53908d6520f70186a0dd1a3b,lockx a system for efficiently querying secure xml,sungran cho sihem amer yahia laks v s lakshmanan divesh srivastava,proceedings of the 2003 acm sigmod international conference on management of data,2003
 2755,53908d6520f70186a0dd1a3c,trex dtd conforming xml to xml transformations,aoying zhou qing wang zhimao guo xueqing gong shihui zheng hongwei wu jianchang xiao kun yue wenfei fan,proceedings of the 2003 acm sigmod international conference on management of data,2003
@@ -2723,6 +2724,7 @@ index_acm,paperId_acm,title_acm,authors_acm,venue_acm,year_acm
 2769,53908d6520f70186a0dd1a47,data quality and data cleaning an overview,theodore johnson tamraparni dasu,proceedings of the 2003 acm sigmod international conference on management of data,2003
 2770,53908d6520f70186a0dd1a3e,timber a native system for querying xml,stelios paparizos shurug al khalifa adriane chapman h v jagadish laks v s lakshmanan andrew nierman jignesh m patel divesh srivastava nuwee wiwatwattana yuqing wu cong yu,proceedings of the 2003 acm sigmod international conference on management of data,2003
 2771,53908d6520f70186a0dd1a45,panel querying networked databases,nick koudas divesh srivastava,proceedings of the 2003 acm sigmod international conference on management of data,2003
+2772,53908d6520f70186a0dd1a40,a system for watermarking relational databases,rakesh agrawal peter j haas jerry kiernan,proceedings of the 2003 acm sigmod international conference on management of data,2003
 2773,53908d6520f70186a0dd1a41,query by humming in action with its technology revealed,yunyue zhu dennis shasha xiaojian zhao,proceedings of the 2003 acm sigmod international conference on management of data,2003
 2774,53908d6520f70186a0dd1a1e,the design of an acquisitional query processor for sensor networks,samuel madden michael j franklin joseph m hellerstein wei hong,proceedings of the 2003 acm sigmod international conference on management of data,2003
 2775,53908d6520f70186a0dd1a39,irisnet internet scale resource intensive sensor services,amol deshpande suman nath phillip b gibbons srinivasan seshan,proceedings of the 2003 acm sigmod international conference on management of data,2003
@@ -2757,6 +2759,7 @@ index_acm,paperId_acm,title_acm,authors_acm,venue_acm,year_acm
 2804,53908e0020f70186a0dd49bd,clustering gene expression data in sql using locally adaptive metrics,dimitris papadopoulos carlotta domeniconi dimitrios gunopulos sheng ma,dmkd '03 proceedings of the 8th acm sigmod workshop on research issues in data mining and knowledge discovery,2003
 2805,53908e0020f70186a0dd49b7,proceedings of the 8th acm sigmod workshop on research issues in data mining and knowledge discovery,mohammed j zaki charu c aggarwal,8th acm sigmod workshop on research issues in data mining and knowledge discovery ( held in conjunction with mod/pods 2003 conference / co-located with fcrc 2003 conference ),2003
 2806,5390958920f70186a0deec74,learning about data integration challenges from day one,alon y halevy,acm sigmod record,2003
+2807,5390958920f70186a0deec76,guest editor s introduction,karl aberer,acm sigmod record,2003
 2808,5390958920f70186a0deec72,analysis of sigmod s co authorship graph,mario a nascimento j rg sander jeffrey pound,acm sigmod record,2003
 2809,5390958920f70186a0deec77,peer to peer research at stanford,mayank bawa brian f cooper arturo crespo neil daswani prasanna ganesan hector garcia molina sepandar kamvar sergio marti mario schlosser qi sun patrick vinograd beverly yang,acm sigmod record,2003
 2810,5390958920f70186a0deec81,standards for databases on the grid,susan malaika andrew eisenberg jim melton,acm sigmod record,2003
@@ -2776,16 +2779,12 @@ index_acm,paperId_acm,title_acm,authors_acm,venue_acm,year_acm
 2824,558c1265612c2ba45fe943e2,the vldb journal the international journal on very large data bases,,the vldb journal — the international journal on very large data bases,2003
 2825,5590d7e90cf2baaad97172ab,guest editorial,philip a bernstein yannis ioannidis raghu ramakrishnan,the vldb journal — the international journal on very large data bases,2003
 2826,5590d7a40cf2baaad971727d,the vldb journal the international journal on very large data bases,,the vldb journal — the international journal on very large data bases,2003
-2827,5390958a20f70186a0def8de,a case for fractured mirrors,ravishankar ramamurthy david j dewitt qi su,the vldb journal — the international journal on very large data bases,2003
 2828,5390958a20f70186a0def8e6,instance based attribute identification in database integration,cecil eng h chua roger h l chiang ee peng lim,the vldb journal — the international journal on very large data bases,2003
 2829,5390958a20f70186a0def8e4,cost driven vertical class partitioning for methods in object oriented databases,chi wai fung kamalakar karlapalem qing li,the vldb journal — the international journal on very large data bases,2003
-2830,5390958a20f70186a0def8e2,watermarking relational data framework algorithms and analysis,rakesh agrawal peter j haas jerry kiernan,the vldb journal — the international journal on very large data bases,2003
 2831,5390958a20f70186a0def8e8,incremental computation and maintenance of temporal aggregates,jun yang jennifer widom,the vldb journal — the international journal on very large data bases,2003
 2832,5390958a20f70186a0def8e0,aurora a new model and architecture for data stream management,daniel j abadi don carney ugur etintemel mitch cherniack christian convey sangdon lee michael stonebraker nesime tatbul stan zdonik,the vldb journal — the international journal on very large data bases,2003
 2833,5390958a20f70186a0def8e5,computing complete answers to queries in the presence of limited access patterns,chen li,the vldb journal — the international journal on very large data bases,2003
-2835,5390958a20f70186a0def8e1,psoup a system for streaming queries over streaming data,sirish chandrasekaran michael j franklin,the vldb journal — the international journal on very large data bases,2003
 2836,5390958a20f70186a0def8e7,a performance study of four index structures for set valued attributes of low cardinality,sven helmer guido moerkotte,the vldb journal — the international journal on very large data bases,2003
-2837,5390958a20f70186a0def8df,re tree an efficient index structure for regular expressions,chee yong chan minos garofalakis rajeev rastogi,the vldb journal — the international journal on very large data bases,2003
 2838,558ce019612c5d355d05240c,the vldb journal the international journal on very large data bases,,the vldb journal — the international journal on very large data bases,2003
 2839,5590daad0cf2ce4b6f3a07a5,guest editorial,vijay atluri anupam joshi yelena yesha,the vldb journal — the international journal on very large data bases,2003
 2840,5390958a20f70186a0df0135,managing multiple and distributed ontologies on the semantic web,a maedche b motik l stojanovic,the vldb journal — the international journal on very large data bases,2003
@@ -2808,6 +2807,7 @@ index_acm,paperId_acm,title_acm,authors_acm,venue_acm,year_acm
 2858,539095ba20f70186a0df0f09,the cougar project a work in progress report,alan demers johannes gehrke rajmohan rajaraman niki trigoni yong yao,acm sigmod record,2003
 2859,539095ba20f70186a0df0f16,research in database engineering at the university of namur,jean luc hainaut,acm sigmod record,2003
 2860,539095ba20f70186a0df0f0d,distributed deviation detection in sensor networks,themistoklis palpanas dimitris papadopoulos vana kalogeraki dimitrios gunopulos,acm sigmod record,2003
+2861,539095ba20f70186a0df0f0e,reasoning on regular path queries,d calvanese g de giacomo m lenzerini m y vardi,acm sigmod record,2003
 2862,539095ba20f70186a0df0f15,information integration on the web a view from ai and databases report on iiweb 03,subbarao kambhampati craig a knoblock,acm sigmod record,2003
 2863,539095ba20f70186a0df0f14,report on fqas 2002 fifth international conference on flexible query answering systems,amihai motro troels andreasen,acm sigmod record,2003
 2864,539095ba20f70186a0df0f12,report on the 5th international workshop on the design and management of data warehouses dmdw 03,hans j lenz panos vassiliadis manfred jeusfeld martin staudt,acm sigmod record,2003

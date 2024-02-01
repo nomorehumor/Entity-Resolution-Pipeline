@@ -1,4 +1,4 @@
-﻿PaperID|Title|Authors|Venue|Year
+paperId|title|authors|venue|year
 53e9a515b7602d9702e350a0|An initial study of overheads of eddies.|Amol Deshpande|SIGMOD Record|2004
 53e9b275b7602d9703d174f6|Engineering Federated Information Systems: Report of EFIS '99 Workshop.|Stefan Conrad, Wilhelm Hasselbring, Uwe Hohenstein, Ralf-Detlef Kutsche, Mark Roantree, Gunter Saake, Fèlix Saltor|SIGMOD Record|1999
 53e9a5beb7602d9702eea180|Information Finding in a Digital Library: The Stanford Perspective.|Tak W. Yan, Hector Garcia-Molina|SIGMOD Record|1995
@@ -166,7 +166,6 @@
 53e99800b7602d970200b603|Editor's Notes.|Michael J. Franklin|SIGMOD Record|2000
 53e9b023b7602d9703a812bc|Managing uncertainty in sensor database.|Reynold Cheng, Sunil Prabhakar|SIGMOD Record|2003
 53e99846b7602d9702077788|XPath query containment.|Thomas Schwentick|SIGMOD Record|2004
-53e99800b7602d970200b603|Editor's Notes.|Michael J. Franklin|SIGMOD Record|2000
 53e99f0ab7602d97027d6316|Message from Editor-in-Chief, ACM Transactions on Database Systems.|Won Kim|SIGMOD Record|1999
 53e9b62eb7602d970418b0b2|Report on the 18th British National Conference on Databases (BNCOD).|Carole A. Goble, Brian J. Read|SIGMOD Record|2002
 53e9ab6fb7602d970350e60f|A Research Status Report on Adaptation for Mobile Data Access.|Brian Noble, Mahadev Satyanarayanan|SIGMOD Record|1995
@@ -272,7 +271,6 @@
 53e9af46b7602d9703986ab6|Managing and Analyzing Carbohydrate Data.|Kiyoko F. Aoki, Nobuhisa Ueda, Atsuko Yamaguchi, Tatsuya Akutsu, Minoru Kanehisa, Hiroshi Mamitsuka|SIGMOD Record|2004
 53e9b9b4b7602d97045aa66b|Report on XEWA-00: The XML Enabled Wide-Area Searches for Bioinformatics Workshop.|Terence Critchlow|SIGMOD Record|2001
 53e99aacb7602d9702325e7d|Guest Editor's Introduction.|Asuman Dogac|SIGMOD Record|2002
-53e99800b7602d970200b603|Editor's Notes.|Michael J. Franklin|SIGMOD Record|2000
 53e99800b7602d970200b604|Editor's Notes.|Ling Liu|SIGMOD Record|2003
 53e9bddbb7602d9704a89963|Semantic Interoperability in Global Information Systems: A Brief Introduction to the Research Area and the Special Section.|Aris M. Ouksel, Amit P. Sheth|SIGMOD Record|1999
 53e99809b7602d970201f956|Chair's Message.|Richard T. Snodgrass|SIGMOD Record|1999
@@ -281,24 +279,20 @@
 53e9a01fb7602d97029056d6|Conceptual Modeling and Specification Generation for B2B Business Process based on ebXML.|HyoungDo Kim|SIGMOD Record|2002
 53e9b6a2b7602d97042174ec|Report on NGITS'99: The 4th International Workshop on Next Generation Information Technologies and Systems.|Opher Etzion|SIGMOD Record|1999
 53e9b565b7602d970409d6df|A Pictorial Query Language for Querying Geographic Databases using Positional and OLAP Operators.|Elaheh Pourabbas, Maurizio Rafanelli|SIGMOD Record|2002
-53e99809b7602d970201f8e3|Chair's Message.|Richard T. Snodgrass|SIGMOD Record|2000
 53e99be3b7602d970248e2e6|Florida International University High Performance Database Research Center.|Naphtali Rishe, Wei Sun 0002, David Barton, Yi Deng, Cyril U. Orji, Michael Alexopoulos, Leonard Loureiro, Carlos Ordonez 0002, Mario Sanchez, Artyom Shaposhnikov|SIGMOD Record|1995
 53e9a914b7602d9703263a5f|Fundamentals of data warehouses: 2nd revised and extended edition.|Vernon Hoffner|SIGMOD Record|2003
 53e99d21b7602d97025d4bcd|An Annotated Bibliography of Benchmarks for Object Databases.|Akmal B. Chaudhri|SIGMOD Record|1995
 53e9a049b7602d970292d69c|KRDB '98: The 5th International Workshop on Knowledge Representation Meets Databases.|Alexander Borgida, Vinay K. Chaudhri, Martin Staudt|SIGMOD Record|1998
 53e9a57db7602d9702ea7df6|A General Techniques for Querying XML Documents using a Relational Database System.|Jayavel Shanmugasundaram, Eugene J. Shekita, Jerry Kiernan, Rajasekar Krishnamurthy, Stratis Viglas, Jeffrey F. Naughton, Igor Tatarinov|SIGMOD Record|2001
-53e99800b7602d970200b5fd|Editor's Notes.|Michael J. Franklin|SIGMOD Record|1997
 53e9b91eb7602d9704506aaf|Introduction to Constraint Databases - Book Review.|Bart Kuijpers|SIGMOD Record|2002
 53e99b21b7602d97023b7d64|On Views and XML.|Serge Abiteboul|SIGMOD Record|1999
 53e9b495b7602d9703f9b093|The Design and Performance Evaluation of Alternative XML Storage Strategies.|Feng Tian, David J. DeWitt, Jianjun Chen 0001, Chun Zhang|SIGMOD Record|2002
-53e99800b7602d970200b603|Editor's Notes.|Ling Liu|SIGMOD Record|2001
 53e99addb7602d9702363885|Temporal Database System Implementations.|Michael H. Böhlen|SIGMOD Record|1995
 53e9bb8db7602d97047d677b|An environmental sensor network to determine drinking water quality and security.|Anastassia Ailamaki, Christos Faloutsos, Paul S. Fischbeck, Mitchell J. Small, Jeanne M. VanBriesen|SIGMOD Record|2003
 53e9b88ab7602d970445a56b|Emergent Semantics and the Multimedia Semantic Web.|William I. Grosky, D. V. Sreenath, Farshad Fotouhi|SIGMOD Record|2002
 53e9a0f3b7602d97029db9e5|Moving up the food chain: Supporting E-Commerce Applications on Databases.|Anant Jhingran|SIGMOD Record|2000
 53e9b4bfb7602d9703fdb00f|HODFA: An Architectural Framework for Homogenizing Heterogeneous Legacy Database.|Kamalakar Karlapalem, Qing Li, Chung-Dak Shum|SIGMOD Record|1995
 53e99b0ab7602d970239c217|Reminiscences on Influential Papers.|Richard T. Snodgrass, Laura M. Haas, Alberto O. Mendelzon, Z. Meral Özsoyoglu, Jan Paredaens, Krithi Ramamritham, Nick Roussopoulos, Jennifer Widom, Philip S. Yu|SIGMOD Record|1998
-53e99800b7602d970200b601|Editor's Notes.|Ling Liu|SIGMOD Record|2004
 53e99eaeb7602d970277811f|Report on FQAS 2002: fifth international conference on flexible query answering systems.|Amihai Motro, Troels Andreasen|SIGMOD Record|2003
 53e9984bb7602d970207a805|Workflow History Management.|Pinar Koksal, Sena Nural Arpinar, Asuman Dogac|SIGMOD Record|1998
 53e9b30ab7602d9703dd0754|Report on the First International Workshop an Efficient Web-based Information Systems.|Zoé Lacroix, Omar Boucelma|SIGMOD Record|2003
@@ -308,7 +302,6 @@
 53e99800b7602d970200b61b|Editor's Notes.|Jennifer Widom|SIGMOD Record|1996
 53e99a49b7602d97022acf07|Advancements in SQL/XML.|Andrew Eisenberg, Jim Melton|SIGMOD Record|2004
 53e9afdab7602d9703a2b275|Analysis of SIGMOD's co-authorship graph.|Mario A. Nascimento, Jörg Sander, Jeffrey Pound|SIGMOD Record|2003
-53e99809b7602d970201f8e7|Chair's Message.|M. Tamer Özsu|SIGMOD Record|2002
 53e9bb01b7602d9704736aa3|Database Research: Achievements and Opportunities Into the 21st Century.|Abraham Silberschatz, Michael Stonebraker, Jeffrey D. Ullman|SIGMOD Record|1996
 53e9984fb7602d970208794b|Too Much Middleware.|Michael Stonebraker|SIGMOD Record|2002
 53e9a22cb7602d9702b32326|Asserting Beliefs in MLS Relational Models.|Nenad Jukic, Susan V. Vrbsky|SIGMOD Record|1997
@@ -335,8 +328,6 @@
 53e9b78ab7602d97043303cf|Learning about data integration challenges from day one.|Alon Y. Halevy|SIGMOD Record|2003
 53e9a27ab7602d9702b7fc2f|T2: A Customizable Parallel Database for Multi-Dimensional Data.|Chialin Chang, Anurag Acharya, Alan Sussman, Joel H. Saltz|SIGMOD Record|1998
 53e9a317b7602d9702c230ca|Career-Enhancing Services at SIGMOD Online.|Alexandros Labrinidis, Alberto O. Mendelzon|SIGMOD Record|2001
-53e99800b7602d970200b603|Editor's Notes.|Ling Liu|SIGMOD Record|2002
-53e99809b7602d970201f952|Chair's Message.|M. Tamer Özsu|SIGMOD Record|2001
 53e9a263b7602d9702b67c26|"Report on the Dagstuhl Seminar: ""data quality on the Web""."|Michael Gertz, M. Tamer Özsu, Gunter Saake, Kai-Uwe Sattler|SIGMOD Record|2004
 53e99e5bb7602d9702722274|Guidelines for Presentation and Comparison of Indexing Techniques.|Justin Zobel, Alistair Moffat, Kotagiri Ramamohanarao|SIGMOD Record|1996
 53e99ea0b7602d9702766094|Report on the Semantic Web Workshop at WWW 2002.|Martin R. Frank, Natalya Fridman Noy, Steffen Staab|SIGMOD Record|2002
@@ -378,7 +369,6 @@
 53e9b95bb7602d9704544971|Mediator Languages - a Proposal for a Standard.|Peter Buneman, Louiqa Raschid, Jeffrey D. Ullman|SIGMOD Record|1997
 53e997e9b7602d9701fe4527|Book review column.|Karl Aberer|SIGMOD Record|2003
 53e99931b7602d97021720a2|Intelligent Access to Heterogeneous Information Sources: Report on the 4th Workshop on Knowledge Representation Meets Databases.|Franz Baader, Manfred A. Jeusfeld, Werner Nutt|SIGMOD Record|1997
-53e99800b7602d970200b618|Editor's Notes.|Jennifer Widom|SIGMOD Record|1995
 53e9a958b7602d97032aef11|Structured Databases on the Web: Observations and Implications.|Kevin Chen-Chuan Chang, Bin He, Chengkai Li, Mitesh Patel, Zhen Zhang|SIGMOD Record|2004
 53e99af2b7602d970237e0d4|The XML Typechecking Problem.|Dan Suciu|SIGMOD Record|2002
 53e99d7ab7602d970263389b|A Denotational Semantics for Continuous Queries over Streams and Relations.|Arvind Arasu, Jennifer Widom|SIGMOD Record|2004
@@ -401,7 +391,6 @@
 53e99c19b7602d97024c482a|Life Science Research and Data Management.|Amarnath Gupta|SIGMOD Record|2004
 53e9984fb7602d9702087949|The Middleware Muddle.|David Ritter|SIGMOD Record|1998
 53e99be3b7602d970248eb0d|A Framework for Providing Consistent and Recoverable Agent-Based Access to Heterogeneous in Mobile Databases.|Evaggelia Pitoura, Bharat K. Bhargava|SIGMOD Record|1995
-53e99800b7602d970200b61b|Editor's Notes.|Jennifer Widom|SIGMOD Record|1996
 53e9ae5cb7602d970387a189|Interviewing During a Tight Job Market.|Qiong Luo, Zachary G. Ives|SIGMOD Record|2002
 53e9a051b7602d97029361aa|Report on the First International Conference on Ontologies, Databases and Applications of Semantics.|Karl Aberer|SIGMOD Record|2003
 53e9b4bfb7602d9703fd4b36|ADEPT: An Agent-Based Approach to Business Process Management.|Nicholas R. Jennings, Timothy J. Norman, Peyman Faratin|SIGMOD Record|1998
@@ -427,7 +416,6 @@
 53e9a603b7602d9702f32f8e|Contracting in the Days of eBusiness.|Wolfgang Hümmer, Wolfgang Lehner, Hartmut Wedekind|SIGMOD Record|2002
 53e9a79eb7602d97030dd354|A Response to R. Camps' Article ``Domains, Relations and Religious Wars''.|C. J. Date|SIGMOD Record|1996
 53e99809b7602d970201f8e7|Chair's Message.|Richard T. Snodgrass|SIGMOD Record|2001
-53e99809b7602d970201f928|Chair's Message.|M. Tamer Özsu|SIGMOD Record|2003
 53e99d6bb7602d97026235a8|Review of The data warehouse toolkit: the complete guide to dimensional modeling (2nd edition) by Ralph Kimball, Margy Ross. John Wiley & Sons, Inc. 2002.|Alexander A. Anisimov|SIGMOD Record|2003
 53e9a1edb7602d9702aee572|Managing Video Data in a Mobile Environment.|Rafael Alonso, Yuh-Lin Chang, Liviu Iftode, V. S. Mani|SIGMOD Record|1995
 53e9be72b7602d9704b31b40|An Optimisation Scheme for Coalesce/Valid Time Selection Operator Sequences.|Costas Vassilakis|SIGMOD Record|2000
@@ -523,7 +511,6 @@
 53e9abd4b7602d970358c7d2|Decision Tables: Scalable Classification Exploring RDBMS Capabilities.|Hongjun Lu, Hongyan Liu|VLDB|2000
 53e9a5a8b7602d9702ed28ff|Report on the 2001 SIGMOD and PODS Awards.|Philip A. Bernstein|SIGMOD Record|2001
 53e9b152b7602d9703bd5308|Design issues and challenges for RDF- and schema-based peer-to-peer systems.|Wolfgang Nejdl, Wolf Siberski, Michael Sintek|SIGMOD Record|2003
-53e99800b7602d970200b5fd|Editor's Notes.|Michael J. Franklin|SIGMOD Record|1999
 53e9984bb7602d970207db5a|Virtual Database technology.|Ashish Gupta 0001, Venky Harinarayan, Anand Rajaraman|SIGMOD Record|1997
 53e9a8beb7602d970320c8eb|Peer-to-peer: harnessing the power of disruptive technologies.|Mario A. Nascimento|SIGMOD Record|2003
 53e99e04b7602d97026c5788|Middle East Technical University Software Research and Development Center.|Asuman Dogac|SIGMOD Record|1996
@@ -536,7 +523,6 @@
 53e9a9b7b7602d9703314db9|Why I Like Working in Academia.|Richard T. Snodgrass|SIGMOD Record|2002
 53e9b79fb7602d97043462ac|Integration of Biological Sources: Current Systems and Challenges Ahead.|Thomas Hernandez, Subbarao Kambhampati|SIGMOD Record|2004
 53e9aa95b7602d970340f609|Report on the 2004 SIGMOD Conference.|Gerhard Weikum, Patrick Valduriez|SIGMOD Record|2004
-53e99800b7602d970200b603|Editor's Notes.|Ling Liu|SIGMOD Record|2002
 53e9bd64b7602d9704a02153|A Multi-paradigm Querying Approach for a Generic Multimedia Database Management System.|Ji-Rong Wen, Qing Li, Wei-Ying Ma, HongJiang Zhang|SIGMOD Record|2003
 53e99809b7602d970201f94d|Chair's Message.|Richard T. Snodgrass|SIGMOD Record|1997
 53e9a326b7602d9702c31476|High-Concurrency Locking in R-Trees.|Marcel Kornacker, Douglas Banks|VLDB|1995
@@ -634,7 +620,6 @@
 53e997b9b7602d9701f9d978|Information rules.|Dale A. Stirling|SIGMOD Record|2003
 53e9a36db7602d9702c77750|Semistructured und Structured Data in the Web: Going Back and Forth.|Paolo Atzeni, Giansalvatore Mecca, Paolo Merialdo|SIGMOD Record|1997
 53e9b40eb7602d9703f006b9|Semantic Integration of Semistructured and Structured Data Sources.|Sonia Bergamaschi, Silvana Castano, Maurizio Vincini|SIGMOD Record|1999
-53e99800b7602d970200b603|Editor's Notes.|Ling Liu|SIGMOD Record|2002
 53e99800b7602d970200b5fd|Editor's Notes.|Michael J. Franklin|SIGMOD Record|1998
 53e9bd1db7602d97049a50d0|Foundations of Statistical Natural Language Processing - Book Review.|Gerhard Weikum|SIGMOD Record|2002
 53e9a480b7602d9702d9b138|SQL: 1999, formerly known as SQL 3.|Andrew Eisenberg, Jim Melton|SIGMOD Record|1999
@@ -643,19 +628,15 @@
 53e99d58b7602d9702613e02|Workshop Report on Experiences Using Object Data Management in the Real-World.|Akmal B. Chaudhri|SIGMOD Record|1998
 53e9afeeb7602d9703a429c6|The Asilomar Report on Database Research.|Philip A. Bernstein, Michael L. Brodie, Stefano Ceri, David J. DeWitt, Michael J. Franklin, Hector Garcia-Molina, Jim Gray, Gerald Held, Joseph M. Hellerstein, H. V. Jagadish, Michael Lesk, David Maier, Jeffrey F. Naughton, Hamid Pirahesh, Michael Stonebraker, Jeffrey D. Ullman|SIGMOD Record|1998
 53e9a52cb7602d9702e5083b|Towards On-Line Analytical Mining in Large Databases.|Jiawei Han|SIGMOD Record|1998
-53e99800b7602d970200b604|Editor's Notes.|Ling Liu|SIGMOD Record|2003
 53e99afeb7602d970238d25a|Reconsidering Multi-Dimensional schemas.|Tim Martyn|SIGMOD Record|2004
-53e99809b7602d970201f8e3|Chair's Message.|Richard T. Snodgrass|SIGMOD Record|1998
 53e9a7c1b7602d9703101656|Report on the 24th European Colloquium on Information Retrieval Research.|Fabio Crestani, Mark Girolami|SIGMOD Record|2002
 53e9a31eb7602d9702c266ab|Parameterized Complexity for the Database Theorist.|Martin Grohe|SIGMOD Record|2002
-53e99800b7602d970200b5fd|Editor's Notes.|Michael J. Franklin|SIGMOD Record|1998
 53e9b2dbb7602d9703d91bc7|EDBT04 Workshop on Database Technologies for Handling XML Information on the Web.|Marco Mesiti, Barbara Catania, Giovanna Guerrini, Akmal B. Chaudhri|SIGMOD Record|2004
 53e9a699b7602d9702fcd165|Predator: A Resource for Database Research.|Praveen Seshadri|SIGMOD Record|1998
 53e9ad68b7602d970374f0fd|Reasoning on regular path queries.|Diego Calvanese, Giuseppe De Giacomo, Maurizio Lenzerini, Moshe Y. Vardi|SIGMOD Record|2003
 53e99800b7602d970200b60a|Editor's Notes.|Ling Liu|SIGMOD Record|2003
 53e9aa66b7602d97033d942d|Database Research at the University of Oklahoma.|Le Gruenwald, Leonard Brown, Ravi A. Dirckze, Sylvain Guinepain, Carlos Sánchez, Brian Summers, Sirirut Vanichayobon|SIGMOD Record|1999
 53e9ac28b7602d97035ed764|Calls for Papers and Announcements.||SIGMOD Record|1995
-53e99800b7602d970200b5fd|Editor's Notes.|Michael J. Franklin|SIGMOD Record|1998
 53e99d96b7602d9702655648|A Conceptual Architecture for Semantic Web Enabled Web Services.|Christoph Bussler, Dieter Fensel, Alexander Maedche|SIGMOD Record|2002
 53e9b33db7602d9703e0f3ee|Research Issues in Federated Database Systems: Report of EFDBS '97 Workshop.|Stefan Conrad, Barry Eaglestone, Wilhelm Hasselbring, Mark Roantree, Fèlix Saltor, Martin Schönhoff, Markus Strässler, Mark W. W. Vermeer|SIGMOD Record|1997
 53e9a61fb7602d9702f4b489|First-Class Views: A Key to User-Centered Computing.|Arnon Rosenthal, Edward Sciore|SIGMOD Record|1999
@@ -703,8 +684,6 @@
 53e9ab42b7602d97034d4ff3|An Active Functionality Service for E-Business Applications.|Mariano Cilia, Alejandro P. Buchmann|SIGMOD Record|2002
 53e9a48eb7602d9702daf1eb|The hyperion project: from data integration to data coordination.|Marcelo Arenas, Vasiliki Kantere, Anastasios Kementsietsidis, Iluju Kiringa, Renée J. Miller, John Mylopoulos|SIGMOD Record|2003
 53e9a9d9b7602d970333c25d|Research in Information Managment at Dublin City University.|Mark Roantree, Alan F. Smeaton|SIGMOD Record|2002
-53e99800b7602d970200b5fd|Editor's Notes.|Michael J. Franklin|SIGMOD Record|1999
-53e99809b7602d970201f928|Chair's Message.|M. Tamer Özsu|SIGMOD Record|2004
 53e99aa6b7602d970231ea2c|Interview with Rakesh Agrawal.|Marianne Winslett|SIGMOD Record|2003
 53e99e54b7602d97027185c1|Workshop on Performance and Architecture of Web Servers (PAWS-2000, held in conjection with SIGMETRICS-2000).|Krishna Kant, Prasant Mohapatra|SIGMOD Record|2000
 53e9abe4b7602d970359e217|The Grid: An Application of the Semantic Web.|Carole A. Goble, David De Roure|SIGMOD Record|2002
@@ -717,7 +696,6 @@
 53e9af81b7602d97039c994d|Contextualizing the Information Space in Federated Digital Libraries.|Mike P. Papazoglou, Jeroen Hoppenbrouwers|SIGMOD Record|1999
 53e99809b7602d970201f928|Chair's Message|M. Tamer Özsu|SIGMOD Record|2004
 53e9a186b7602d9702a7c019|Detection and Classification of Intrusions and Faults using Sequences of System Calls.|João B. D. Cabrera, Lundy M. Lewis, Raman K. Mehra|SIGMOD Record|2001
-53e99800b7602d970200b604|Editor's Notes.|Ling Liu|SIGMOD Record|2003
 53e9ac89b7602d970365fef8|Design and User Testing of a Multi-Paradigm Query Interface to an Object-Oriented Database.|Dac Khoa Doan, Norman W. Paton, Alistair C. Kilgour|SIGMOD Record|1995
 53e9ad18b7602d97036f6d04|Report from the First Workshop on Geo Sensor Networks.|Silvia Nittel, Anthony Stefanidis, Isabel F. Cruz, Max J. Egenhofer, Dina Q. Goldin, A. Howard, Alexandros Labrinidis, Samuel Madden, Agnès Voisard, Michael F. Worboys|SIGMOD Record|2004
 53e9ad92b7602d970378f854|Real-Time Index Concurrency Control.|Jayant R. Haritsa, S. Seshadri|SIGMOD Record|1996
@@ -745,7 +723,6 @@
 53e9a2ceb7602d9702bd676a|The Piazza peer data management project.|Igor Tatarinov, Zachary G. Ives, Jayant Madhavan, Alon Y. Halevy, Dan Suciu, Nilesh N. Dalvi, Xin Dong 0001, Yana Kadiyska, Gerome Miklau, Peter Mork|SIGMOD Record|2003
 53e99b0ab7602d970239c211|Reminiscences on Influential Papers.|Kenneth A. Ross, Jiawei Han, Nick Koudas, Rajeev Rastogi, Daniel J. Rosenkrantz, Peter Scheuermann, Dan Suciu|SIGMOD Record|2001
 53e99ac4b7602d97023410ed|Vice Chair's Message.|Z. Meral Özsoyoglu|SIGMOD Record|2000
-53e9ac28b7602d97035ed764|Calls for Papers and Announcements.||SIGMOD Record|1995
 53e9a487b7602d9702da2c2d|Advances in Real-Time Database Systems Research.|Azer Bestavros|SIGMOD Record|1996
 53e9ac8fb7602d9703664b1b|Report on The 1995 International Workshop on Temporal Databases.|Arie Segev, Christian S. Jensen, Richard T. Snodgrass|SIGMOD Record|1995
 53e99aacb7602d9702325e77|Guest Editor's Introduction.|Robert Meersman, Amit P. Sheth|SIGMOD Record|2002
@@ -1050,7 +1027,6 @@
 53e99be3b7602d970248c52b|A Logical View of Structured Files.|Serge Abiteboul, Sophie Cluet, Tova Milo|VLDB J.|1998
 53e99f3bb7602d970280d837|Energy-performance trade-offs for spatial access methods on memory-resident data.|Ning An, Sudhanva Gurumurthi, Anand Sivasubramaniam, Narayanan Vijaykrishnan, Mahmut T. Kandemir, Mary Jane Irwin|VLDB J.|2002
 53e9bdf6b7602d9704aab9e4|Dynamic vp-Tree Indexing for n-Nearest Neighbor Search Given Pair-Wise Distances.|Ada Wai-Chee Fu, Polly Mei-shuen Chan, Yin-Ling Cheung, Yiu Sang Moon|VLDB J.|2000
-53e99800b7602d970200b5fd|Editor's Notes.|Michael J. Franklin|SIGMOD Record|1997
 53e9a15bb7602d9702a4e028|Cache Invalidation Scheme for Mobile Computing Systems with Real-time Data.|Joe Chun-Hung Yuen, Edward Chan, Kam-yiu Lam, Hei-Wing Leung|SIGMOD Record|2000
 53e9997eb7602d97021bd8fd|Emergence and Convergence: Qualitative Novelty and the Unity of Knowledge By Mario Bunge.|Haim Kilov|SIGMOD Record|2004
 53e9ae0bb7602d9703816130|Integrating Contents and Structure in Text Retrieval.|Ricardo A. Baeza-Yates, Gonzalo Navarro|SIGMOD Record|1996
@@ -1392,7 +1368,6 @@
 53e9a5efb7602d9702f17e5d|Database Techniques for the World-Wide Web: A Survey.|Daniela Florescu, Alon Y. Levy, Alberto O. Mendelzon|SIGMOD Record|1998
 53e9993fb7602d970217c102|3D Geographic Network Displays.|Kenneth C. Cox, Stephen G. Eick, Taosong He|SIGMOD Record|1996
 53e99afdb7602d970238b12c|SIGMOD 2001 Industry Sessions.|Guy M. Lohman, César A. Galindo-Legaria, Michael J. Franklin, Leonard J. Seligman|SIGMOD Record|2001
-53e99800b7602d970200b601|Editor's Notes.|Ling Liu|SIGMOD Record|2004
 53e9b8f6b7602d97044dd0d2|VOODB: A Generic Discrete-Event Random Simulation Model To Evaluate the Performances of OODBs.|Jérôme Darmont, Michel Schneider|VLDB|1999
 53e99cb5b7602d970256a2e4|BANKS: Browsing and Keyword Searching in Relational Databases.|B. Aditya, Gaurav Bhalotia, Soumen Chakrabarti, Arvind Hulgeri, Charuta Nakhe, Parag, S. Sudarshan 0001|VLDB|2002
 53e9b699b7602d970420d8f8|A System for Keyword Proximity Search on XML Databases.|Andrey Balmin, Vagelis Hristidis, Nick Koudas, Yannis Papakonstantinou, Divesh Srivastava, Tianqiu Wang|VLDB|2003
@@ -1549,7 +1524,6 @@
 53e9a55cb7602d9702e83be7|Mapping Extended Entity Relationship Model to Object Modeling Technique.|Joseph Fong|SIGMOD Record|1995
 53e9b076b7602d9703adb294|Data Warehousing and Business Intelligence for E-Commerce - Book Review.|Frank G. Goethals|SIGMOD Record|2002
 53e9b8c7b7602d97044a6795|Mining the World Wide Web: An Information Search Approach - Book Review.|Aris M. Ouksel|SIGMOD Record|2002
-53e99809b7602d970201f8e7|Chair's Message.|M. Tamer Özsu|SIGMOD Record|2002
 53e99960b7602d97021a2437|Rainbow: Distributed Database System for Classroom Education and Experimental Research.|Abdelsalam Helal, Hua Li|VLDB|2000
 53e9a1bcb7602d9702ab0ad7|A Generic Approach to Bulk Loading Multidimensional Index Structures.|Jochen Van den Bercken, Bernhard Seeger, Peter Widmayer|VLDB|1997
 53e9adaab7602d97037a6d7d|Hot Block Clustering for Disk Arrays with Dynamic Striping.|Kazuhiko Mogi, Masaru Kitsuregawa|VLDB|1995
@@ -2147,7 +2121,6 @@
 53e9b246b7602d9703ce4922|Comparative Analysis of Five XML Query Languages.|Angela Bonifati, Stefano Ceri|SIGMOD Record|2000
 53e9ba3fb7602d970464dd2f|Report on Second International Workshop on Advanced Issues of E-Commerce and Web-based Information Systems.|Kun-Lung Wu, Philip S. Yu|SIGMOD Record|2000
 53e9b7d9b7602d9704388db5|Query Previews for Networked Information Systems: A Case Study with NASA Environmental Data.|Khoa Doan, Catherine Plaisant, Ben Shneiderman, Tom Bruns|SIGMOD Record|1997
-53e99800b7602d970200b61b|Editor's Notes.|Jennifer Widom|SIGMOD Record|1996
 53e9a75fb7602d970309b887|Application of OODB and SGML Techniques in Text Database: An Electronic Dictionary System.|Jian Zhang|SIGMOD Record|1995
 53e99aa6b7602d970231e911|Interview with Michael Stonebraker.|Marianne Winslett|SIGMOD Record|2003
 53e9bcefb7602d9704977b5f|ANSI SQL Hierarchical Processing Can Fully Integrate Native XML.|Michael M. David|SIGMOD Record|2003
