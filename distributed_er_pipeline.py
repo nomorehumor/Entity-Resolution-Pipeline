@@ -3,7 +3,7 @@ import time
 import Levenshtein
 
 from pipeline.clustering import connected_components
-from paths import ACM_DATASET_FILE, DBLP_DATASET_FILE
+from paths import ACM_DATASET_FILE, DBLP_DATASET_FILE, OUTPUT_DIR
 
 from pyspark.sql import SparkSession
 from pyspark.ml.feature import Tokenizer, NGram
@@ -32,7 +32,6 @@ def read_file_spark(filename, dataset_origin):
           .option("maxPartitionBytes", "134217728")
           .csv(filename, schema=schema))
 
-    df = df.dropDuplicates(subset=["paperId"]).orderBy(col("paperId"))
     df = df.na.fill("")
 
     df = preprocess_column(df, 'title', 'cleaned_title')
@@ -93,15 +92,6 @@ def create_ngram_word_blocks_spark(df, column, id_col, n):
 
     return blocks
 
-# def get_token_blocks_spark(df, column, id_col):
-#     exploded_df = df.select(col(id_col).alias("idx"), explode(col(column)).alias("token"))
-#     repartitioned_df = exploded_df.repartition(10)
-#     grouped_df = repartitioned_df.groupBy("token").agg(collect_list("idx").alias("ids"))
-#     filtered_tokens_sdf = grouped_df.filter(size("ids") > 1).filter(size("ids") < 1000)
-#     blocks = filtered_tokens_sdf.repartition(10)
-#
-#     return blocks
-
 
 def get_candidate_pairs_between_blocks_spark(blocks1, blocks2, column, id_col):
     ids1 = blocks1.select(col(column).alias("words_acm"), explode(col(id_col)).alias("id_acm"))
@@ -147,22 +137,42 @@ def create_undirected_bipartite_graph_distributed(matched_pairs):
     return graph
 
 
+def deduplicate_datasets_spark(df_acm, df_dblp, clusters):
+    idx_acm, idx_dblp = [], []
+
+    for key in clusters.keys():
+        if len(clusters[key]) > 2:
+            id_acm = [int(el[2:]) for el in clusters[key] if el.startswith('1')]
+            idx_acm.extend(id_acm[1:])
+            id_dblp = [int(el[2:]) for el in clusters[key] if el.startswith('2')]
+            idx_dblp.extend(id_dblp[1:])
+
+    df_acm = df_acm.filter(~col("id_acm").cast(IntegerType()).isin(idx_acm))
+    df_dblp = df_dblp.filter(~col("id_dblp").cast(IntegerType()).isin(idx_dblp))
+
+    return df_acm, df_dblp
+
+
 def pipeline():
     sim_threshold = 0.8
-    df_acm, df_dblp = load_two_publication_sets_spark()
+
     pipeline_start = time.time()
+    df_acm, df_dblp = load_two_publication_sets_spark()
     candidate_pairs = blocking_spark(df_acm, df_dblp)
     matched_entities = levenshtein_matching(df_acm, df_dblp, candidate_pairs, sim_threshold)
-    pipeline_end = time.time()
-    print(f'Time needed for blocking and matching: {pipeline_end - pipeline_start}')
+    clusters = connected_components(matched_entities)
+    dedupe_acm, dedupe_dblp = deduplicate_datasets_spark(df_acm, df_dblp, clusters)
 
-    matched_entities_csv = matched_entities.coalesce(1)
-    matched_entities_csv.write.option("header", "true") \
+    pipeline_end = time.time()
+    print(f'Pipeline execution time: {pipeline_end - pipeline_start}')
+
+    matched_entities.coalesce(1).write.option("header", "true") \
         .mode("overwrite") \
         .csv("output/distributed_matched_entities")
-    print('Wrote output')
-    clusters = connected_components(matched_entities)
-    print('Finished clustering')
+
+    dedupe_acm.coalesce(1).write.csv(f"{OUTPUT_DIR}/CM_deduplicated_distributed.csv", header=True,
+                                     mode="overwrite")
+    dedupe_dblp.coalesce(1).write.csv(f"{OUTPUT_DIR}/DBLP_deduplicated_distributed.csv", header=True,
+                                      mode="overwrite")
 
     return clusters
-
