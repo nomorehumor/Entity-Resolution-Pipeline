@@ -95,8 +95,7 @@ def get_candidate_pairs_between_blocks_spark(blocks1, blocks2, column, id_col):
     ids1 = blocks1.select(col(column).alias("words_acm"), explode(col(id_col)).alias("id_acm"))
     ids2 = blocks2.select(col(column).alias("words_dblp"), explode(col(id_col)).alias("id_dblp"))
 
-    candidate_pairs = ids1.join(ids2, ids1["words_acm"] == ids2["words_dblp"])
-    candidate_pairs = candidate_pairs.select([col('id_acm'), col('id_dblp')])
+    candidate_pairs = ids1.join(ids2, ids1["words_acm"] == ids2["words_dblp"]).select([col('id_acm'), col('id_dblp')])
 
     return candidate_pairs.dropDuplicates()
 
@@ -105,22 +104,18 @@ def levenshtein_matching(df_acm, df_dblp, pairs, threshold, weights=[0.33, 0.33,
     joined_sdf = pairs.join(df_acm, col("id_acm") == col("index_acm"))
     joined_sdf = joined_sdf.join(df_dblp, col("id_dblp") == col("index_dblp"))
 
-    # Define UDF for Levenshtein similarity
     levenshtein_udf = udf(
         lambda s1, s2: 1 - Levenshtein.distance(s1, s2) / max(len(s1), len(s2)) if max(len(s1), len(s2)) > 0 else 0,
         FloatType())
 
-    # Compute title, authors, and year similarity
     title_sim = levenshtein_udf(col("cleaned_title_acm"), col("cleaned_title_dblp"))
     authors_sim = levenshtein_udf(col("cleaned_authors_acm"), col("cleaned_authors_dblp"))
     year_sim = (col("year_acm") == col("year_dblp")).cast("int")
 
-    # Compute overall similarity using weights
     similarity_col = weights[0] * title_sim + weights[1] * authors_sim + weights[2] * year_sim
 
-    # Add the similarity column to the DataFrame
     result_sdf = joined_sdf.withColumn("similarity", similarity_col)
-    cols = [col('id_acm'), col('id_dblp'), col('similarity'), col('cleaned_title_acm'), col('cleaned_title_dblp')]
+    cols = [col('index_acm'), col('index_dblp'), col('similarity'), col('cleaned_title_acm'), col('cleaned_title_dblp')]
     matched_entities = result_sdf.select(cols).filter(col("similarity") > threshold)
 
     return matched_entities
@@ -128,8 +123,8 @@ def levenshtein_matching(df_acm, df_dblp, pairs, threshold, weights=[0.33, 0.33,
 
 def create_undirected_bipartite_graph_distributed(matched_pairs):
     edges_df = matched_pairs.select(
-        concat(lit("1"), lit("_"), col("id_acm")).alias("node1"),
-        concat(lit("2"), lit("_"), col("id_dblp")).alias("node2")
+        concat(lit("1_"), col("id_acm")).alias("node1"),
+        concat(lit("2_"), col("id_dblp")).alias("node2")
     )
 
     undirected_edges_df = edges_df.union(edges_df.select("node2", "node1"))
@@ -156,5 +151,6 @@ def pipeline():
     print('Wrote output')
     clusters = connected_components(matched_entities)
     print('Finished clustering')
+
     return clusters
 

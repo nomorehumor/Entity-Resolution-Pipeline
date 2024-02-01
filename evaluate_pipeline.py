@@ -1,9 +1,14 @@
 import csv
+import os
+import time
+
+import pandas as pd
+
 from clustering import connected_components
 from blocking import blocking
 from data_loading import load_two_publication_sets
-from er_block_match import *
 from matching import baseline_matching, matching
+from paths import OUTPUT_DIR
 
 
 def evaluate(df, bs_df, threshold):
