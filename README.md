@@ -48,6 +48,12 @@ To run the pipeline (n-gram blocking + Levenshtein):
 python3 run_pipeline.py
 ```
 
+To run distributed pipeline:
+
+```
+python3 distributed_er_pipeline.py
+```
+
 ## 3. Alternative Approach
 
 We also have an alternative approach with blocking and matching using n-gram words and cosine function. It also uses different clustering algorithm.
