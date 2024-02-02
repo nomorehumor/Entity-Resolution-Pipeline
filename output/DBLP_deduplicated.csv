@@ -2094,19 +2094,19 @@ paperId,title,authors,venue,year
 5390972920f70186a0dfaccb,relaxed currency and consistency how to say good enough in sql,hongfei guo per ke larson raghu ramakrishnan jonathan goldstein,sigmod '04 proceedings of the 2004 acm sigmod international conference on management of data,2004
 53909f8c20f70186a0e3fe3d,load shedding in a data stream manager,nesime tatbul u ur etintemel stan zdonik mitch cherniack michael stonebraker,vldb '03 proceedings of the 29th international conference on very large data bases - volume 29,2003
 53909f8c20f70186a0e40217,cords automatic generation of correlation statistics in db2,ihab f ilyas volker markl peter j haas paul g brown ashraf aboulnaga,vldb '04 proceedings of the thirtieth international conference on very large data bases - volume 30,2004
+539087dd20f70186a0d62b44,pixel oriented database visualizations,daniel a keim,acm sigmod record,1996
 539087dd20f70186a0d644d4,devise integrated querying and visual exploration of large datasets,m livny r ramakrishnan k beyer g chen d donjerkovic s lawande j myllymaki k wenger,sigmod '97 proceedings of the 1997 acm sigmod international conference on management of data,1997
-539087e120f70186a0d665f6,a query language for a web site management system,mary fernandez daniela florescu alon levy dan suciu,acm sigmod record,1997
+539087dd20f70186a0d64518,strudel a web site management system,mary fernandez daniela florescu jaewoo kang alon levy dan suciu,sigmod '97 proceedings of the 1997 acm sigmod international conference on management of data,1997
 539087e720f70186a0d696a1,dtl s dataspot database exploration as easy as browsing the web,shaul dar gadi entin shai geva eran palmon,sigmod '98 proceedings of the 1998 acm sigmod international conference on management of data,1998
 539087eb20f70186a0d6a44f,sonar system for optimized numeric association rules,takeshi fukuda yasuhiko morimoto shinichi morishita takeshi tokuyama,sigmod '96 proceedings of the 1996 acm sigmod international conference on management of data,1996
-539087eb20f70186a0d6a445,databases and visualization,daniel a keim,sigmod '96 proceedings of the 1996 acm sigmod international conference on management of data,1996
-5390880220f70186a0d77f8a,on views and xml,serge abiteboul,acm sigmod record,1999
+539087f320f70186a0d6f78e,on views and xml,serge abiteboul,pods '99 proceedings of the eighteenth acm sigmod-sigact-sigart symposium on principles of database systems,1999
 5390881720f70186a0d7ff31,reminiscences in influential papers,richard snodgrass,acm sigmod record,1998
 5390882d20f70186a0d8daf2,database tuning principles experiments and troubleshooting techniques part ii,dennis shasha philippe bonnet,proceedings of the 2002 acm sigmod international conference on management of data,2002
 5390882d20f70186a0d8daef,querying and mining data streams you only get one look a tutorial,minos garofalakis johannes gehrke rajeev rastogi,proceedings of the 2002 acm sigmod international conference on management of data,2002
 5390882d20f70186a0d8db9a,cluster validity methods part i,maria halkidi yannis batistakis michalis vazirgiannis,acm sigmod record,2002
+53908a9620f70186a0da4880,caching strategies for data intensive web sites,khaled yagoub daniela florescu val rie issarny patrick valduriez,vldb '00 proceedings of the 26th international conference on very large data bases,2000
 53908a9620f70186a0da4e2a,tpc d the challenges issues and results,ramesh bhashyam,vldb '96 proceedings of the 22th international conference on very large data bases,1996
-53908b2a20f70186a0db9750,building and customizing data intensive web sites using weave,khaled yagoub daniela florescu val rie issarny patrick valduriez,vldb '00 proceedings of the 26th international conference on very large data bases,2000
-53908b4920f70186a0dbabee,erratum a database model for object dynamics,m p papazoglou b j kr 228 mer,the vldb journal — the international journal on very large data bases,1997
+53908b4920f70186a0dbabe4,a database model for object dynamics,m p papazoglou b j kr 228 mer,the vldb journal — the international journal on very large data bases,1997
 53908b4920f70186a0dbc919,xpath processing in a nutshell,georg gottlob christoph koch reinhard pichler,acm sigmod record,2003
 53908cde20f70186a0dcde08,advances in real time database systems research special section on rtdbs of acm sigmod record 25 1 march 1996,azer bestavros,"advances in real-time database systems research: special section on rtdbs of acm sigmod record 25(1), march 1996.",1996
 5590d19e0cf237666fc28f98,book review column,karl aberer,acm sigmod record,2003
