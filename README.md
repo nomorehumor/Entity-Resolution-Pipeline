@@ -1,8 +1,16 @@
-"# dia-entity-resolution" 
+# Entity Resolution (ER) Pipeline
 
-Link to Overleaf: https://www.overleaf.com/7685527817vqfdrjwdmpdd#c3140f
+This repository contains implementation of an ER pipeline.
 
-0. Clone Repo & Install Dependencies
+Directories: 
+```
+- data # extracted datasets
+- output # experiment results, Matched_Entities.csv, deduplicated datasets
+- pipeline # code for different stages of ER pipeline
+- scripts # 2 other approaches that weren't fully included to the main script
+```
+
+## 0. Clone Repo & Install Dependencies
 
 ```
 git clone
@@ -10,7 +18,7 @@ cd dia-entity-resolution
 pip install -r requirements.txt
 ```
 
-1. Data Acquisition and Preparation
+## 1. Data Acquisition and Preparation
 
 Download datasets:
 ```
@@ -26,6 +34,25 @@ python3 extract_to_csv.py
 
 Files will be stored in `data/` folder
 
-2. Run Pipeline
+## 2. Run Pipeline
 
-To execute the experiments
+To execute the experiments:
+
+```
+python3 evaluate_pipeline.py
+```
+
+To run the pipeline (n-gram blocking + Levenshtein):
+
+```
+python3 run_pipeline.py
+```
+
+## 3. Alternative Approach
+
+We also have an alternative approach with blocking and matching using n-gram words and cosine function. It also uses different clustering algorithm.
+To run it:
+
+```
+python3 scripts/er_vectorized_pipeline.py
+```
