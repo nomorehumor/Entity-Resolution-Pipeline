@@ -46,6 +46,28 @@ def entity_resolution_experiments():
             "blocking_params": {"n": 3},
         },
         {
+            "blocking": 'ngram_word_blocks',
+            "matching": 'jaccard',
+            "blocking_params": {"n": 3},
+            "matching_weights": [0.3, 0.3, 0.3]
+        },
+        {
+            "blocking": 'ngram_word_blocks',
+            "matching": 'trigram',
+            "blocking_params": {"n": 3},
+            "matching_weights": [0.3, 0.3, 0.3]
+        },
+        {
+            "blocking": 'st',
+            "matching": 'cosine',
+            "blocking_params": {},
+        },
+        {
+            "blocking": 'token',
+            "matching": 'cosine',
+            "blocking_params": {},
+        },
+        {
             "blocking": 'st',
             "matching": 'jaccard',
             "blocking_params": {},
