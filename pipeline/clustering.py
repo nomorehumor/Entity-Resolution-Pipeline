@@ -1,3 +1,6 @@
+import pandas as pd
+
+
 def create_undirected_bipartite_graph(matched_pairs):
     graph = {}
     for idx1, idx2 in zip(matched_pairs['index_acm'], matched_pairs['index_dblp']):
@@ -33,20 +36,36 @@ def connected_components(matched_pairs):
     return connected_components
 
 
-def deduplicate_datasets(df_acm, df_dblp, clusters):
+def deduplicate_datasets(df_acm_deduplicated, df_dblp_deduplicated, clusters):
     idx_acm, idx_dblp = [], []
+    entities_to_preserve = []
 
     for key in clusters.keys():
         if len(clusters[key]) > 2:
-            id_acm = [int(el[2:]) for el in clusters[key] if el.startswith('1')]
+            id_acm = [el[2:] for el in clusters[key] if el.startswith('1')]
             idx_acm.extend(id_acm[1:])
-            id_dblp = [int(el[2:]) for el in clusters[key] if el.startswith('2')]
-            idx_dblp.extend(id_dblp[1:])
+            entities_to_preserve.append(id_acm[0])
+            
+            id_dblp = [el[2:] for el in clusters[key] if el.startswith('2')]
+            idx_dblp.extend(id_dblp)
     
-    if any("Combined" in col for col in df_acm.columns):
-        df_acm = df_acm.drop(columns=[col for col in df_acm.columns if "Combined" in col])
-    if any("Combined" in col for col in df_dblp.columns):
-        df_dblp = df_dblp.drop(columns=[col for col in df_dblp.columns if "Combined" in col])
+    if any("Combined" in col for col in df_acm_deduplicated.columns):
+        df_acm_deduplicated = df_acm_deduplicated.drop(columns=[col for col in df_acm_deduplicated.columns if "Combined" in col])
+    if any("Combined" in col for col in df_dblp_deduplicated.columns):
+        df_dblp_deduplicated = df_dblp_deduplicated.drop(columns=[col for col in df_dblp_deduplicated.columns if "Combined" in col])
+        
+    df_acm_deduplicated = df_acm_deduplicated[~df_acm_deduplicated['paperId_acm'].isin(idx_acm)]
+    df_dblp_deduplicated = df_dblp_deduplicated[~df_dblp_deduplicated['paperId_dblp'].isin(idx_dblp)]
     
-    return df_acm.drop(idx_acm), df_dblp.drop(idx_dblp)
+    df_entities_to_preserve = df_acm_deduplicated[df_acm_deduplicated['paperId_acm'].isin(entities_to_preserve)]
+    df_entities_to_preserve.rename(columns={
+                                    'paperId_acm': 'paperId_dblp', 
+                                    'title_acm': 'title_dblp', 
+                                    'authors_acm': 'authors_dblp', 
+                                    'venue_acm': 'venue_dblp', 
+                                    'year_acm': 'year_dblp'
+                                    }, inplace=True)
+    df_dblp_deduplicated = pd.concat([df_dblp_deduplicated, df_entities_to_preserve], axis=1)
+    
+    return df_acm_deduplicated, df_dblp_deduplicated
 

@@ -16,7 +16,7 @@ def run_entity_resolution(df_acm, df_dblp, blocking_function, matching_function,
     
     # Matching
     df_pairs = matching(df_acm, df_dblp, pairs, matching_function, weights=matching_params.get('matching_weights'))
-    df_pairs[["paperId_acm", "paperId_dblp"]].to_csv(f'{OUTPUT_DIR}/Matched_Entities.csv', index=False)
+    df_pairs[["index_acm", "paperId_acm", "index_dblp", "paperId_dblp"]].to_csv(f'{OUTPUT_DIR}/Matched_Entities.csv', index=False)
     pipeline_end = time.time()
     print(f'Time needed for blocking and matching: {pipeline_end-pipeline_start}')
 
