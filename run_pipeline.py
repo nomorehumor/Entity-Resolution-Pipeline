@@ -41,4 +41,4 @@ def run_entity_resolution(df_acm, df_dblp, blocking_function, matching_function,
 if __name__ == "__main__":
     df_acm, df_dblp = load_two_publication_sets()
 
-    run_entity_resolution(df_acm, df_dblp, "ngram_word_blocks", "cosine", 0.8, {"n":4})
+    run_entity_resolution(df_acm, df_dblp, "ngram_word_blocks", "levenshtein", 0.8, {"n":4}, {"matching_weights": [0.3, 0.3, 0.3]})
