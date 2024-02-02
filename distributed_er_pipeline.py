@@ -2,7 +2,6 @@ import time
 
 import Levenshtein
 
-from pipeline.clustering import connected_components
 from paths import ACM_DATASET_FILE, DBLP_DATASET_FILE, OUTPUT_DIR
 
 from pyspark.sql import SparkSession
@@ -45,7 +44,7 @@ def read_file_spark(filename, dataset_origin):
     column_names = [f"{col}_{dataset_origin}" for col in df.columns]
     df = df.toDF(*column_names)
 
-    df = df.repartition(10)
+    df = df.repartition(5)
     return df
 
 
@@ -64,10 +63,10 @@ def preprocess_column(df, input_column, output_column):
     return df
 
 
-def load_two_publication_sets_spark(acm_file, dblp_file):
+def load_two_publication_sets_spark():
     # Load ACM and DBLP datasets
-    df_acm = read_file_spark(acm_file, "acm")
-    df_dblp = read_file_spark(dblp_file, "dblp")
+    df_acm = read_file_spark(ACM_DATASET_FILE, "acm")
+    df_dblp = read_file_spark(DBLP_DATASET_FILE, "dblp")
 
     return df_acm, df_dblp
 
@@ -86,9 +85,9 @@ def create_ngram_word_blocks_spark(df, column, id_col, n):
     df = ngram.transform(df)
 
     exploded_df = df.select(col(id_col), explode(col("ngrams")).alias("ngram"))
-    repartitioned_df = exploded_df.repartition(10)
+    repartitioned_df = exploded_df.repartition(5)
     blocks = repartitioned_df.groupBy("ngram").agg(collect_list(id_col).alias("ids"))
-    blocks = blocks.repartition(10)
+    blocks = blocks.repartition(5)
 
     return blocks
 
@@ -125,8 +124,8 @@ def levenshtein_matching(df_acm, df_dblp, pairs, threshold, weights=[0.33, 0.33,
 
 def create_undirected_bipartite_graph_distributed(matched_pairs):
     edges_df = matched_pairs.select(
-        concat(lit("1_"), col("id_acm")).alias("node1"),
-        concat(lit("2_"), col("id_dblp")).alias("node2")
+        concat(lit("1_"), col("index_acm")).alias("node1"),
+        concat(lit("2_"), col("index_dblp")).alias("node2")
     )
 
     undirected_edges_df = edges_df.union(edges_df.select("node2", "node1"))
@@ -135,6 +134,28 @@ def create_undirected_bipartite_graph_distributed(matched_pairs):
     graph = graph_rdd.groupByKey().mapValues(list).collectAsMap()
 
     return graph
+
+
+def connected_components(matched_pairs):
+    graph = create_undirected_bipartite_graph_distributed(matched_pairs)
+
+    def dfs(node, traversed_nodes, current_component):
+        traversed_nodes.add(node)
+        current_component.add(node)
+        for neighbor in graph.get(node, []):
+            if neighbor not in traversed_nodes:
+                dfs(neighbor, traversed_nodes, current_component)
+
+    connected_components = {}
+    traversed_nodes = set()
+
+    for node in graph.keys():
+        if node not in traversed_nodes:
+            current_component = {node}
+            dfs(node, traversed_nodes, current_component)
+            connected_components[node] = current_component
+
+    return connected_components
 
 
 def deduplicate_datasets_spark(df_acm, df_dblp, clusters):
@@ -147,32 +168,39 @@ def deduplicate_datasets_spark(df_acm, df_dblp, clusters):
             id_dblp = [int(el[2:]) for el in clusters[key] if el.startswith('2')]
             idx_dblp.extend(id_dblp[1:])
 
-    df_acm = df_acm.filter(~col("id_acm").cast(IntegerType()).isin(idx_acm))
-    df_dblp = df_dblp.filter(~col("id_dblp").cast(IntegerType()).isin(idx_dblp))
+    df_acm = df_acm.filter(~col("index_acm").cast(IntegerType()).isin(idx_acm))
+    df_dblp = df_dblp.filter(~col("index_dblp").cast(IntegerType()).isin(idx_dblp))
 
     return df_acm, df_dblp
 
 
-def distributed_er_pipeline(acm_file=ACM_DATASET_FILE, dblp_file=DBLP_DATASET_FILE, save=True):
+def distributed_er_pipeline():
     sim_threshold = 0.8
 
     pipeline_start = time.time()
-    df_acm, df_dblp = load_two_publication_sets_spark(acm_file, dblp_file )
+    df_acm, df_dblp = load_two_publication_sets_spark()
     candidate_pairs = blocking_spark(df_acm, df_dblp)
     matched_entities = levenshtein_matching(df_acm, df_dblp, candidate_pairs, sim_threshold)
     clusters = connected_components(matched_entities)
     dedupe_acm, dedupe_dblp = deduplicate_datasets_spark(df_acm, df_dblp, clusters)
 
     pipeline_end = time.time()
-    print(f'Pipeline execution time: {pipeline_end - pipeline_start}')
+    execution_time = pipeline_end - pipeline_start
+    print(f'Pipeline execution time: {execution_time}')
 
-    if save:
-        matched_entities.coalesce(1).write.option("header", "true") \
-            .mode("overwrite") \
-            .csv("output/distributed_matched_entities")
+    matched_entities.coalesce(1).write.option("header", "true") \
+        .mode("overwrite") \
+        .csv(f"output/distributed_matched_entities")
 
-        dedupe_acm.coalesce(1).write.csv(f"{OUTPUT_DIR}/CM_deduplicated_distributed.csv", header=True,
-                                         mode="overwrite")
-        dedupe_dblp.coalesce(1).write.csv(f"{OUTPUT_DIR}/DBLP_deduplicated_distributed.csv", header=True,
-                                          mode="overwrite")
+    dedupe_acm.coalesce(1).write.option("header", "true") \
+        .mode("overwrite") \
+        .csv(f"{OUTPUT_DIR}/ACM_deduplicated_distributed")
 
+    dedupe_dblp.coalesce(1).write.option("header", "true") \
+        .mode("overwrite") \
+        .csv(f"{OUTPUT_DIR}/DBLP_deduplicated_distributed")
+
+
+if __name__ == '__main__':
+    distributed_er_pipeline()
+    spark.stop()
