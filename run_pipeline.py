@@ -8,6 +8,16 @@ from pipeline.clustering import connected_components, deduplicate_datasets
 from pipeline.matching import matching
 
 
+def write_dataset(df, path, columns_suffix):
+    df.drop([f"index_{columns_suffix}", f"Combined_{columns_suffix}"], axis=1).rename(columns={
+            f'paperId_{columns_suffix}': 'paperId', 
+            f'title_{columns_suffix}': 'title', 
+            f'authors_{columns_suffix}': 'authors', 
+            f'venue_{columns_suffix}': 'venue', 
+            f'year_{columns_suffix}': 'year',
+            f'Combined_{columns_suffix}': 'Combined'
+            }).to_csv(path, index=False)
+
 def run_entity_resolution(df_acm, df_dblp, blocking_function, matching_function, sim_threshold, blocking_params=None, matching_params={}):
     print(f'Running entity resolution with blocking function {blocking_function} and matching function {matching_function}')
     pipeline_start= time.time()
@@ -25,8 +35,8 @@ def run_entity_resolution(df_acm, df_dblp, blocking_function, matching_function,
     df_acm_dedup, df_dblp_dedup = deduplicate_datasets(df_acm, df_dblp, clusters)
     
     # Save deduplicated datasets
-    df_acm_dedup.to_csv(f'{OUTPUT_DIR}/ACM_deduplicated.csv')
-    df_dblp_dedup.to_csv(f'{OUTPUT_DIR}/DBLP_deduplicated.csv')    
+    write_dataset(df_acm_dedup, f'{OUTPUT_DIR}/ACM_deduplicated.csv', "acm")
+    write_dataset(df_dblp_dedup, f'{OUTPUT_DIR}/DBLP_deduplicated.csv', "dblp")    
 
 if __name__ == "__main__":
     df_acm, df_dblp = load_two_publication_sets()

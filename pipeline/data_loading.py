@@ -1,3 +1,4 @@
+import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 import pandas as pd
 
@@ -14,7 +15,8 @@ def read_file(filename, dataset_origin):
 
     column_names = [f"{column_name}_{dataset_origin}" for column_name in df.columns]
     df.columns = column_names
-    df.index.names = [f'index_{dataset_origin}']
+    df[f'index_{dataset_origin}'] = np.arange(len(df))
+    # df.index.names = [f'index_{dataset_origin}']
     # df.dropna(ignore_index=True, inplace=True)
     # df.drop_duplicates(keep='first', ignore_index=True, inplace=True)
     return df
