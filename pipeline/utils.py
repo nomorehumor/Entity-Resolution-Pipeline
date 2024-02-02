@@ -62,6 +62,7 @@ def get_candidate_pairs_between_blocks(blocks1, blocks2):
             candidate_pairs.update(pairs) # add all candidate pairs to set
     return np.array(list(candidate_pairs))
 
+
 # instead of storing the rownumbers in the dataframes, get the actual PaperID in the dataframes
 def convert_matches_to_indices_df(df_acm, df_dblp, df_matches):
     indices = [(df_acm.iloc[int(row["index_acm"])]['paperId_acm'], df_dblp.iloc[int(row["index_dblp"])]['paperId_dblp']) for _, row in df_matches.iterrows()]
@@ -80,6 +81,7 @@ def create_cartesian_product_baseline(df_acm, df_dblp):
     df_dblp['key'] = 1
     bs_df = pd.merge(df_acm, df_dblp, on='key').drop('key', axis=1)
     return bs_df
+
 
 def get_token_blocks(df, stop_words):
     blocks = defaultdict(list)

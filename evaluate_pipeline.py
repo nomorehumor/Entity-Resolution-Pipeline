@@ -1,9 +1,14 @@
 import csv
+import os
+import time
+
+import pandas as pd
+
 from pipeline.clustering import connected_components, deduplicate_datasets
 from pipeline.blocking import blocking
 from pipeline.data_loading import load_two_publication_sets
-from scripts.er_block_match import *
 from pipeline.matching import baseline_matching, matching
+from paths import OUTPUT_DIR
 
 
 def evaluate(df, bs_df, threshold):
@@ -62,17 +67,18 @@ def entity_resolution_experiments():
         df_pairs = matching(df_acm, df_dblp, pairs, config['matching'], weights=config.get('matching_weights'))
 
         pipeline_end = time.time()
-        print(f'Time needed for blocking and matching: {pipeline_end-pipeline_start}')
+        print(f'Time needed for blocking and matching: {pipeline_end - pipeline_start}')
 
         bs_start = time.time()
-        bs_df_pairs = baseline_matching(df_acm, df_dblp, matching_function=config['matching'], weights=config.get('matching_weights'))
+        bs_df_pairs = baseline_matching(df_acm, df_dblp, matching_function=config['matching'],
+                                        weights=config.get('matching_weights'))
         bs_matching_end = time.time()
-        print(f'Time needed for baseline creation & matching : {bs_matching_end-bs_start}')
+        print(f'Time needed for baseline creation & matching : {bs_matching_end - bs_start}')
 
         for threshold in thresholds:
             f1, prec, rec = evaluate(df_pairs, bs_df_pairs, threshold)
             print(f'threshold: {threshold}, f1: {f1}, precision: {prec}, recall: {rec}')
-            save_result(config, start_timestamp, threshold, f1, prec, rec, pipeline_end-pipeline_start)
+            save_result(config, start_timestamp, threshold, f1, prec, rec, pipeline_end - pipeline_start)
 
         clusters = connected_components(df_pairs[df_pairs.similarity > chosen_threshold])
         df_acm_dedup, df_dblp_dedup = deduplicate_datasets(df_acm, df_dblp, clusters)
