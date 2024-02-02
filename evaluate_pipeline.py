@@ -196,7 +196,6 @@ def entity_resolution_experiments():
             print(f'threshold: {threshold}, f1: {f1}, precision: {prec}, recall: {rec}')
             save_result(config, start_timestamp, threshold, f1, prec, rec, pipeline_end - pipeline_start)
 
-        df_pairs[df_pairs.similarity > chosen_threshold].to_csv(f'matched_entities_{i}.csv')
         clusters = connected_components(df_pairs[df_pairs.similarity > chosen_threshold])
         df_acm_dedup, df_dblp_dedup = deduplicate_datasets(df_acm, df_dblp, clusters)
         df_acm_dedup.to_csv(f'{OUTPUT_DIR}/ACM_deduplicated_{i}.csv')
