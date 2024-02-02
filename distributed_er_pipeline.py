@@ -116,10 +116,10 @@ def levenshtein_matching(df_acm, df_dblp, pairs, threshold, weights=[0.33, 0.33,
     similarity_col = weights[0] * title_sim + weights[1] * authors_sim + weights[2] * year_sim
 
     result_sdf = joined_sdf.withColumn("similarity", similarity_col)
-    cols = [col('index_acm'), col('index_dblp'), col('similarity'), col('cleaned_title_acm'), col('cleaned_title_dblp')]
-    matched_entities = result_sdf.select(cols).filter(col("similarity") > threshold)
+    matched_entities = result_sdf.filter(col("similarity") > threshold)
+    cols = [col('index_acm'), col('paperId_acm'), col('index_dblp'), col('paperId_dblp')]
 
-    return matched_entities
+    return matched_entities.select(cols)
 
 
 def create_undirected_bipartite_graph_distributed(matched_pairs):
@@ -160,18 +160,35 @@ def connected_components(matched_pairs):
 
 def deduplicate_datasets_spark(df_acm, df_dblp, clusters):
     idx_acm, idx_dblp = [], []
+    ids_to_preserve = []
 
     for key in clusters.keys():
         if len(clusters[key]) > 2:
             id_acm = [int(el[2:]) for el in clusters[key] if el.startswith('1')]
             idx_acm.extend(id_acm[1:])
+            ids_to_preserve.append(id_acm[0])
+
             id_dblp = [int(el[2:]) for el in clusters[key] if el.startswith('2')]
-            idx_dblp.extend(id_dblp[1:])
+            idx_dblp.extend(id_dblp)
 
-    df_acm = df_acm.filter(~col("index_acm").cast(IntegerType()).isin(idx_acm))
-    df_dblp = df_dblp.filter(~col("index_dblp").cast(IntegerType()).isin(idx_dblp))
+    df_acm_deduplicated = df_acm.filter(~df_acm['index_acm'].isin(idx_acm))
 
-    return df_acm, df_dblp
+    df_dblp_deduplicated = df_dblp.filter(~df_dblp['index_dblp'].isin(idx_dblp))
+
+    df_entities_to_preserve = df_acm.filter(df_acm['index_acm'].isin(ids_to_preserve))
+    df_entities_to_preserve = df_entities_to_preserve.withColumnRenamed("paperId_acm", "paperId_dblp") \
+        .withColumnRenamed("title_acm", "title_dblp") \
+        .withColumnRenamed("authors_acm", "authors_dblp") \
+        .withColumnRenamed("venue_acm", "venue_dblp") \
+        .withColumnRenamed("year_acm", "year_dblp") \
+        .withColumnRenamed("Combined_acm", "Combined_dblp")
+
+    df_dblp_deduplicated = df_dblp_deduplicated.union(df_entities_to_preserve)
+
+    df_dblp_deduplicated = df_dblp_deduplicated.drop("index_acm", "Combined_dblp")
+    df_acm_deduplicated = df_acm_deduplicated.drop("Combined_acm")
+
+    return df_acm_deduplicated, df_dblp_deduplicated
 
 
 def distributed_er_pipeline():
@@ -190,7 +207,7 @@ def distributed_er_pipeline():
 
     matched_entities.coalesce(1).write.option("header", "true") \
         .mode("overwrite") \
-        .csv(f"output/distributed_matched_entities")
+        .csv(f"{OUTPUT_DIR}/distributed_matched_entities")
 
     dedupe_acm.coalesce(1).write.option("header", "true") \
         .mode("overwrite") \

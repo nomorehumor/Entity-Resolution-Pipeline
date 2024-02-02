@@ -14,6 +14,7 @@ def create_undirected_bipartite_graph(matched_pairs):
         graph[node2].add(node1)
     return graph
 
+
 def connected_components(matched_pairs):
 
     graph = create_undirected_bipartite_graph(matched_pairs)
