@@ -6,7 +6,7 @@ import time
 from pipeline.blocking import create_ngram_word_blocks
 from pipeline.data_loading import get_vector_datasets, load_two_publication_sets
 from paths import OUTPUT_DIR
-from utils import get_candidate_pairs_between_blocks, convert_matches_to_indices_df, show_tuples_behind_indices_pair
+from pipeline.utils import get_candidate_pairs_between_blocks, convert_matches_to_indices_df, show_tuples_behind_indices_pair
 
 BASELINE_OUTPUT = f"{OUTPUT_DIR}/baseline_cosine.csv"
 DEDUPLICATED_ACM_OUTPUT = f"{OUTPUT_DIR}/deduplicated_acm.csv"
@@ -17,7 +17,6 @@ ER_PIPELINE_NGRAM_COSINE_OUTPUT = f"{OUTPUT_DIR}/Matched_Entities_Ngram_Cosine_I
 # FIRST PIPE FOR ENTITY RESOLUTION
 def er_ngram_cosine_pipe(n=2):
     df_acm, df_dblp = load_two_publication_sets()
-    print(df_dblp.columns)
 
     # Vectorization using TF-IDF
     vector_space1, vector_space2 = get_vector_datasets(df_acm, df_dblp)

@@ -1,4 +1,4 @@
-from utils import get_candidate_pairs_between_blocks, get_words_ngrams, get_token_blocks
+from pipeline.utils import get_candidate_pairs_between_blocks, get_words_ngrams, get_token_blocks
 from collections import defaultdict
 import itertools
 import numpy as np

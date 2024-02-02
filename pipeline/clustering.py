@@ -1,3 +1,6 @@
+import pandas as pd
+
+
 def create_undirected_bipartite_graph(matched_pairs):
     graph = {}
     for idx1, idx2 in zip(matched_pairs['index_acm'], matched_pairs['index_dblp']):
@@ -31,3 +34,34 @@ def connected_components(matched_pairs):
             connected_components[node] = current_component
             
     return connected_components
+
+
+def deduplicate_datasets(df_acm, df_dblp, clusters):
+    idx_acm, idx_dblp = [], []
+    ids_to_preserve = []
+
+    for key in clusters.keys():
+        if len(clusters[key]) > 2:
+            id_acm = [int(el[2:]) for el in clusters[key] if el.startswith('1')]
+            idx_acm.extend(id_acm[1:])
+            ids_to_preserve.append(id_acm[0])
+            
+            id_dblp = [int(el[2:]) for el in clusters[key] if el.startswith('2')]
+            idx_dblp.extend(id_dblp)
+    
+        
+    df_acm_deduplicated = df_acm[~df_acm['index_acm'].isin(idx_acm)]
+    df_dblp_deduplicated = df_dblp[~df_dblp['index_dblp'].isin(idx_dblp)]
+    
+    df_entities_to_preserve = df_acm[df_acm['index_acm'].isin(ids_to_preserve)].rename(columns={
+                                    'paperId_acm': 'paperId_dblp', 
+                                    'title_acm': 'title_dblp', 
+                                    'authors_acm': 'authors_dblp', 
+                                    'venue_acm': 'venue_dblp', 
+                                    'year_acm': 'year_dblp',
+                                    'Combined_acm': 'Combined_dblp'
+                                    })
+    df_dblp_deduplicated = pd.concat([df_dblp_deduplicated, df_entities_to_preserve])
+    df_dblp_deduplicated.drop(["index_acm"],axis=1, inplace=True)
+    return df_acm_deduplicated, df_dblp_deduplicated
+

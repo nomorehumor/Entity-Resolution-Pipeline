@@ -1,12 +1,12 @@
 import csv
 import os
 import time
+
 import pandas as pd
 
-from pipeline.clustering import connected_components
+from pipeline.clustering import connected_components, deduplicate_datasets
 from pipeline.blocking import blocking
 from pipeline.data_loading import load_two_publication_sets
-from pipeline.deduplication import deduplicate_datasets
 from pipeline.matching import baseline_matching, matching
 from paths import OUTPUT_DIR
 
@@ -30,21 +30,6 @@ def f1_evaluation(df, bs_df):
     f1 = 2 * precision * recall / (precision + recall) if precision + recall != 0 else 0
 
     return f1, precision, recall
-
-
-def deduplicate_datasets(df_acm, df_dblp, clusters, config_num):
-    idx_acm, idx_dblp = [], []
-
-    for key in clusters.keys():
-        if len(clusters[key]) > 2:
-            id_acm = [int(el[2:]) for el in clusters[key] if el.startswith('1')]
-            idx_acm.extend(id_acm[1:])
-            id_dblp = [int(el[2:]) for el in clusters[key] if el.startswith('2')]
-            idx_dblp.extend(id_dblp[1:])
-
-    df_acm.drop(idx_acm).to_csv(f'{OUTPUT_DIR}/ACM_deduplicated_{config_num}.csv')
-    df_dblp.drop(idx_dblp).to_csv(f'{OUTPUT_DIR}/DBLP_deduplicated_{config_num}.csv')
-
 
 def entity_resolution_experiments():
     df_acm, df_dblp = load_two_publication_sets()
@@ -213,7 +198,9 @@ def entity_resolution_experiments():
 
         df_pairs[df_pairs.similarity > chosen_threshold].to_csv(f'matched_entities_{i}.csv')
         clusters = connected_components(df_pairs[df_pairs.similarity > chosen_threshold])
-        deduplicate_datasets(df_acm, df_dblp, clusters, i)
+        df_acm_dedup, df_dblp_dedup = deduplicate_datasets(df_acm, df_dblp, clusters)
+        df_acm_dedup.to_csv(f'{OUTPUT_DIR}/ACM_deduplicated_{i}.csv')
+        df_dblp_dedup.to_csv(f'{OUTPUT_DIR}/DBLP_deduplicated_{i}.csv')
 
 
 def save_result(config, timestamp, threshold, f1, prec, rec, pipeline_execution_time):
