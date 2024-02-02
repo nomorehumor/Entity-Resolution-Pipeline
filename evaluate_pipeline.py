@@ -29,166 +29,28 @@ def f1_evaluation(df, bs_df):
 def entity_resolution_experiments():
     df_acm, df_dblp = load_two_publication_sets()
 
-    experiment_configs = [
-        {
-            "blocking": 'ngram_word_blocks',
-            "matching": 'cosine',
-            "blocking_params": {"n": 4},
-        },
-        {
-            "blocking": 'ngram_word_blocks',
-            "matching": 'cosine',
-            "blocking_params": {"n": 3},
-        },
-        {
-            "blocking": 'ngram_word_blocks',
-            "matching": 'jaccard',
-            "blocking_params": {"n": 3},
-            "matching_weights": [0.3, 0.3, 0.3]
-        },
-        {
-            "blocking": 'ngram_word_blocks',
-            "matching": 'trigram',
-            "blocking_params": {"n": 3},
-            "matching_weights": [0.3, 0.3, 0.3]
-        },
-        {
-            "blocking": 'st',
-            "matching": 'cosine',
-            "blocking_params": {},
-        },
-        {
-            "blocking": 'token',
-            "matching": 'cosine',
-            "blocking_params": {},
-        },
-        {
-            "blocking": 'st',
-            "matching": 'jaccard',
-            "blocking_params": {},
-            "matching_weights": [0.7, 0.3, 0]
-        },
-        {
-            'blocking': 'token',
-            'matching': 'jaccard',
-            "blocking_params": {},
-            'matching_weights': [0.7, 0.3, 0]
-        },
-        {
-            'blocking': 'st',
-            'matching': 'jaccard',
-            "blocking_params": {},
-            'matching_weights': [0.3, 0.3, 0.3]
-        },
-        {
-            'blocking': 'token',
-            'matching': 'jaccard',
-            "blocking_params": {},
-            'matching_weights': [0.3, 0.3, 0.3]
-        },
-        {
-            'blocking': 'st',
-            'matching': 'jaccard',
-            "blocking_params": {},
-            'matching_weights': [0, 0.7, 0.3]
-        },
-        {
-            'blocking': 'token',
-            'matching': 'jaccard',
-            "blocking_params": {},
-            'matching_weights': [0, 0.7, 0.3]
-        },
-        {
-            "blocking": 'st',
-            "matching": 'trigram',
-            "blocking_params": {},
-            "matching_weights": [0.7, 0.3, 0]
-        },
-        {
-            'blocking': 'token',
-            'matching': 'trigram',
-            "blocking_params": {},
-            'matching_weights': [0.7, 0.3, 0]
-        },
-        {
-            'blocking': 'st',
-            'matching': 'trigram',
-            "blocking_params": {},
-            'matching_weights': [0.3, 0.3, 0.3]
-        },
-        {
-            'blocking': 'token',
-            'matching': 'trigram',
-            "blocking_params": {},
-            'matching_weights': [0.3, 0.3, 0.3]
-        },
-        {
-            'blocking': 'st',
-            'matching': 'trigram',
-            "blocking_params": {},
-            'matching_weights': [0, 0.7, 0.3]
-        },
-        {
-            'blocking': 'token',
-            'matching': 'trigram',
-            "blocking_params": {},
-            'matching_weights': [0, 0.7, 0.3]
-        },
-        {
-            "blocking": 'st',
-            "matching": 'levenshtein',
-            "blocking_params": {},
-            "matching_weights": [0.7, 0.3, 0]
-        },
-        {
-            'blocking': 'token',
-            'matching': 'levenshtein',
-            "blocking_params": {},
-            'matching_weights': [0.7, 0.3, 0]
-        },
-        {
-            'blocking': 'st',
-            'matching': 'levenshtein',
-            "blocking_params": {},
-            'matching_weights': [0.3, 0.3, 0.3]
-        },
-        {
-            'blocking': 'token',
-            'matching': 'levenshtein',
-            "blocking_params": {},
-            'matching_weights': [0.3, 0.3, 0.3]
-        },
-        {
-            'blocking': 'st',
-            'matching': 'levenshtein',
-            "blocking_params": {},
-            'matching_weights': [0, 0.7, 0.3]
-        },
-        {
-            'blocking': 'token',
-            'matching': 'levenshtein',
-            "blocking_params": {},
-            'matching_weights': [0, 0.7, 0.3]
-        },
-        {
-            'blocking': 'ngram_word_blocks',
-            'matching': 'levenshtein',
-            "blocking_params": {"n": 3},
-            'matching_weights': [0.3, 0.3, 0.3]
-        },
-        {
-            'blocking': 'ngram_word_blocks',
-            'matching': 'levenshtein',
-            "blocking_params": {"n": 3},
-            'matching_weights': [0, 0.7, 0.3]
-        },
-        {
-            'blocking': 'ngram_word_blocks',
-            'matching': 'levenshtein',
-            "blocking_params": {"n": 3},
-            'matching_weights': [0, 0.7, 0.3]
-        }
-    ]
+    all_blocking = ['ngram_word_blocks', 'by_year', 'token']
+    all_matching = ['cosine', 'jaccard', 'trigram', 'levenshtein']
+    all_matching_parameters = [{'matching_weights': [0.3, 0.3, 0.3]}, {'matching_weights': [0.7, 0.3, 0]}, {'matching_weights': [0, 0.7, 0.3]}]
+    
+    experiment_configs = []
+    for blocking_method in all_blocking:
+        for matching_method in all_matching:
+            config = {}
+            config["blocking_params"] = {"n": 3}
+            
+            if matching_method == 'cosine':
+                config["blocking"] = blocking_method
+                config['matching'] = matching_method
+                experiment_configs.append(config)
+            else:
+                for matching_params in all_matching_parameters:
+                    params_config = config.copy()
+                    params_config["blocking"] = blocking_method
+                    params_config['matching'] = matching_method 
+                    params_config['matching_weights'] = matching_params['matching_weights']
+                    experiment_configs.append(params_config)
+                    
 
     thresholds = [0.5, 0.6, 0.7, 0.8, 0.9, 0.95]
     chosen_threshold = 0.8
@@ -214,8 +76,8 @@ def entity_resolution_experiments():
 
         clusters = connected_components(df_pairs[df_pairs.similarity > chosen_threshold])
         df_acm_dedup, df_dblp_dedup = deduplicate_datasets(df_acm, df_dblp, clusters)
-        df_acm_dedup.to_csv(f'{OUTPUT_DIR}/ACM_deduplicated_{i}.csv')
-        df_dblp_dedup.to_csv(f'{OUTPUT_DIR}/DBLP_deduplicated_{i}.csv')
+        # df_acm_dedup.to_csv(f'{OUTPUT_DIR}/ACM_deduplicated_{i}.csv')
+        # df_dblp_dedup.to_csv(f'{OUTPUT_DIR}/DBLP_deduplicated_{i}.csv')
 
 
 def save_result(config, timestamp, threshold, f1, prec, rec, pipeline_execution_time):

@@ -17,7 +17,7 @@ def blocking(df_acm, df_dblp, blocking_scheme, params):
         blocks = token_blocking(df_acm[['title_acm', 'authors_acm']], df_dblp[['title_dblp', 'authors_dblp']], stop_words)
         blocks = np.unique(blocks, axis=0)
         return blocks
-    elif blocking_scheme == 'st':
+    elif blocking_scheme == 'by_year':
         blocks = blocking_by_year(df_acm, df_dblp)
         return blocks
         
