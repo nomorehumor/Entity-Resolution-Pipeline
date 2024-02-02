@@ -13,7 +13,7 @@ from pyspark.sql.functions import monotonically_increasing_id
 
 spark = SparkSession.builder \
     .appName('ERPipeline') \
-    .master("local[10]") \
+    .master("local[5]") \
     .getOrCreate()
 
 
@@ -87,7 +87,7 @@ def create_ngram_word_blocks_spark(df, column, id_col, n):
     exploded_df = df.select(col(id_col), explode(col("ngrams")).alias("ngram"))
     repartitioned_df = exploded_df.repartition(5)
     blocks = repartitioned_df.groupBy("ngram").agg(collect_list(id_col).alias("ids"))
-    blocks = blocks.repartition(5)
+    blocks = blocks.repartition(5, "ngram")
 
     return blocks
 
